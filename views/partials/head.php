@@ -56,6 +56,7 @@
 <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
 
 <!-- jQuery Validation CDN -->
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
 
 
 <!-- BEGIN: Vendor JS-->
