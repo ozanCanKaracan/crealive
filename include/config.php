@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 2);
 
 const MYSQL_HOST = 'localhost';
-const MYSQL_DB = 'puantaj';
+const MYSQL_DB = 'cms';
 const MYSQL_USER = 'root';
 const MYSQL_PASS = '';
 
