@@ -41,20 +41,28 @@
                     </li>
                 </ul>
             </li>
-            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i data-feather="more-horizontal"></i>
+            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Sayfalar</span><i data-feather="more-horizontal"></i>
             </li>
+            <?php
+            $getParentName=DB::get("SELECT * FROM pages WHERE parent_id=0");
+            foreach ($getParentName as $getParent){
+            $getPageNames=DB::get("SELECT * FROM pages WHERE parent_id=?",[$getParent->id]);
 
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Invoice">Invoice</span></a>
+            ?>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i class=" <?php echo $getParent->page_icon; ?> mb-1"></i><span class="menu-title text-truncate" data-i18n="Invoice"><?php echo $getParent->page_name; ?></span></a>
+                <?php
+                }
+                    foreach ($getPageNames as $getPages){
+
+                ?>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" href="app-invoice-list.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">List</span></a>
+                    <li><a class="d-flex align-items-center" href="<?php echo $getPages->href; ?>"><i class=" <?php echo $getPages->page_icon; ?> mb-1"></i><span class="menu-item text-truncate" data-i18n="List"><?php echo $getPages->page_name;?></span></a>
                     </li>
-                    <li><a class="d-flex align-items-center" href="app-invoice-preview.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Preview">Preview</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="app-invoice-edit.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Edit">Edit</span></a>
-                    </li>
-                    <li><a class="d-flex align-items-center" href="app-invoice-add.html"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Add</span></a>
-                    </li>
+
                 </ul>
+                <?php
+                    }
+            ?>
             </li>
             
         </ul>
