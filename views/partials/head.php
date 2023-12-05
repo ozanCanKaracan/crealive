@@ -51,7 +51,8 @@
 <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 <!-- END: Custom CSS-->
 
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>-->
+<script src="app-assets/vendors/js/jquery/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="assets/plugins/custom/datatables/datatables.bundle.js"></script>
 

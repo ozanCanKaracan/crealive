@@ -4,7 +4,7 @@
             <div class="card shadow">
                 <div class="card-header">
                     <div class="card-body">
-                        <table class="table table-responsive table-hover-animation table-hover table-striped"
+                        <table class="datatables-basic table dataTable no-footer dtr-column"
                                id="roleTable">
                             <thead>
                             <tr class="fw-semibold fs-6 text-gray-800">

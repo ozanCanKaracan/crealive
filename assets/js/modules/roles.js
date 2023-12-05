@@ -1,5 +1,7 @@
+var jQuery = $.noConflict();
+
 let tableX;
-function getRoleTable(id) {
+function getRoleTable() {
     if (tableX) {
         tableX.destroy()
         tableX = false
@@ -9,16 +11,15 @@ function getRoleTable(id) {
         sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
         order: [0, "desc"],
         ajax: {
-            url: 'controller/storeController.php',
+            url: 'controller/roleController.php',
             type: 'POST',
             data: {
                 "getRoleTable": 1,
-                "id": id,
             }
         },
         columns: [
             { data: 'id', visible: false },
-            { data: 'name' },
+            { data: 'role_name' },
             { data: 'process' },
         ],
         "language": { "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json" }

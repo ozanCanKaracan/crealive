@@ -15,9 +15,8 @@ if (isset($_POST["addRole"])) {
         exit();
     }
 }
-if (isset($_POST["roleTable"])) {
+if (isset($_POST["getRoleTable"])){
     $data = $role->getRoles();
-
     $response = [];
     if (count($data) > 0) {
         foreach ($data as $d) {
@@ -28,4 +27,7 @@ if (isset($_POST["roleTable"])) {
             ];
         }
     }
+
+    echo json_encode(["recordsTotal" => count($data), "recordsFiltered" => count($data), "data" => $response]);
+    exit();
 }
