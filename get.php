@@ -6,4 +6,7 @@ if(!$_GET){
 	switch(@$_GET['target']){
 		case '': include('views/index.php');  break;
 	}
+    switch (@$_GET['target']){
+        case 'roles':include('views/roles/roles.php');
+    }
 }
