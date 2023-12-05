@@ -1,7 +1,7 @@
 <footer class="footer footer-static footer-light" style="position: fixed; bottom: 0; width: 100%;">
     <p class="clearfix mb-0">
         <span class="float-md-start d-block d-md-inline-block mt-25">&copy; 2023 | Tüm hakları saklıdır
-        <a class="ms-25" href="" target="_blank">Senkrona</a>
+        <a class="ms-25" href="" target="_blank">Crealive</a>
     </p>
 </footer>
 

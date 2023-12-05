@@ -46,5 +46,8 @@ if(isset($_POST["login"])){
     }
 }
 if(isset($_POST["logout"])){
+    session_unset();
+    echo "ok";
+    exit();
 
 }

@@ -1,4 +1,3 @@
-
 function register() {
     $.validator.addMethod("customPattern", function (value, element, pattern) {
         return this.optional(element) || pattern.test(value);
@@ -158,7 +157,7 @@ function register() {
                                     showConfirmButton: true,
                                     confirmButtonColor: '#3085d6'
                                 })
-                            }else if (e.trim() === "ok") {
+                            } else if (e.trim() === "ok") {
                                 Swal.fire({
                                     title: 'Başarlı!',
                                     text: 'Kayıt Başarılı, Giriş Ekranına Yönlendiriliyorsunuz!',
@@ -243,7 +242,7 @@ function login() {
                         }).then((result) => {
                             window.location.href = "";
                         });
-                    }else if(e.trim() === "hata"){
+                    } else if (e.trim() === "hata") {
                         Swal.fire({
                             title: 'Hata!',
                             text: 'Email veya şifre hatalı!',
@@ -258,7 +257,54 @@ function login() {
         }
     });
 }
-$("#phone").on("input", function() {
+
+function logout() {
+    Swal.fire({
+        title: 'Çıkış yapmak istediğinize emin misiniz?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#00FF00',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Evet',
+        cancelButtonText: 'İptal',
+        showClass: {
+            popup: 'swal2-show',
+            backdrop: 'swal2-backdrop-show',
+            icon: 'swal2-icon-show'
+        },
+        hideClass: {
+            popup: 'swal2-hide',
+            backdrop: 'swal2-backdrop-hide',
+            icon: 'swal2-icon-hide'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "controller/authController.php",
+                data: {
+                    "logout": 1,
+                },
+                success: function (e) {
+                    if (e.trim() === "ok") {
+                        Swal.fire({
+                            title: 'Başarılı!',
+                            text: 'Çıkış yapılıyor!',
+                            icon: 'success',
+                            timer: 1500,
+                            showConfirmButton: true,
+                            confirmButtonColor: '#3085d6'
+                        }).then((result) => {
+                            window.location.href = "";
+                        });
+                    }
+                }
+            })
+        }
+    })
+}
+
+$("#phone").on("input", function () {
     var sanitizedValue = $(this).val().replace(/[^0-9]/g, "");
     $(this).val(sanitizedValue);
 });
