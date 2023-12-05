@@ -140,7 +140,25 @@ function register() {
                                     showConfirmButton: true,
                                     confirmButtonColor: '#3085d6'
                                 })
-                            } else if (e.trim() === "ok") {
+                            } else if (e.trim() === "mail2") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Mail adresleri uyuşmuyor!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            } else if (e.trim() === "pass") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Şifreler uyuşmuyor!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            }else if (e.trim() === "ok") {
                                 Swal.fire({
                                     title: 'Başarlı!',
                                     text: 'Kayıt Başarılı, Giriş Ekranına Yönlendiriliyorsunuz!',

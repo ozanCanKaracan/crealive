@@ -1,6 +1,7 @@
 <?php 
 session_start();
 include'db.php';
+include'function.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 2);
 
@@ -13,3 +14,4 @@ const site_url = "http://localhost/cms/";
 
 define('PATH', str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']) . "/cms/");
 
+include "../classes/Auth.php";

@@ -40,7 +40,7 @@
                                 <div class="form-group">
                                     <label class="form-label" for="register-email">Telefon numarası</label>
                                     <input class="form-control" id="phone" type="text" name="phone"
-                                           placeholder="john@example.com" aria-describedby="register-phone"
+                                           placeholder="__________" aria-describedby="register-phone"
                                            tabindex="2" maxlength="10"/>
                                 </div>
                                 <div class="form-group">
