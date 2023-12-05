@@ -73,5 +73,4 @@
 <!-- END: Theme JS-->
 
 <!-- BEGIN: Page JS-->
-<script src="app-assets/js/scripts/pages/auth-login.js"></script>
 <!-- END: Page JS-->

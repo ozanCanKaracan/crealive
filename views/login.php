@@ -49,13 +49,12 @@
                                         <input class="form-control form-control-merge" id="password" type="password"
                                                name="password" placeholder="············"
                                                aria-describedby="login-password" tabindex="2"/>
-                                        <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                     </div>
                                 </div>
-                                <button type="button" class="btn btn-primary w-100" tabindex="4" onclick="login()">Giriş
+                                <button type="submit" class="btn btn-primary w-100" tabindex="4" onclick="login()">Giriş
                                     Yap
                                 </button>
-
+                            </form>
                         </div>
                     </div>
                     <!-- /Login-->
@@ -64,7 +63,7 @@
         </div>
     </div>
 </div>
-</form>
+
 <!-- END: Content-->
 
 <script>

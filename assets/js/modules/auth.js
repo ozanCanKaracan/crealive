@@ -1,7 +1,8 @@
+
 function register() {
     $.validator.addMethod("customPattern", function (value, element, pattern) {
         return this.optional(element) || pattern.test(value);
-    }, "Geçerli bir değer girin.");
+    }, "");
 
     $("#registerForm").validate({
         rules: {
@@ -20,7 +21,7 @@ function register() {
                 required: true,
                 email: true,
             },
-            email_again: {
+            email2: {
                 required: true,
                 email: true,
 
@@ -29,7 +30,7 @@ function register() {
                 required: true,
                 minlength: 3,
             },
-            password_again: {
+            password2: {
                 required: true,
                 minlength: 3,
             },
@@ -51,11 +52,15 @@ function register() {
                 required: "Bu alan zorunludur!",
                 email: "Lütfen geçerli bir mail adresi giriniz.",
             },
+            email2: {
+                required: "Bu alan zorunludur!",
+                email: "Lütfen geçerli bir mail adresi giriniz.",
+            },
             password: {
                 minlength: "En az 3 karakter giriniz!",
                 required: "Bu alan zorunludur!",
             },
-            password_again: {
+            password2: {
                 required: "Bu alan zorunludur!",
                 minlength: "En az 3 karakter giriniz!",
 
@@ -156,9 +161,6 @@ function register() {
 }
 
 function login() {
-    $.validator.addMethod("customPattern", function (value, element, pattern) {
-        return this.optional(element) || pattern.test(value);
-    }, "Geçerli bir değer girin.");
 
     $("#loginForm").validate({
         rules: {
@@ -169,7 +171,6 @@ function login() {
             password: {
                 required: true,
                 minlength: 3,
-                customPattern: /^[0-9]+$/,
             },
         },
         messages: {
@@ -180,7 +181,6 @@ function login() {
             password: {
                 required: "Bu alan zorunludur!",
                 minlength: "Şifre en az 3 karakter olmalıdır.",
-                customPattern: "Lütfen sadece sayı kullanın.",
             },
         },
         errorPlacement: function (error, element) {
@@ -231,3 +231,8 @@ function login() {
         }
     });
 }
+$("#phone").on("input", function() {
+    var sanitizedValue = $(this).val().replace(/[^0-9]/g, "");
+    $(this).val(sanitizedValue);
+});
+
