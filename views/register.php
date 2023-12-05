@@ -3,7 +3,6 @@
 
 <head>
     <?php include "partials/head.php" ?>
-
 </head>
 
 <body class="horizontal-layout horizontal-menu blank-page navbar-floating footer-static" data-open="hover"

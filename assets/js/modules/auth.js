@@ -107,10 +107,10 @@ function register() {
                             "register": 1,
                             "name": $("#name").val(),
                             "phone": $("#phone").val(),
-                            "mail": $("#mail").val(),
-                            "mail2": $("#mail2").val(),
-                            "pass": $("#pass").val(),
-                            "pass2": $("#pass2").val(),
+                            "mail": $("#email").val(),
+                            "mail2": $("#email2").val(),
+                            "pass": $("#password").val(),
+                            "pass2": $("#password2").val(),
                         },
                         success: function (e) {
                             if (e.trim() === "bos") {
@@ -220,7 +220,7 @@ function login() {
                 data: {
                     "login": 1,
                     "email": $("#email").val(),
-                    "pass": $("#password").val(),
+                    "password": $("#password").val(),
                 },
                 success: function (e) {
                     if (e.trim() === "bos") {
@@ -243,6 +243,15 @@ function login() {
                         }).then((result) => {
                             window.location.href = "";
                         });
+                    }else if(e.trim() === "hata"){
+                        Swal.fire({
+                            title: 'Hata!',
+                            text: 'Email veya şifre hatalı!',
+                            icon: 'error',
+                            timer: 1500,
+                            showConfirmButton: true,
+                            confirmButtonColor: '#3085d6'
+                        });
                     }
                 }
             });
@@ -253,4 +262,5 @@ $("#phone").on("input", function() {
     var sanitizedValue = $(this).val().replace(/[^0-9]/g, "");
     $(this).val(sanitizedValue);
 });
+
 

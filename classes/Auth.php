@@ -6,15 +6,18 @@ class Auth{
 
     function __construct(){
         $this->table ='users';
-        $this->primary ='user_id';
+        $this->primary ='id';
     }
-    function login($email,$encrypt){
-        return DB::getVar("SELECT user_id FROM {$this->table} WHERE user_mail =? AND user_password=?",[$email,$encrypt]);
+    function login($email,$encryptedPass){
+        return DB::get("SELECT id FROM {$this->table} WHERE mail =? AND password=?",[$email,$encryptedPass]);
     }
     function controlEmail($email){
-        return DB:: get("SELECT * FROM {$this->table} WHERE email=?",[$email]);
+        return DB:: get("SELECT * FROM {$this->table} WHERE mail=?",[$email]);
     }
     function controlPhone($phone){
         return DB:: get("SELECT * FROM {$this->table} WHERE phone=?",[$phone]);
+    }
+    function addUser($name,$phone,$email,$encryptedPass){
+        return DB::exec("INSERT INTO users (name,phone,mail,password) VALUES (?,?,?,?)",[$name,$phone,$email,$encryptedPass]);
     }
 }
