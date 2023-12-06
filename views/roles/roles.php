@@ -1,16 +1,22 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-header">
                     <div class="card-body">
-                        <table class="datatables-basic table dataTable no-footer dtr-column"
+                        <div class="card-title">
+                            <h4 class="d-flex justify-content-center mb-2">Rol Kontrol Paneli</h4>
+                        </div>
+                        <table class="table-bordered table datatables-basic table dataTable no-footer dtr-column "
                                id="roleTable">
                             <thead>
                             <tr class="fw-semibold fs-6 text-gray-800">
                                 <th scope="col" class="d-none"></th>
-                                <th scope="col"><b>Rol Adı</b></th>
-                                <th scope="col"><b>İşlem</b></th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 300px;">Rol Adı</th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Ekleme</b></th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Silme</b></th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Düzenleme</b></th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Listeleme</b></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -20,30 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card shadow">
-                <div class="card-body">
-                    <div class="col-md-12">
-                        <div class="card shadow">
-                            <div class="card-title">
-                                <p>Rol Oluştur</p>
-                                <div class="card-body">
-                                    <div class="">
-                                        <label class="form-label">Rol Adı</label>
-                                        <input type="text" class="form-control" id="role" name="role"/>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-end">
-                                    <button type="button" class="btn btn-relief-success" onclick="addRole()"><font
-                                                style="vertical-align: inherit;"><font
-                                                    style="vertical-align: inherit;">Oluştur</font></font>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
-    <script src="assets/js/modules/roles.js"></script>
+</div>
+
+<script src="assets/js/modules/roles.js"></script>

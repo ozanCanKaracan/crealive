@@ -1,5 +1,6 @@
 <?php
 include "include/config.php";
+
 if (isset($_SESSION['user'])) {
     ?>
     <!DOCTYPE html>

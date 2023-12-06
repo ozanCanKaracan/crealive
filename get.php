@@ -3,13 +3,18 @@
 if(!$_GET){
 	 include('views/index.php');
 }else{
-        //roles/role_list
-        //file_exists("views/{$_GET['target']}.php");
-        //include ("views/{$_GET['target']}.php");
 	switch(@$_GET['target']){
 		case '': include('views/index.php');  break;
-	}
-    switch (@$_GET['target']){
-        case 'roles':include('views/roles/roles.php');
+        case 'roles':include('views/roles/roles.php'); break;
+        case 'editRole':include('views/roles/editRole.php'); break;
+
     }
 }
+//	 include('views/index.php');
+//}else{
+//    if( file_exists("views/{$_GET['target']}.php")){
+//        include ("views/{$_GET['target']}.php");
+//    }else{
+//        include('views/404/404.php');
+//    }
+//}

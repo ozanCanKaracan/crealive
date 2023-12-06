@@ -5,11 +5,13 @@ class Roles
     protected $table;
     protected $primary;
 
+
     function __construct()
     {
 
         $this->table = 'roles';
         $this->primary = 'id';
+
     }
 
     function controlRole($roleName)
@@ -25,6 +27,11 @@ class Roles
     function getRoles()
     {
         return DB::get("SELECT * FROM roles");
+    }
+
+    function deleteRoles($id)
+    {
+        return DB::exec("DELETE FROM roles WHERE id=?",[$id]);
     }
 
 }
