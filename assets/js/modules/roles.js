@@ -219,12 +219,13 @@ function deleteRole() {
 
 getRoleTable();
 $("#role").on("input", function () {
-    var sanitizedValue = $(this).val().replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, "");
+    var sanitizedValue = $(this).val().replace(/[^a-zA-Z\s]/g, "");
     $(this).val(sanitizedValue);
 });
 
 function addCheckBox(id) {
     var checkedID = $('.check:checked').val();
+    var notChecked=$('.check:not(checked)').val();
 
     $.ajax({
         type: "POST",
@@ -232,6 +233,7 @@ function addCheckBox(id) {
         data: {
             "id": id,
             "checkedID": checkedID,
+            "notChecked":notChecked,
             "addCheckBox": 1,
         },
         success: function (e) {
