@@ -108,6 +108,7 @@ function register() {
                             "phone": $("#phone").val(),
                             "mail": $("#email").val(),
                             "mail2": $("#email2").val(),
+                            "selectLang":$("#selectLang").val(),
                             "pass": $("#password").val(),
                             "pass2": $("#password2").val(),
                         },

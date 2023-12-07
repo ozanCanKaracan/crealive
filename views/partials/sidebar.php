@@ -61,31 +61,30 @@
                         data-feather="more-horizontal"></i>
             </li>
             <?php
-            $getParentName = DB::get("SELECT * FROM pages WHERE parent_id=0");
-            foreach ($getParentName
-
-            as $getParent){
-            $getPageNames = DB::get("SELECT * FROM pages WHERE parent_id=?", [$getParent->id]);
-
-            ?>
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i
-                            class=" <?php echo $getParent->page_icon; ?> mb-1"></i><span
-                            class="menu-title text-truncate"
-                            data-i18n="Invoice"><?php echo $getParent->page_name; ?></span></a>
-                <?php
-                }
-                foreach ($getPageNames as $getPages) {
-                    ?>
-                    <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" href="<?php echo $getPages->href; ?>"><i
-                                        class=" <?php echo $getPages->page_icon; ?> mb-1"></i><span
-                                        class="menu-item text-truncate"
-                                        data-i18n="List"><?php echo $getPages->page_name; ?></span></a>
-                        </li>
-                    </ul>
-                    <?php
-                }
+            $getTitle = DB::get("SELECT * FROM pages WHERE parent_id = 0");
+            foreach ($getTitle as $gt) {
+                $getPages = DB::get("SELECT * FROM pages WHERE parent_id = ?", [$gt->id]);
                 ?>
+                <li class=" nav-item nav-group-children">
+                    <a class="d-flex align-items-center"><i class="<?php echo $gt->page_icon; ?> mb-1"></i><span
+                                class="menu-title text-truncate"
+                                data-i18n="Invoice"><?php echo $gt->page_name; ?></span></a>
+                    <ul class="menu-content ">
+                        <?php
+                        foreach ($getPages as $gp) {
+                            ?>
+                            <li><a class="router-link-active router-link-exact-active" href="<?= $gp->href; ?>"><i
+                                            data-feather="circle"></i><span class="menu-item text-truncate"
+                                                                            data-i18n="List"><?php echo $gp->page_name; ?></span></a>
+                            </li>
+                            <?php
+                        }
+                        ?>
+                    </ul>
+                </li>
+                <?php
+            }
+            ?>
             </li>
         </ul>
     </div>

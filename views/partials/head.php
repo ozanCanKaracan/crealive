@@ -14,6 +14,7 @@
 <!-- BEGIN: scripts-->
 
 
+<script src="https://cdn.ckeditor.com/ckeditor5/40.1.0/classic/ckeditor.js"></script>
 
 <!-- END: -->
 <link href="assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css"/>

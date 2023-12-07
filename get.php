@@ -7,6 +7,8 @@ if(!$_GET){
 		case '': include('views/index.php');  break;
         case 'roles':include('views/roles/roles.php'); break;
         case 'editRole':include('views/roles/editRole.php'); break;
+        case 'userlistRole':include('views/roles/userlistRole.php'); break;
+        case 'newContact' : include('views/content/newContent.php');break;
 
     }
 }

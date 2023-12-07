@@ -1,19 +1,20 @@
 <?php
 include "../include/config.php";
 
-$auth=new Auth();
+$auth=new User();
 
 if(isset($_POST["register"])){
     $name = C($_POST["name"]);
     $phone = C($_POST["phone"]);
     $email = C($_POST["mail"]);
     $email2 = C($_POST["mail2"]);
+    $lang=C($_POST["selectLang"]);
     $pass = C($_POST["pass"]);
     $pass2 = C($_POST["pass2"]);
     $encryptedPass = md5(sha1(md5($pass)));
     $controlEmail=$auth->controlEmail($email);
     $controlPhone=$auth->controlPhone($phone);
-    if(!$name || !$phone || !$email || !$email2 || !$pass || !$pass2){
+    if(!$name || !$phone || !$email || !$email2 || !$lang || !$pass || !$pass2){
         echo "bos";
     }else if($controlPhone){
         echo "phone";
@@ -24,7 +25,7 @@ if(isset($_POST["register"])){
     }else if ($pass != $pass2){
         echo "pass";
     }else{
-        $add=$auth->addUser($name,$phone,$email2,$encryptedPass);
+        $add=$auth->addUser($name,$lang,$phone,$email2,$encryptedPass);
         echo "ok";
         exit();
     }

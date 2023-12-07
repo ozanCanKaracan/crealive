@@ -13,6 +13,7 @@
                             <tr class="fw-semibold fs-6 text-gray-800">
                                 <th scope="col" class="d-none"></th>
                                 <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 300px;">Rol Adı</th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Kullanıcılar</b></th>
                                 <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Ekleme</b></th>
                                 <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Silme</b></th>
                                 <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Düzenleme</b></th>

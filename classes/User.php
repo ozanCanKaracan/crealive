@@ -1,6 +1,6 @@
 <?php
 
-class Auth{
+class User{
     protected $table;
     protected $primary;
 
@@ -17,7 +17,10 @@ class Auth{
     function controlPhone($phone){
         return DB:: get("SELECT * FROM {$this->table} WHERE phone=?",[$phone]);
     }
-    function addUser($name,$phone,$email,$encryptedPass){
-        return DB::exec("INSERT INTO users (name,phone,mail,password) VALUES (?,?,?,?)",[$name,$phone,$email,$encryptedPass]);
+    function addUser($name,$language,$phone,$email,$encryptedPass){
+        return DB::exec("INSERT INTO users (name,language_id,phone,mail,password) VALUES (?,?,?,?,?)",[$name,$language,$phone,$email,$encryptedPass]);
+    }
+    function getUser($id){
+        return DB::get("SELECT * FROM users WHERE role_id=?",[$id]);
     }
 }

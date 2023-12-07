@@ -55,6 +55,18 @@
                                            tabindex="2"/>
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-label" for="register-password">Dil Seçimi</label>
+                                    <select class=" form-control" id="selectLang">
+                                        <option value="">Dil Seçiniz</option>
+                                        <?php
+                                        $languages=DB::get("SELECT * FROM languages");
+                                        foreach ($languages as $lg){
+                                        ?>
+                                            <option value="<?php echo $lg->id; ?>" ><?php echo $lg->lang_name; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label class="form-label" for="register-password">Şifre</label>
                                     <input class="form-control form-control-merge" id="password" type="password"
                                            name="password" placeholder="············"
@@ -66,6 +78,7 @@
                                            name="password2" placeholder="············"
                                            aria-describedby="register-password" tabindex="3"/>
                                 </div>
+
                                 <br>
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-block" type="submit" onclick="register()">Kayıt
