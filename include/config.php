@@ -17,4 +17,6 @@ define('PATH', str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']) . "/cms/");
 include "../classes/User.php";
 include "../classes/Roles.php";
 include "../classes/Permission.php";
+include "../classes/Category.php";
+
 

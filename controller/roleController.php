@@ -80,12 +80,12 @@ if (isset($_POST["getSelectBox"])) {
                 <option value="" data-select2-id="3" selected> Rol Seçiniz</option>
     ';
 
-    $data = DB::get("SELECT * FROM roles");
+    $data = $role->getRoles();
 
     foreach ($data as $d) {
-        $selected=$d->id;
-        $disabled = ($d->id == '1') ? 'disabled' : "";
-        $response .= '<option value="' . $selected. '" data-select2-id="3" ' . $disabled . '>' . $d->role_name . '</option>';
+        $id=$d->id;
+        $disabled = ($id == '1') ? 'disabled' : "";
+        $response .= '<option value="' . $id. '" data-select2-id="3" ' . $disabled . '>' . $d->role_name . '</option>';
     }
 
     $response .= '</select>

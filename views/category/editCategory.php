@@ -4,24 +4,25 @@
             <div class="card shadow">
                 <div class="card-body">
                     <div class="col-md-12">
-                        <div class="card">
+                        <div class="card ">
                             <div class="card-title">
-                                <p>Rol Oluştur</p>
+                                <p>Yeni Kategori</p>
                                 <div class="card-body ">
-                                    <form id="addRoleForm">
+                                    <form id="addCategoryForm">
                                         <div class="">
-                                            <label class="form-label-lg mb-1">Rol Adı</label>
-                                            <input type="text" class="form-control " id="role" name="role"
-                                                   maxlength="20"/>
+                                            <label class="form-label-lg mb-1">Kategori Adı</label>
+                                            <input type="text" class="form-control " id="categoryName"
+                                                   name="categoryName" maxlength="35">
                                         </div>
                                         <div class="d-flex justify-content-end mt-1">
-                                            <button type="submit" class="btn btn-relief-success" onclick="addRole()">
-                                                <font
+                                            <button type="submit" class="btn btn-relief-success"
+                                                    onclick="addCategory()"><font
                                                         style="vertical-align: inherit;"><font
                                                             style="vertical-align: inherit;">Oluştur</font></font>
                                             </button>
                                         </div>
                                 </div>
+
                                 </form>
                             </div>
                         </div>
@@ -33,12 +34,11 @@
             <div class="card shadow">
                 <div class="card-body">
                     <div class="col-md-12">
-                        <div class="card ">
+                        <div class="card">
                             <div class="card-title">
-                                <p>Rol Kaldır</p>
+                                <p>Kategori Kaldır</p>
                                 <div class="card-body">
-                                    <div class="" id="selectBox">
-
+                                    <div class="" id="selectBoxCategory">
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
     </div>
 </div>
 </div>
-<script src="assets/js/modules/roles.js"></script>
+<script src="assets/js/modules/category.js"></script>
 <script>
-    getSelectBox();
+    getCategorySelectBox();
 </script>
