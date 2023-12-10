@@ -18,5 +18,7 @@ include "../classes/User.php";
 include "../classes/Roles.php";
 include "../classes/Permission.php";
 include "../classes/Category.php";
+include "../classes/Content.php";
+
 
 

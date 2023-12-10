@@ -15,20 +15,36 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="categorySelect" class="form-label-lg"><b>İçerik Dili</b></label>
+
                                 <select class="form-select" id="languageSelect" name="languageSelect">
-                                    <option value="1">Kategori 1</option>
-                                    <option value="2">Kategori 2</option>
-                                    <option value="3">Kategori 3</option>
+                                    <option value="">Dil seçiniz</option>
+
+                                    <?php
+                                    $languages=DB::get("SELECT * FROM languages");
+
+                                    foreach ($languages as $l){
+                                    ?>
+                                    <option value="<?php echo $l->id ?>"> <?php echo $l->lang_name;?></option>
+
+                                    <?php } ?>
                                 </select>
+
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <label for="categorySelect" class="form-label-lg"><b>Kategori</b></label>
                                 <select class="form-select" id="categorySelect" name="categorySelect">
-                                    <option value="1">Kategori 1</option>
-                                    <option value="2">Kategori 2</option>
-                                    <option value="3">Kategori 3</option>
+                                    <option value="">Kategori seçiniz</option>
+
+                                    <?php
+                                    $categories=DB::get("SELECT * FROM category");
+
+                                    foreach ($categories as $c){
+                                        ?>
+                                        <option value="<?php echo $c->id ?>"> <?php echo $c->category_name;?></option>
+
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>

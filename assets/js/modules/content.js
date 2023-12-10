@@ -66,7 +66,7 @@ function addContent() {
         submitHandler: function (form) {
             event.preventDefault();
             Swal.fire({
-                title: 'Kayıt olmak istediğinize emin misiniz?',
+                title: 'İçerik oluşturulsun mu?',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#00FF00',
@@ -87,9 +87,9 @@ function addContent() {
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "POST",
-                        url: "controller/authController.php",
+                        url: "controller/contentController.php",
                         data: {
-                            "register": 1,
+                            "addContent": 1,
                             "language": $("#languageSelect").val(),
                             "category": $("#categorySelect").val(),
                             "title": $("#titleContent").val(),
@@ -109,13 +109,13 @@ function addContent() {
                             } else if (e.trim() === "ok") {
                                 Swal.fire({
                                     title: 'Başarılı!',
-                                    text: 'Kayıt Başarılı, Giriş Ekranına Yönlendiriliyorsunuz!',
+                                    text: 'İçerik eklenmiştir!',
                                     icon: 'success',
                                     timer: 1500,
                                     showConfirmButton: true,
                                     confirmButtonColor: '#3085d6'
                                 }).then((result) => {
-                                    window.location.href = "contents";
+                                    window.location.relaod();
                                 });
                             }
                         }

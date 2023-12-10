@@ -18,14 +18,14 @@ function addCategory(){
             categoryName: {
                 required: true,
                 minlength: 3,
-                maxlength: 20
+                maxlength: 35
             },
         },
         messages: {
             categoryName: {
                 required: "Bu alan zorunludur!",
                 minlength: "Rol en az 3 karakter olmalıdır.",
-                maxlength: "En fazla 20 karakter girebilirsiniz."
+                maxlength: "En fazla 35 karakter girebilirsiniz."
             },
         },
         errorPlacement: function (error, element) {
@@ -43,7 +43,7 @@ function addCategory(){
             event.preventDefault();
 
             Swal.fire({
-                title: 'Rol Eklensin mi?',
+                title: 'Kategori Eklensin mi?',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonColor: '#00FF00',
@@ -159,7 +159,7 @@ function deleteCategory(){
                         url: "controller/categoryController.php",
                         data: {
                             "deleteCategory": 1,
-                            "id": $("#categorySelect").val(),
+                                "id": $("#categorySelect").val(),
                         },
                         success: function (e) {
                             if (e.trim() === "ok") {
