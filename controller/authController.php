@@ -39,7 +39,8 @@ if(isset($_POST["login"])){
     if(!$email || !$password){
         echo "bos";
     }else if($login){
-        $_SESSION["user"]=$login;
+        $_SESSION["user"] = $login->id;
+        $_SESSION["role_id"] =$login->role_id;
         echo "ok";
         exit();
     }else{

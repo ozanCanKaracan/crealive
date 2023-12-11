@@ -10,7 +10,6 @@ function getRoleTable() {
 
     tableX = $('#roleTable').DataTable({
         sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
-        order: [0, "desc"],
         ajax: {
             url: 'controller/roleController.php',
             type: 'POST',
@@ -22,10 +21,8 @@ function getRoleTable() {
             {data: 'id', visible: false},
             {data: 'role_name'},
             {data: 'users'},
-            {data: 'add'},
-            {data: 'delete'},
-            {data: 'edit'},
-            {data: 'list'},
+            {data: 'pages'},
+
         ],
         "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
     });
@@ -223,121 +220,4 @@ $("#role").on("input", function () {
     var sanitizedValue = $(this).val().replace(/[^a-zA-Z\s]/g, "");
     $(this).val(sanitizedValue);
 });
-
-function addCheckBox(id) {
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".add:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".add:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/roleController.php",
-        data: {
-            "id": id,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "addCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
-
-
-function deleteCheckBox(id) {
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".deleteCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".deleteCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/roleController.php",
-        data: {
-            "id": id,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "deleteCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
-
-function editCheckBox(id) {
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".editCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".editCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/roleController.php",
-        data: {
-            "id": id,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "editCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
-
-function listCheckBox(id) {
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".listCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".listCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/roleController.php",
-        data: {
-            "id": id,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "listCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
 

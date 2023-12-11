@@ -11,8 +11,8 @@ class Permission
         $this->table = 'permission';
         $this->primary = 'permission_id';
     }
-    function getPermission(){
-        return DB::get("SELECT * FROM permission");
+    function getPermission($id){
+        return DB::get("SELECT * FROM permission WHERE role_id=?",[$id]);
     }
       function roleAddPermission($lastid){
         return DB::insert("INSERT INTO permission (page_id,role_id,permission_add,permission_edit,permission_list,permission_delete) VALUES(?, ?, ?, ?, ?, ?)",[2,$lastid,0,0,0,0]);

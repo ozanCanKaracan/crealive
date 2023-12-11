@@ -23,23 +23,19 @@ if (isset($_POST["addRole"])) {
     }
 }
 if (isset($_POST["getRoleTable"])) {
-    $data = $perm->getPermission();
+
+
+    $data = $role->getRoles();
     $response = [];
     if (count($data) > 0) {
         foreach ($data as $d) {
-            $addCheck=($d->permission_add == '1') ? 'checked' : '';
-            $deleteCheck=($d->permission_delete == '1') ? 'checked' : '';
-            $editCheck=($d->permission_edit == '1') ? 'checked' : '';
-            $listCheck=($d->permission_list == '1') ? 'checked' : '';
-            $roleName=DB::getVar("SELECT role_name FROM roles WHERE id=?",[$d->role_id]);
+            $controlList=controlList();
+
             $response[] = [
-                "id" => $d->permission_id,
-                "role_name" => $roleName,
-                "users" => '<a href="userlistRole/'.$d->role_id.'"><button type="button" class="btn btn-relief-warning btn-sm">Kişi Listesi</button></a>',
-                "add" => '<input type="checkbox" class="custom-control-input add" id="addCheckBox" value="'.$d->role_id.'" onclick="addCheckBox('.$d->role_id.')" ' . $addCheck . '>',
-                "delete"=>'<input type="checkbox" class="custom-control-input deleteCheck" id="deleteCheckBox" value="'.$d->role_id.'" onclick="deleteCheckBox('.$d->role_id.')" ' .$deleteCheck. '>',
-                "edit"=>'<input type="checkbox" class="custom-control-input editCheck" id="editCheckBox" value="'.$d->role_id.'" onclick="editCheckBox('.$d->role_id.')" ' .$editCheck. '>',
-                "list"=>'<input type="checkbox" class="custom-control-input listCheck" id="listCheckBox" value="'.$d->role_id.'" onclick="listCheckBox('.$d->role_id.')" '. $listCheck .'>',
+                "id" => $d->id,
+                "role_name" => $d->role_name,
+                "users" =>'<a href="userlistRole/'.$d->id.'"><button type="button" class="btn btn-relief-warning btn-sm">Kişi Listesi</button></a>',
+                "pages" =>'<a href="permission/'.$d->id.'"><button type="button" class="btn btn-relief-info btn-sm">Sayfa İzinleri</button></a>',
             ];
         }
     }
@@ -107,74 +103,6 @@ if(isset($_POST["deleteRole"])){
         $delete=$role->deleteRoles($id);
         echo "ok";
         exit();
-    }
-}
-if (isset($_POST["addCheckBox"])) {
-    $checkedID = isset($_POST["checkedID"]) ? $_POST["checkedID"] : [];
-    $notCheckedID = isset($_POST["notCheckedID"]) ? $_POST["notCheckedID"] : [];
-    $id = C($_POST["id"]);
-
-    if ($checkedID) {
-        foreach ($checkedID as $check) {
-            $update = DB::exec("UPDATE permission SET permission_add = '1' WHERE role_id=?", [$check]);
-        }
-    }
-
-     if ($notCheckedID) {
-        foreach ($notCheckedID as $not) {
-            $update = DB::exec("UPDATE permission SET permission_add = '0' WHERE role_id=?", [$not]);
-        }
-    }
-}
-if (isset($_POST["deleteCheckBox"])) {
-    $checkedID = isset($_POST["checkedID"]) ? $_POST["checkedID"] : [];
-    $notCheckedID = isset($_POST["notCheckedID"]) ? $_POST["notCheckedID"] : [];
-    $id = C($_POST["id"]);
-
-    if ($checkedID) {
-        foreach ($checkedID as $check) {
-            $update = DB::exec("UPDATE permission SET permission_delete = '1' WHERE role_id=?", [$check]);
-        }
-    }
-
-    if ($notCheckedID) {
-        foreach ($notCheckedID as $not) {
-            $update = DB::exec("UPDATE permission SET permission_delete = '0' WHERE role_id=?", [$not]);
-        }
-    }
-}
-if (isset($_POST["editCheckBox"])) {
-    $checkedID = isset($_POST["checkedID"]) ? $_POST["checkedID"] : [];
-    $notCheckedID = isset($_POST["notCheckedID"]) ? $_POST["notCheckedID"] : [];
-    $id = C($_POST["id"]);
-
-    if ($checkedID) {
-        foreach ($checkedID as $check) {
-            $update = DB::exec("UPDATE permission SET permission_edit = '1' WHERE role_id=?", [$check]);
-        }
-    }
-
-    if ($notCheckedID) {
-        foreach ($notCheckedID as $not) {
-            $update = DB::exec("UPDATE permission SET permission_edit = '0' WHERE role_id=?", [$not]);
-        }
-    }
-}
-if (isset($_POST["listCheckBox"])) {
-    $checkedID = isset($_POST["checkedID"]) ? $_POST["checkedID"] : [];
-    $notCheckedID = isset($_POST["notCheckedID"]) ? $_POST["notCheckedID"] : [];
-    $id = C($_POST["id"]);
-
-    if ($checkedID) {
-        foreach ($checkedID as $check) {
-            $update = DB::exec("UPDATE permission SET permission_list = '1' WHERE role_id=?", [$check]);
-        }
-    }
-
-    if ($notCheckedID) {
-        foreach ($notCheckedID as $not) {
-            $update = DB::exec("UPDATE permission SET permission_list = '0' WHERE role_id=?", [$not]);
-        }
     }
 }
 if (isset($_POST["turkishCheckBox"])) {
@@ -253,8 +181,6 @@ if (isset($_POST["frenchCheckBox"])) {
         }
     }
 }
-
-
 
 
 

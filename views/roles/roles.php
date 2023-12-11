@@ -7,6 +7,10 @@
                         <div class="card-title">
                             <h4 class="d-flex justify-content-center mb-2">Rol Kontrol Paneli</h4>
                         </div>
+                        <?php
+                        $controlList=controlList();
+                        if($controlList){
+                        ?>
                         <table class="table-bordered table datatables-basic table dataTable no-footer dtr-column "
                                id="roleTable">
                             <thead>
@@ -14,15 +18,15 @@
                                 <th scope="col" class="d-none"></th>
                                 <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 300px;">Rol Adı</th>
                                 <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Kullanıcılar</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Ekleme</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Silme</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Düzenleme</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Listeleme</b></th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>İzinler</b></th>
                             </tr>
                             </thead>
                             <tbody>
                             </tbody>
                         </table>
+                        <?php }else{
+
+                        }?>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,7 @@ class User{
         $this->primary ='id';
     }
     function login($email,$encryptedPass){
-        return DB::get("SELECT id FROM {$this->table} WHERE mail =? AND password=?",[$email,$encryptedPass]);
+        return DB::getRow("SELECT id,role_id FROM {$this->table} WHERE mail =? AND password=?",[$email,$encryptedPass]);
     }
     function controlEmail($email){
         return DB:: get("SELECT * FROM {$this->table} WHERE mail=?",[$email]);

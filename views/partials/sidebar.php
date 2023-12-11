@@ -72,12 +72,18 @@
                     <ul class="menu-content ">
                         <?php
                         foreach ($getPages as $gp) {
-                            ?>
-                            <li><a class="router-link-active router-link-exact-active" href="<?= $gp->href; ?>"><i
-                                            data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                            data-i18n="List"><?php echo $gp->page_name; ?></span></a>
-                            </li>
-                            <?php
+                            $id = $gp->id;
+                            $controlView = controlView($id);
+                            if ($controlView) {
+                                ?>
+                                <li><a class="router-link-active router-link-exact-active" href="<?= $gp->href; ?>"><i
+                                                data-feather="circle"></i><span class="menu-item text-truncate"
+                                                                                data-i18n="List"><?php echo $gp->page_name; ?></span></a>
+                                </li>
+                                <?php
+                            }else{
+
+                            }
                         }
                         ?>
                     </ul>
