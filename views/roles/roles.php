@@ -19,6 +19,11 @@
                                 <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 300px;">Rol Adı</th>
                                 <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Kullanıcılar</b></th>
                                 <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>İzinler</b></th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Türkçe</b></th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>İngilizce</b></th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Almanca</b></th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Fransızca</b></th>
+
                             </tr>
                             </thead>
                             <tbody>
