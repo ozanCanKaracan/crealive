@@ -17,8 +17,7 @@ if (isset($_POST["addRole"])) {
     } else {
         $add = $role->addRole($roleName);
         $lastid=DB::lastInsertID($add);
-        $add2=$perm->roleAddPermission($lastid);
-        echo "ok";
+            echo "ok";
         exit();
     }
 }

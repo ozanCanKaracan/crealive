@@ -55,6 +55,9 @@ if (!$_GET) {
         case 'permission' :
             include('views/permission/permission.php');
             break;
+        case 'contents' :
+            include('views/content/contents.php');
+            break;
     }
 }
 //	 include('views/index.php');

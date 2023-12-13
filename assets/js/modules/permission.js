@@ -59,8 +59,6 @@ function addCheckBox(id) {
         }
     });
 }
-
-
 function deleteCheckBox(id) {
     var checkedIDs = [];
     var notcheck = [];
@@ -89,7 +87,6 @@ function deleteCheckBox(id) {
         }
     });
 }
-
 function editCheckBox(id) {
     var checkedIDs = [];
     var notcheck = [];
@@ -118,7 +115,6 @@ function editCheckBox(id) {
         }
     });
 }
-
 function listCheckBox(id) {
     var checkedIDs = [];
     var notcheck = [];

@@ -19,6 +19,7 @@ include "../classes/Roles.php";
 include "../classes/Permission.php";
 include "../classes/Category.php";
 include "../classes/Content.php";
+include "../classes/Pages.php";
 
 
 

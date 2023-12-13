@@ -2,7 +2,7 @@
 
 include "../include/config.php";
 $category = new Category();
-
+$content = new Content();
 if (isset($_POST["getCategorySelectBox"])) {
     $response = '
         <form id="deleteCategoryForm">
@@ -43,11 +43,11 @@ if (isset($_POST["categoryAdd"])) {
 
 if (isset($_POST["deleteCategory"])) {
     $categoryID = C($_POST["id"]);
-    //$control=DB::get("SELECT * FROM contents WHERE category_id=?",[$categoryID]);
+    $control=$content->controlContent($categoryID);
     if (!$categoryID) {
         echo "bos";
-    //}else if($control){
-      //  echo "hata";
+    }else if($control){
+        echo "hata";
     }else{
         $delete=$category->deleteCategory($categoryID);
         echo "ok";

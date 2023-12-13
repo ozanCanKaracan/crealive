@@ -19,10 +19,13 @@ function controlDelete(){
     $control=DB::getVar("SELECT permission_delete FROM permission WHERE page_id=? AND role_id=?",[$page_id,$role_id]);
     return $control ? true : false ;
 }
-function controlEdit(){
-    $page_url=$_GET["target"];
+function controlDeleteBack($page_id){
     $role_id=$_SESSION["role_id"];
-    $page_id=DB::getVar("SELECT id FROM pages WHERE href=?",[$page_url]);
+    $control=DB::getVar("SELECT permission_delete FROM permission WHERE page_id=? AND role_id=?",[$page_id,$role_id]);
+    return $control ? true : false ;
+}
+function controlEdit($page_id){
+    $role_id=$_SESSION["role_id"];
     $control=DB::getVar("SELECT permission_edit FROM permission WHERE page_id=? AND role_id=?",[$page_id,$role_id]);
     return $control ? true : false ;
 }

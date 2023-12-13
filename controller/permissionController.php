@@ -1,10 +1,10 @@
 <?php
 include "../include/config.php";
 $permission=new Permission();
+$pages=new Pages();
 if(isset($_POST["getPermissionTable"])){
     $id=C($_POST["id"]);
-   // $data = $permission->getPermission($id);
-    $data=DB::get("SELECT * FROM pages WHERE parent_id > 0 ");
+    $data=$pages->getPages();
     $response = [];
     if (count($data) > 0) {
         foreach ($data as $d) {
@@ -40,9 +40,9 @@ if (isset($_POST["addCheckBox"])) {
 
     if ($checkedID) {
         foreach ($checkedID as $check) {
-            $control=DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=?",[$check,$role_id]);
+            $control=$permission->controlPermission($check,$role_id);
             if($control){
-                $update = DB::exec("UPDATE permission SET permission_add = '1' WHERE page_id=? AND role_id=?", [$check,$role_id]);
+                $update = $permission->updateAddON($check,$role_id);
                 echo "update";
 
             }else{
@@ -54,7 +54,7 @@ if (isset($_POST["addCheckBox"])) {
 
     if ($notCheckedID) {
         foreach ($notCheckedID as $not) {
-            $update = DB::exec("UPDATE permission SET permission_add = '0' WHERE page_id=? AND role_id=?", [$not,$role_id]);
+            $update = $permission->updateAddOFF($not,$role_id);
         }
     }
 }
@@ -65,9 +65,9 @@ if (isset($_POST["deleteCheckBox"])) {
 
     if ($checkedID) {
         foreach ($checkedID as $check) {
-            $control=DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=?",[$check,$role_id]);
+            $control=$permission->controlPermission($check,$role_id);
             if($control){
-                $update = DB::exec("UPDATE permission SET permission_delete = '1' WHERE page_id=? AND role_id=?", [$check,$role_id]);
+                $update = $permission->updateDeleteON($check,$role_id);
                 echo "update";
 
             }else{
@@ -78,7 +78,7 @@ if (isset($_POST["deleteCheckBox"])) {
     }
     if ($notCheckedID) {
         foreach ($notCheckedID as $not) {
-            $update = DB::exec("UPDATE permission SET permission_delete = '0' WHERE page_id=? AND role_id=?", [$not,$role_id]);
+            $update = $permission->updateDeleteOFF($not,$role_id);
         }
     }
 }
@@ -89,9 +89,9 @@ if (isset($_POST["editCheckBox"])) {
 
     if ($checkedID) {
         foreach ($checkedID as $check) {
-            $control=DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=?",[$check,$role_id]);
+            $control=$permission->controlPermission($check,$role_id);
             if($control){
-                $update = DB::exec("UPDATE permission SET permission_edit = '1' WHERE page_id=? AND role_id=?", [$check,$role_id]);
+                $update =$permission->updateEditON($check,$role_id);
                 echo "update";
 
             }else{
@@ -103,7 +103,7 @@ if (isset($_POST["editCheckBox"])) {
 
     if ($notCheckedID) {
         foreach ($notCheckedID as $not) {
-            $update = DB::exec("UPDATE permission SET permission_edit = '0' WHERE page_id=? AND role_id=?", [$not,$role_id]);
+            $update = $permission->updateEditOFF($not,$role_id);
         }
     }
 }
@@ -114,9 +114,9 @@ if (isset($_POST["listCheckBox"])) {
 
     if ($checkedID) {
         foreach ($checkedID as $check) {
-            $control=DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=?",[$check,$role_id]);
+            $control=$permission->controlPermission($check,$role_id);
             if($control){
-                $update = DB::exec("UPDATE permission SET permission_list = '1' WHERE page_id=? AND role_id=?", [$check,$role_id]);
+                $update = $permission->updateListON($check,$role_id);
                 echo "update";
 
             }else{
@@ -128,7 +128,7 @@ if (isset($_POST["listCheckBox"])) {
 
     if ($notCheckedID) {
         foreach ($notCheckedID as $not) {
-            $update = DB::exec("UPDATE permission SET permission_list = '0' WHERE page_id=? AND role_id=?", [$not,$role_id]);
+            $update =$permission->updateListOFF($not,$role_id);
         }
     }
 }
@@ -139,9 +139,9 @@ if (isset($_POST["viewCheckBox"])) {
 
     if ($checkedID) {
         foreach ($checkedID as $check) {
-            $control=DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=?",[$check,$role_id]);
+            $control=$permission->controlPermission($check,$role_id);
             if($control){
-                $update = DB::exec("UPDATE permission SET permission_view = '1' WHERE page_id=? AND role_id=?", [$check,$role_id]);
+                $update = $permission->updateViewON($check,$role_id);
                 echo "update";
 
             }else{
@@ -153,7 +153,7 @@ if (isset($_POST["viewCheckBox"])) {
 
     if ($notCheckedID) {
         foreach ($notCheckedID as $not) {
-            $update = DB::exec("UPDATE permission SET permission_view = '0' WHERE page_id=? AND role_id=?", [$not,$role_id]);
+            $update = $permission->updateViewOFF($not,$role_id);
         }
     }
 }

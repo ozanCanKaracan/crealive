@@ -1,4 +1,7 @@
+
 var editorTextarea;
+
+
 
 ClassicEditor
     .create(document.querySelector('#content'))
@@ -125,3 +128,6 @@ function addContent() {
         }
     });
 }
+
+
+

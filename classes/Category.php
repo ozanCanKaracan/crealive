@@ -31,6 +31,9 @@ class Category
     function deleteCategory($categoryID){
         return DB::exec("DELETE FROM category WHERE id=? ",[$categoryID]);
     }
+    function getCategoryName($categoryID){
+        return DB::getVar("SELECT category_name FROM category WHERE id=?",[$categoryID]);
+    }
 
 
 }
