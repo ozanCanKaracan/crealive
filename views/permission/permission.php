@@ -1,9 +1,16 @@
 <?php
 $id = $_GET["id"];
 $getName = DB::getVar("SELECT role_name FROM roles WHERE id=?", [$id]);
+$page_url=$_GET["target"];
+$page_id=DB::getVar("SELECT id FROM pages WHERE href=?",[$page_url]);
+
 ?>
 <div class="container">
     <div class="row">
+        <?php
+        $edit=controlEdit($page_id);
+        if($edit){
+        ?>
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-header">
@@ -39,6 +46,11 @@ $getName = DB::getVar("SELECT role_name FROM roles WHERE id=?", [$id]);
                 </div>
             </div>
         </div>
+        <?php
+        } else{
+        }
+
+        ?>
     </div>
 </div>
 

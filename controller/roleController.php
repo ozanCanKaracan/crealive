@@ -61,10 +61,6 @@ if (isset($_POST["getUserTable"])) {
             $response[] = [
                 "id" => $d->id,
                 "name" => $d->name,
-                "turkish" => '<input type="checkbox" class="custom-control-input turkishCheck" id="turkish" value="'.$d->id.'" onclick="turkishCheckBox('.$d->id.')" '. $controlTR .'>',
-                "german" => '<input type="checkbox" class="custom-control-input germanCheck" id="german" value="'.$d->id.'" onclick="germanCheckBox('.$d->id.')" '. $controlGER .'>',
-                "english"=>'<input type="checkbox" class="custom-control-input englishCheck" id="english" value="'.$d->id.'" onclick="englishCheckBox('.$d->id.')" '. $controlENG .'>',
-                "french"=>'<input type="checkbox" class="custom-control-input frenchCheck" id="french" value="'.$d->id.'" onclick="frenchCheckBox('.$d->id.')" '. $controlFR .'>',
             ];
         }
     }

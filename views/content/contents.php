@@ -11,6 +11,9 @@ $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
                         <div class="card-title">
                             <h2 class="d-flex justify-content-center mb-2">İçerikler</h2>
                         </div>
+                        <div class="col-md-6 mt-5" id="filterByCategory">
+
+                        </div>
                         <?php
                         $controlList = controlList();
                         if ($controlList) {

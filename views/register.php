@@ -8,6 +8,7 @@
 <body class="horizontal-layout horizontal-menu blank-page navbar-floating footer-static" data-open="hover"
       data-menu="horizontal-menu" data-col="blank-page">
 <!-- BEGIN: Content-->
+ <br><br><br><br>
 <div class="app-content content ">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -80,7 +81,7 @@
                                 </div>
 
                                 <br>
-                                <div class="form-group">
+                                <div class="form-group d-flex justify-content-end">
                                     <button class="btn btn-primary btn-block" type="submit" onclick="register()">Kayıt
                                         Ol
                                     </button>

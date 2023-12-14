@@ -22,10 +22,6 @@ function getUserTable(id) {
         columns: [
             {data: 'id', visible: false},
             {data: 'name'},
-            {data: 'turkish'},
-            {data: 'german'},
-            {data: 'english'},
-            {data: 'french'},
         ],
         "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
     });

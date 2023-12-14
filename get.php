@@ -30,8 +30,15 @@ if (!$_GET) {
                 break;
             }
         case 'userlistRole' :
-            include('views/roles/userlistRole.php');
-            break;
+            $access = access($_GET["target"]);
+            if ($access) {
+                include('views/roles/userlistRole.php');
+                break;
+            } else {
+                include('views/404/404.php');
+                break;
+            }
+
         case 'newContent' :
             $access = access($_GET["target"]);
 
@@ -53,11 +60,34 @@ if (!$_GET) {
                 break;
             }
         case 'permission' :
-            include('views/permission/permission.php');
-            break;
+            $access = access($_GET["target"]);
+            if ($access) {
+                include('views/permission/permission.php');
+                break;
+            } else {
+                include('views/404/404.php');
+                break;
+            }
+
         case 'contents' :
-            include('views/content/contents.php');
-            break;
+            $access = access($_GET["target"]);
+            if ($access) {
+                include('views/content/contents.php');
+                break;
+            } else {
+                include('views/404/404.php');
+                break;
+            }
+
+        case 'editContent' :
+            $access = languageAcces();
+            if ($access) {
+                include('views/content/editContent.php');
+                break;
+            } else {
+                include('views/404/404.php');
+                break;
+            }
     }
 }
 //	 include('views/index.php');

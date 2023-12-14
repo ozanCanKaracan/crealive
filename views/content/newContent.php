@@ -64,12 +64,19 @@ if ($controlAdd) {
                                            name="contentDescription">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="titleContent" class="form-label-lg"><b>Fotoğraf Ekle</b></label>
+                                    <input class="form-control" type="file" id="formFileMultiple" multiple="">
+                                </div>
+                            </div>
+
                             <div class="col-md-12">
                                 <div id="editor1" style="display:none"></div>
                                 <div class="ck-reset ck-editor...">
                                     <div>
                                         <div class="... ck-editor__editable ck-editor__editable_inline ...">
-                                            <label for="editor" class="form-label-lg mb-1"><b>İçerik Oluştur</b></label>
+                                            <label for="editor" class="form-label-lg mb-1"><b>İçerik Yazısı</b></label>
                                             <textarea name="content" id="content"></textarea>
                                         </div>
                                     </div>
@@ -93,4 +100,4 @@ if ($controlAdd) {
 }
 ?>
 
-<script src="assets/js/modules/content.js"></script>
+<script src="assets/js/modules/addContent.js"></script>

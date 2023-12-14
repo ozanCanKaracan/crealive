@@ -17,11 +17,7 @@ $roleName=DB::getVar("SELECT role_name FROM roles WHERE id=?",[$id]);
                             <thead>
                             <tr class="fw-semibold fs-6 text-gray-800">
                                 <th scope="col" class="d-none"></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 300px;">Ad Soyad</th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Türkçe</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Almanca</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>İngilizce</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Fransızca</b></th>
+                                <th tabindex="0" aria-controls="DataTables_Table_2">Ad Soyad</th>
                             </tr>
                             </thead>
                             <tbody>
