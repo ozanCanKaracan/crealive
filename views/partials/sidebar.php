@@ -49,12 +49,9 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item"><a class="d-flex align-items-center"><i data-feather="home"></i><span
-                            class="menu-title text-truncate" data-i18n="Dashboards">Ayarlar</span><span
-                            class="badge badge-light-warning rounded-pill ms-auto me-1">2</span></a>
+                            class="menu-title text-truncate" data-i18n="Dashboards">Ayarlar</span></a>
                 <ul class="menu-content">
-                    <li class="active"><a class="d-flex align-items-center"><i data-feather="circle"></i><span
-                                    class="menu-item text-truncate" onclick="logout()">Çıkış Yap</span></a>
-                    </li>
+
                 </ul>
             </li>
             <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Sayfalar</span><i
@@ -95,6 +92,5 @@
         </ul>
     </div>
 </div>
-<script src="assets/js/modules/auth.js"></script>
 
 <!-- END: Main Menu-->

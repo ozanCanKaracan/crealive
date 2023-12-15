@@ -17,15 +17,22 @@ if (isset($_POST["addContent"])) {
     }
 }
 if (isset($_POST["contentTable"])) {
-    $categoryId = $_POST["categoryID"];
+    $categoryId = isset($_POST["categoryId"]) ? $_POST["categoryId"] : null;
+    $languageId = isset($_POST["languageId"]) ? $_POST["languageId"] : null;
     $role_id = $_SESSION["role_id"];
     $page_id = $_POST["id"];
 
-    if ($categoryId == null) {
+
+    if ($categoryId == null || $languageId == null) {
         $data = DB::get("SELECT * FROM contents");
-    } else {
+    }if ($categoryId  AND  $languageId ) {
+        $data = DB::get("SELECT * FROM contents WHERE content_category=? AND content_language=?", [$categoryId, $languageId]);
+    }else if ($categoryId) {
         $data = DB::get("SELECT * FROM contents WHERE content_category=?", [$categoryId]);
+    }else if ($languageId ) {
+        $data = DB::get("SELECT * FROM contents WHERE content_language=?", [$languageId]);
     }
+
 
     $controlEdit = controlEdit($page_id);
     $controlDelete = controlDeleteBack($page_id);
@@ -53,7 +60,6 @@ if (isset($_POST["contentTable"])) {
     echo json_encode(["recordsTotal" => count($response), "recordsFiltered" => count($response), "data" => $response]);
     exit();
 }
-
 if (isset($_POST["deleteContent"])) {
     $id = C($_POST["id"]);
     $delete = $content->deleteContent($id);
@@ -74,5 +80,57 @@ if (isset($_POST["categoryFilter"])) {
     echo $response;
     exit();
 
+}
+if (isset($_POST["languageFilter"])) {
+    $data = DB::get("SELECT * FROM languages");
+    $response = "";
+    $response .= '
+     <label class="form-label-lg "><b>Dile Göre Filtrele :</b></label>
+     <select class="select2 form-control form-control select2-hidden-accessible" data-select2-id="1" aria-hidden="true" id="languageFilter" name="categoryFilter">
+         <option value="" data-select2-id="3" selected=""> Dil Seçiniz</option> ';
+    foreach ($data as $d) {
+        $response .= '   <option value="' . $d->id . '" data-select2-id="3" >' . $d->lang_name . '</option>';
+    }
+    $response .= '</select>';
+    echo $response;
+    exit();
+}
+
+
+if (isset($_FILES['upload']['name'])) {
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+
+    $data = [];
+    $file_name = basename($_FILES['upload']['name']);
+    $file_path = '../uploads/' . $file_name;
+    $file_extension = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
+$file_pathORG='uploads/' . $file_name;
+    // İzin verilen dosya uzantıları
+    $allowed_extensions = ['jpg', 'jpeg', 'png'];
+
+    // Dosya uzantısı ve format kontrolü
+    if (in_array($file_extension, $allowed_extensions) && exif_imagetype($_FILES['upload']['tmp_name'])) {
+        // Dosya varlığını kontrol etme
+        if (file_exists($_FILES['upload']['tmp_name'])) {
+            // Dosyayı güvenli bir şekilde taşıma
+            if (move_uploaded_file($_FILES['upload']['tmp_name'], $file_path)) {
+                $data['file'] = $file_name;
+                $data['url'] = $file_pathORG;
+                $data['uploaded'] = 1;
+            } else {
+                $data['uploaded'] = 0;
+                $data['error']['message'] = 'Hata! Dosya yüklenemedi';
+            }
+        } else {
+            $data['uploaded'] = 0;
+            $data['error']['message'] = 'Dosya bulunamadı';
+        }
+    } else {
+        $data['uploaded'] = 0;
+        $data['error']['message'] = 'Geçersiz dosya uzantısı veya dosya formatı';
+    }
+
+    echo json_encode($data);
 }
 ?>

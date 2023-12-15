@@ -1,4 +1,3 @@
-var jQuery = $.noConflict();
 
 var table;
 function getPermissionTable(id) {

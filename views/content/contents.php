@@ -2,6 +2,9 @@
 $page_name = $_GET["target"];
 $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
 ?>
+<script>
+    const id= '<?php echo $page_id ?>';
+</script>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -11,26 +14,26 @@ $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
                         <div class="card-title">
                             <h2 class="d-flex justify-content-center mb-2">İçerikler</h2>
                         </div>
-                        <div class="col-md-6 mt-5" id="filterByCategory">
+                        <div class="row">
+                            <div class="col-md-4 mt-5" id="filterByCategory">
 
+                            </div>
+                            <div class="col-md-4 mt-5" id="filterByLanguage">
+
+                            </div>
                         </div>
                         <?php
                         $controlList = controlList();
                         if ($controlList) {
                             ?>
-                            <table class="table-bordered table datatables-basic table dataTable no-footer dtr-column "
-                                   id="contentTable">
+                            <table class="table-bordered table datatables-basic table dataTable no-footer dtr-column " id="contentTable">
                                 <thead>
                                 <tr class="fw-semibold fs-6 text-gray-800">
                                     <th scope="col" class="d-none"></th>
-                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
-                                        style="width: 100px;"><b>Başlık</b></th>
-                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
-                                        style="width: 200px;"><b>Açıklama</b></th>
-                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
-                                        style="width: 200px;"><b>Kategori</b></th>
-                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
-                                        style="width: 50px;"><b>İşlemler</b></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 100px;"><b>Başlık</b></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 200px;"><b>Açıklama</b></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 200px;"><b>Kategori</b></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>İşlemler</b></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -47,8 +50,8 @@ $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
 </div>
 
 
+
 <script src="assets/js/modules/contents.js"></script>
 <script>
-    contentTable(<?php echo $page_id ?>);
-
+    contentTable(id);
 </script>

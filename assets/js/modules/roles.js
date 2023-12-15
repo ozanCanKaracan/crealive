@@ -1,4 +1,3 @@
-var jQuery = $.noConflict();
 
 let tableX;
 

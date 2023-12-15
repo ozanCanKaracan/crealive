@@ -1,13 +1,15 @@
-var jQuery = $.noConflict();
 var table;
-$(document).on('change', '#categoryFilter', function () {
-    var categoryId = $(this).val();
-    contentTable(categoryId);
+
+$(document).on('change', '#categoryFilter, #languageFilter', function () {
+    var categoryId = $('#categoryFilter').val();
+    var languageId = $('#languageFilter').val();
+    contentTable(id, categoryId, languageId);
 });
 
-function contentTable(id, categoryId) {
+
+function contentTable(id, categoryId, languageId) {
     if (table) {
-        table.destroy();
+        table.clear().destroy();
         table = false;
     }
 
@@ -19,6 +21,8 @@ function contentTable(id, categoryId) {
             data: {
                 "contentTable": 1,
                 "categoryId": categoryId,
+                "languageId":languageId,
+
                 "id": id,
             }
         },
@@ -46,11 +50,21 @@ function categoryFilter() {
         }
     });
 }
-
-
 categoryFilter();
-
-
+function languageFilter() {
+    $.ajax({
+        type: 'POST',
+        data: {
+            'languageFilter': 1
+        },
+        url: "controller/contentController.php",
+        success: function (e) {
+            $('#filterByLanguage').empty();
+            $('#filterByLanguage').append(e);
+        }
+    });
+}
+languageFilter();
 
 
 function deleteContent(id) {

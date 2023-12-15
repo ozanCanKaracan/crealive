@@ -1,18 +1,22 @@
 
 var editorTextarea;
 
-
-
 ClassicEditor
-    .create(document.querySelector('#content'))
+    .create(document.querySelector('#content'), {
+        ckfinder: {
+            uploadUrl: 'controller/contentController.php'
+        }
+    })
     .then(editor => {
         editorTextarea = editor;
         editorTextarea.model.document.on('change:data', function () {
+            // Buraya düzenleme yapıldığında tetiklenecek işlemleri ekleyebilirsiniz
         });
     })
     .catch(error => {
         console.error(error);
     });
+
 
 function addContent() {
     $.validator.addMethod("ck_editor", function () {
@@ -118,7 +122,7 @@ function addContent() {
                                     showConfirmButton: true,
                                     confirmButtonColor: '#3085d6'
                                 }).then((result) => {
-                                    window.location.relaod();
+                                    window.location.reload();
                                 });
                             }
                         }
@@ -128,6 +132,5 @@ function addContent() {
         }
     });
 }
-
 
 
