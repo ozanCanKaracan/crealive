@@ -2,17 +2,22 @@
 include "../include/config.php";
 $content = new Content();
 $category = new Category();
+
 if (isset($_POST["addContent"])) {
+    $specialURL = isset($_POST["specialURL"]) ? $_POST["specialURL"] : null;
+    $tag = $_POST["tag"];
     $language = C($_POST["language"]);
     $category = C($_POST["category"]);
     $title = C($_POST["title"]);
-    $description = C($_POST["description"]);
     $editor = C($_POST["editor"]);
+    $editorContent = stripslashes($editor);
+    $special = $content->createUrl($specialURL);
+    $url = $content->createUrl($title);
 
-    if (!$language || !$category || !$title || !$description || !$editor) {
+    if (!$language || !$category || !$title || !$editor) {
         echo "bos";
     } else {
-        $add = $content->addContent($language, $category, $title, $description, $editor);
+        $add = $content->addContent($language, $category, $title, $editorContent);
         echo "ok";
     }
 }
@@ -22,18 +27,16 @@ if (isset($_POST["contentTable"])) {
     $role_id = $_SESSION["role_id"];
     $page_id = $_POST["id"];
 
-
     if ($categoryId == null || $languageId == null) {
         $data = DB::get("SELECT * FROM contents");
-    }if ($categoryId  AND  $languageId ) {
+    }
+    if ($categoryId and $languageId) {
         $data = DB::get("SELECT * FROM contents WHERE content_category=? AND content_language=?", [$categoryId, $languageId]);
-    }else if ($categoryId) {
+    } else if ($categoryId) {
         $data = DB::get("SELECT * FROM contents WHERE content_category=?", [$categoryId]);
-    }else if ($languageId ) {
+    } else if ($languageId) {
         $data = DB::get("SELECT * FROM contents WHERE content_language=?", [$languageId]);
     }
-
-
     $controlEdit = controlEdit($page_id);
     $controlDelete = controlDeleteBack($page_id);
     $response = [];
@@ -95,8 +98,6 @@ if (isset($_POST["languageFilter"])) {
     echo $response;
     exit();
 }
-
-
 if (isset($_FILES['upload']['name'])) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
@@ -105,7 +106,7 @@ if (isset($_FILES['upload']['name'])) {
     $file_name = basename($_FILES['upload']['name']);
     $file_path = '../uploads/' . $file_name;
     $file_extension = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
-$file_pathORG='uploads/' . $file_name;
+    $file_pathORG = 'uploads/' . $file_name;
     // İzin verilen dosya uzantıları
     $allowed_extensions = ['jpg', 'jpeg', 'png'];
 
@@ -132,5 +133,35 @@ $file_pathORG='uploads/' . $file_name;
     }
 
     echo json_encode($data);
+}
+if (isset($_POST["editContent"])) {
+    $id = C($_POST["id"]);
+    $language = C($_POST["language"]);
+    $category = C($_POST["category"]);
+    $title = C($_POST["title"]);
+    $description = C($_POST["description"]);
+    $editor = C($_POST["editor"]);
+    $editorContent = stripslashes($editor);
+
+    if (!$language || !$category || !$title || !$description || !$editor) {
+        echo "bos";
+    } else {
+        $update = $content->updateContent($category, $language, $title, $description, $editorContent, $id);
+        echo "ok";
+    }
+}
+if (isset($_POST["tagSelect"])) {
+    $categoryId = isset($_POST["categoryId"]) ? $_POST["categoryId"] : null;
+    if ($categoryId) {
+        $data = DB::get("SELECT * FROM tag_category WHERE category_id=?", [$categoryId]);
+        $response = '
+      <label for="tag" class="form-label-lg"><b>Etiket Seçimi</b></label>
+        <select class="form-select" id="tag" multiple="multiple">';
+        foreach ($data as $d) {
+            $tagName=DB::getVar("SELECT tag_name FROM tag WHERE id=?",[$d->tag_id]);
+            $response .= '<option value="' . $d->id . '">' . $tagName . '</option>';
+        }
+        $response.='</select >';
+    }
 }
 ?>

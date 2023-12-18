@@ -38,7 +38,6 @@ if (!$_GET) {
                 include('views/404/404.php');
                 break;
             }
-
         case 'newContent' :
             $access = access($_GET["target"]);
 
@@ -80,11 +79,17 @@ if (!$_GET) {
             }
 
         case 'editContent' :
-            $access = languageAcces();
-            if ($access) {
-                include('views/content/editContent.php');
-                break;
-            } else {
+            $access=access($_GET["target"]);
+            $languageAccess = languageAcces();
+            if ($languageAccess) {
+                if ($access) {
+                    include('views/content/editContent.php');
+                    break;
+                } else {
+                    include('views/404/404.php');
+                    break;
+                }
+            }else{
                 include('views/404/404.php');
                 break;
             }
