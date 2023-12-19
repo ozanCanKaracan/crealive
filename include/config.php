@@ -12,7 +12,6 @@ const MYSQL_PASS = '';
 
 const site_url = "http://localhost/cms/";
 
-define('PATH', str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT']) . "/cms/");
 
 include "../classes/User.php";
 include "../classes/Roles.php";

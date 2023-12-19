@@ -8,7 +8,8 @@ $href=$_GET["target"];
 $page_id=DB::getVar("SELECT id FROM pages WHERE href=?",[$href]);
 $id=$_GET["id"];
 $data=DB::getRow("SELECT * FROM contents WHERE id=?",[$id]);
-
+$slug=$_GET["slug"];
+var_dump($slug);
 ?>
 <?php $controlAdd = controlEdit($page_id);
 if ($controlAdd) {

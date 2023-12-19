@@ -23,6 +23,10 @@ ClassicEditor
 
 
 function addContent() {
+
+    var selectedCategory = $(".category:checked").val();
+    var selectedTag = $(".tag:checked").val();
+
     $.validator.addMethod("ck_editor", function () {
         var content_length = editorTextarea.getData().trim().length;
         return content_length > 0;
@@ -90,6 +94,7 @@ function addContent() {
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
+
                     $.ajax({
                         type: "POST",
                         url: "controller/contentController.php",
@@ -100,10 +105,11 @@ function addContent() {
                             "language": $("#languageSelect").val(),
                             "category": $("#categorySelect").val(),
                             "title": $("#titleContent").val(),
+                            "urlCat":selectedCategory,
+                            "urlTag":selectedTag,
                             "editor": editorTextarea.getData(),
                         },
                         success: function (e) {
-                            console.log($("#tag").val())
                             if (e.trim() === "bos") {
                                 Swal.fire({
                                     title: 'Hata!',

@@ -2,10 +2,9 @@
     RewriteEngine On
     RewriteBase /cms/
 
-    # Diğer sayfalar için genel yönlendirme
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteRule ^([^/]+)$ index.php?target=$1 [QSA,L]
-    RewriteRule ^([^/]+)/([0-9]+)*$ index.php?target=$1&id=$2 [QSA,L]
-
+    RewriteRule ^([^/]+)/?$ index.php?target=$1 [QSA,L]
+    RewriteRule ^([^/]+)/([0-9]+)/([^/]+)?$ index.php?target=$1&id=$2&slug=$3 [QSA,L]
+    RewriteRule ^editContent/([^/]+)$ ?target=editContent/slug=$1 [L]
 </IfModule>

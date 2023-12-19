@@ -5,20 +5,37 @@ $category = new Category();
 
 if (isset($_POST["addContent"])) {
     $specialURL = isset($_POST["specialURL"]) ? $_POST["specialURL"] : null;
+    $checkedTag = isset($_POST["urlTag"]) ? $_POST["urlTag"] : null;
+    $checkedCategory = isset($_POST["urlCat"]) ? $_POST["urlCat"] : null;
     $tag = $_POST["tag"];
+
     $language = C($_POST["language"]);
     $category = C($_POST["category"]);
     $title = C($_POST["title"]);
     $editor = C($_POST["editor"]);
     $editorContent = stripslashes($editor);
     $special = $content->createUrl($specialURL);
+    $autoUrl = $content->checkedFunction($checkedTag, $checkedCategory, $category, $tag);
+
     $url = $content->createUrl($title);
 
     if (!$language || !$category || !$title || !$editor) {
         echo "bos";
     } else {
-        $add = $content->addContent($language, $category, $title, $editorContent);
-        echo "ok";
+        if ($special) {
+            $add = DB::insert("INSERT INTO contents (content_title, content_category, content_language, content_text, url) VALUES (?,?,?,?,?)", [$title, $category, $language, $editor, $special]);
+            echo "ok";
+            exit;
+        } else if ($autoUrl) {
+            $add = DB::insert("INSERT INTO contents (content_title, content_category, content_language, content_text, url) VALUES (?,?,?,?,?)", [$title, $category, $language, $editor, $autoUrl]);
+            echo "ok";
+            exit();
+        } else {
+            $add = $content->addContent($language, $category, $title, $editorContent, $url);
+            echo "ok";
+            exit();
+
+        }
     }
 }
 if (isset($_POST["contentTable"])) {
@@ -53,7 +70,7 @@ if (isset($_POST["contentTable"])) {
                 "desc" => $d->content_desc,
                 "category" => $categoryName,
                 "process" => '<div class="d-flex justify-content-center">'
-                    . ($controlEdit ? '<a href="editContent/' . $d->id . '"><button type="button" class="btn btn-relief-info btn-sm" onclick="editContent()">Düzenle</button></a><span style="margin:3px;"></span>' : '')
+                    . ($controlEdit ? '<a href="editContent/' . $d->id . '/' . $d->url . '"><button type="button" class="btn btn-relief-info btn-sm" onclick="editContent()">Düzenle</button></a><span style="margin:3px;"></span>' : '')
                     . ($controlDelete ? '<button type="button" class="btn btn-relief-danger btn-sm" onclick="deleteContent(' . $d->id . ')">Sil</button>' : '')
                     . '</div>',
             ];
@@ -107,14 +124,10 @@ if (isset($_FILES['upload']['name'])) {
     $file_path = '../uploads/' . $file_name;
     $file_extension = strtolower(pathinfo($file_path, PATHINFO_EXTENSION));
     $file_pathORG = 'uploads/' . $file_name;
-    // İzin verilen dosya uzantıları
     $allowed_extensions = ['jpg', 'jpeg', 'png'];
 
-    // Dosya uzantısı ve format kontrolü
     if (in_array($file_extension, $allowed_extensions) && exif_imagetype($_FILES['upload']['tmp_name'])) {
-        // Dosya varlığını kontrol etme
         if (file_exists($_FILES['upload']['tmp_name'])) {
-            // Dosyayı güvenli bir şekilde taşıma
             if (move_uploaded_file($_FILES['upload']['tmp_name'], $file_path)) {
                 $data['file'] = $file_name;
                 $data['url'] = $file_pathORG;
@@ -152,16 +165,26 @@ if (isset($_POST["editContent"])) {
 }
 if (isset($_POST["tagSelect"])) {
     $categoryId = isset($_POST["categoryId"]) ? $_POST["categoryId"] : null;
+
     if ($categoryId) {
         $data = DB::get("SELECT * FROM tag_category WHERE category_id=?", [$categoryId]);
+
         $response = '
       <label for="tag" class="form-label-lg"><b>Etiket Seçimi</b></label>
         <select class="form-select" id="tag" multiple="multiple">';
         foreach ($data as $d) {
-            $tagName=DB::getVar("SELECT tag_name FROM tag WHERE id=?",[$d->tag_id]);
-            $response .= '<option value="' . $d->id . '">' . $tagName . '</option>';
+            $tagName = DB::getVar("SELECT tag_name FROM tag WHERE id=?", [$d->tag_id]);
+            $response .= '<option value="' . $d->tag_id . '">' . $tagName . '</option>';
         }
-        $response.='</select >';
+        $response .= '</select >';
+    } else {
+        $response = "";
+        $response .= '
+            <label for="tag" class="form-label-lg"><b>Etiket Seçimi</b></label>
+            <select class="form-select" id="tag" multiple="multiple">
+            </select>';
     }
+    echo $response;
+    exit;
 }
 ?>

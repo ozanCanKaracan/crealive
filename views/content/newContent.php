@@ -62,18 +62,19 @@ if ($controlAdd) {
                                     <input type="text" class="form-control" id="url" name="url">
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-1 mt-2"><h6><b>Yada</h6></b></div>
+                            <div class="col-md-5">
                                 <h5 class="d-flex justify-content-center mt-1">Otomatik URL</h5>
                                 <div class="d-flex justify-content-center">
                                     <div class="form-check form-check-inline ">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                        <input class="form-check-input category" type="checkbox" value="1" id="categoryCheckbox">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             Kategori Gözüksün
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="flexCheckChecked"></label>
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                        <input class="form-check-input tag" type="checkbox" value="2" id="tagCheckbox">
                                         Etiket Gözüksün
                                         </label>
                                     </div>
