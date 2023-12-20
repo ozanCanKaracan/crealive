@@ -1,5 +1,5 @@
 <?php
-$id=$_GET["id"];
+$id=$_GET["slug"];
 $roleName=DB::getVar("SELECT role_name FROM roles WHERE id=?",[$id]);
 
 ?>

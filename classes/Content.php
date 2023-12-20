@@ -46,7 +46,7 @@ class Content
         $result = implode('-', $combinedTags);
 
         if ($checkedTag && $checkedCategory) {
-            return $categoryName . "/" . $result;
+            return $categoryName . "-" . $result;
         } else if ($checkedTag) {
             return $result;
         } else if ($checkedCategory) {

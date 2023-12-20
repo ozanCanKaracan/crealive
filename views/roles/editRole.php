@@ -44,8 +44,8 @@
             } ?>
         </div>
         <?php
-        $controlDelete= controlDelete();
-        if($controlDelete){
+        $controlDelete = controlDelete();
+        if ($controlDelete){
         ?>
         <div class="col-md-6">
             <div class="card shadow">
@@ -67,12 +67,12 @@
         </div>
     </div>
     <?php
-    }else{
+    } else {
 
     }
     ?>
 </div>
-</div>
+
 <script src="assets/js/modules/roles.js"></script>
 <script>
     getSelectBox();

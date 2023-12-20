@@ -1,5 +1,6 @@
 <?php
-$id = $_GET["id"];
+
+$id = $_GET["slug"];
 $getName = DB::getVar("SELECT role_name FROM roles WHERE id=?", [$id]);
 $page_url=$_GET["target"];
 $page_id=DB::getVar("SELECT id FROM pages WHERE href=?",[$page_url]);

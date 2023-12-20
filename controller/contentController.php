@@ -8,7 +8,6 @@ if (isset($_POST["addContent"])) {
     $checkedTag = isset($_POST["urlTag"]) ? $_POST["urlTag"] : null;
     $checkedCategory = isset($_POST["urlCat"]) ? $_POST["urlCat"] : null;
     $tag = $_POST["tag"];
-
     $language = C($_POST["language"]);
     $category = C($_POST["category"]);
     $title = C($_POST["title"]);
@@ -16,20 +15,35 @@ if (isset($_POST["addContent"])) {
     $editorContent = stripslashes($editor);
     $special = $content->createUrl($specialURL);
     $autoUrl = $content->checkedFunction($checkedTag, $checkedCategory, $category, $tag);
-
     $url = $content->createUrl($title);
-
+    $controlTitle = DB::get("SELECT * FROM contents WHERE content_title=?", [$title]);
     if (!$language || !$category || !$title || !$editor) {
         echo "bos";
+    } else if ($controlTitle) {
+        echo "title";
     } else {
         if ($special) {
-            $add = DB::insert("INSERT INTO contents (content_title, content_category, content_language, content_text, url) VALUES (?,?,?,?,?)", [$title, $category, $language, $editor, $special]);
-            echo "ok";
-            exit;
+            $controlSpecial = DB::get("SELECT * FROM contents WHERE url=?", [$special]);
+
+            if ($controlSpecial) {
+                echo "special";
+            } else {
+                $add = DB::insert("INSERT INTO contents (content_title, content_category, content_language, content_text, url) VALUES (?,?,?,?,?)", [$title, $category, $language, $editor, $special]);
+                echo "ok";
+                exit;
+            }
+
         } else if ($autoUrl) {
-            $add = DB::insert("INSERT INTO contents (content_title, content_category, content_language, content_text, url) VALUES (?,?,?,?,?)", [$title, $category, $language, $editor, $autoUrl]);
-            echo "ok";
-            exit();
+            $controlAuto = DB::get("SELECT * FROM contents WHERE url=?", [$autoUrl]);
+
+            if ($controlAuto) {
+                echo "auto";
+            } else {
+                $add = DB::insert("INSERT INTO contents (content_title, content_category, content_language, content_text, url) VALUES (?,?,?,?,?)", [$title, $category, $language, $editor, $autoUrl]);
+                echo "ok";
+                exit();
+            }
+
         } else {
             $add = $content->addContent($language, $category, $title, $editorContent, $url);
             echo "ok";
@@ -70,7 +84,7 @@ if (isset($_POST["contentTable"])) {
                 "desc" => $d->content_desc,
                 "category" => $categoryName,
                 "process" => '<div class="d-flex justify-content-center">'
-                    . ($controlEdit ? '<a href="editContent/' . $d->id . '/' . $d->url . '"><button type="button" class="btn btn-relief-info btn-sm" onclick="editContent()">Düzenle</button></a><span style="margin:3px;"></span>' : '')
+                    . ($controlEdit ? '<a href="editContent/' . $d->url . '"><button type="button" class="btn btn-relief-info btn-sm">Düzenle</button></a><span style="margin:3px;"></span>' : '')
                     . ($controlDelete ? '<button type="button" class="btn btn-relief-danger btn-sm" onclick="deleteContent(' . $d->id . ')">Sil</button>' : '')
                     . '</div>',
             ];

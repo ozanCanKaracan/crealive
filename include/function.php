@@ -53,8 +53,9 @@ function access($href)
 
 }
 function languageAcces(){
-    $id=$_GET["id"];
+    $slug=$_GET["slug"];
     $role_id=$_SESSION["role_id"];
+    $id=DB::getVar("SELECT id FROM contents WHERE url=?",[$slug]);
     $content=DB::getVar("SELECT content_language FROM contents WHERE id=?",[$id]);
     $languageName = DB::getVar("SELECT lang_name_short FROM languages WHERE id=?", [$content]);
     $access = DB::getVar("SELECT $languageName FROM roles WHERE id=?", [$role_id]);

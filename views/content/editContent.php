@@ -4,12 +4,12 @@
     }
 </style>
 <?php
+
+$slug=$_GET["slug"];
 $href=$_GET["target"];
 $page_id=DB::getVar("SELECT id FROM pages WHERE href=?",[$href]);
-$id=$_GET["id"];
+$id=DB::getVar("SELECT id FROM contents WHERE url=?",[$slug]);
 $data=DB::getRow("SELECT * FROM contents WHERE id=?",[$id]);
-$slug=$_GET["slug"];
-var_dump($slug);
 ?>
 <?php $controlAdd = controlEdit($page_id);
 if ($controlAdd) {

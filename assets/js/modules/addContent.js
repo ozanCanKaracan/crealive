@@ -1,4 +1,3 @@
-
 var editorTextarea;
 $(document).on('change', '#categorySelect', function () {
     var categoryId = $('#categorySelect').val();
@@ -100,13 +99,13 @@ function addContent() {
                         url: "controller/contentController.php",
                         data: {
                             "addContent": 1,
-                            "tag":$("#tag").val(),
-                            "specialURL":$("#url").val(),
+                            "tag": $("#tag").val(),
+                            "specialURL": $("#url").val(),
                             "language": $("#languageSelect").val(),
                             "category": $("#categorySelect").val(),
                             "title": $("#titleContent").val(),
-                            "urlCat":selectedCategory,
-                            "urlTag":selectedTag,
+                            "urlCat": selectedCategory,
+                            "urlTag": selectedTag,
                             "editor": editorTextarea.getData(),
                         },
                         success: function (e) {
@@ -118,6 +117,36 @@ function addContent() {
                                     timer: 1500,
                                     showConfirmButton: true,
                                     confirmButtonColor: '#3085d6'
+                                });
+                            } else if (e.trim() === "title") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Bu başlık kullanılıyor!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                });
+                            } else if (e.trim() === "special") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Oluşturmak istediğiniz URL kullanılıyor!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                });
+                            }else if (e.trim() === "auto") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Oluşturmak istediğiniz otomatik URL kullanılıyor!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                }).then((result) => {
+                                    $(".tag:checked").prop('checked', false);
+                                    $(".category:checked").prop('checked', false);
                                 });
                             } else if (e.trim() === "ok") {
                                 Swal.fire({
@@ -138,6 +167,7 @@ function addContent() {
         }
     });
 }
+
 function editContent(id) {
     $.validator.addMethod("ck_editor", function () {
         var content_length = editorTextarea.getData().trim().length;
@@ -217,7 +247,7 @@ function editContent(id) {
                         url: "controller/contentController.php",
                         data: {
                             "editContent": 1,
-                            "id":id,
+                            "id": id,
                             "language": $("#languageSelect").val(),
                             "category": $("#categorySelect").val(),
                             "title": $("#titleContent").val(),
@@ -253,11 +283,12 @@ function editContent(id) {
         }
     });
 }
+
 function tagSelect(categoryId) {
     $.ajax({
         type: 'POST',
         data: {
-            "categoryId":categoryId,
+            "categoryId": categoryId,
             'tagSelect': 1
         },
         url: "controller/contentController.php",
@@ -267,6 +298,7 @@ function tagSelect(categoryId) {
         }
     });
 }
+
 tagSelect()
 
 
