@@ -1,33 +1,45 @@
 <nav class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
     <div class="navbar-container d-flex content">
         <ul class="nav navbar-nav align-items-center ms-auto">
+            <?php
+            if (isset($_GET['lang'])) {
+                $selectedLanguage = $_GET['lang'];
+                $_SESSION['lang'] = $selectedLanguage;
+            } elseif ($_SESSION['lang']) {
+                $selectedLanguage = $_SESSION['lang'];
+                $_SESSION['lang'] = $selectedLanguage;
+            } else {
+                $browserLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+                $result = substr($browserLanguage, 0, 2);
+                $selectedLanguage = DB::getVar("SELECT lang_name_short FROM languages WHERE lang_name_short=?", [$result]);
+                $_SESSION['lang'] = $selectedLanguage;
+            }
+            $fullName = DB::getVar("SELECT lang_name FROM languages WHERE lang_name_short=?", [$selectedLanguage]);
+            $translate=(language($fullName)) ? language($fullName) : $fullName;
+            ?>
+
             <li class="nav-item dropdown dropdown-language">
-                <a class="nav-link dropdown-toggle" id="dropdown-flag" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     <?php
-
-                     $browserLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-                     $result = substr($browserLanguage, 0, 2);
-
-                     // Seçili dilin adını al
-                     $selectedLanguage = DB::getVar("SELECT lang_name FROM languages WHERE lang_name_short=?", [$result]);
-
-                     // Tüm dilleri al
-                     $allLanguages = DB::get("SELECT * FROM languages" );
-
-                     // Tüm diller içinde seçili dil hariç olanları filtrele
-                     $filteredLanguages = array_filter($allLanguages, function ($language) use ($selectedLanguage) {
-                         return $language['lang_name'] !== $selectedLanguage;
-                     });
-                     ?>
-                    <i class="flag-icon flag-icon-<?=$result?>"></i><?= $selectedLanguage ?></a>
+                <a class="nav-link dropdown-toggle" id="dropdown-flag" href="#" data-bs-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="flag-icon flag-icon-<?= $selectedLanguage ?>"></i><?= $translate ?>
+                </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag">
                     <?php
-                    foreach ($filteredLanguages as $language){
-                    ?>
-                    <a class="dropdown-item" href="#"><i class="flag-icon flag-icon-<?= $language->lang_name_short ?>"></i><?= $language->lang_name ?></a>
-              <?php } ?>
+                    $allLanguages = DB::get("SELECT * FROM languages");
+                    foreach ($allLanguages as $language) {
+                        $langName=$language->lang_name;
+                        $translate=(language($langName)) ? language($langName) : $langName;
+                        $languageShort = $language->lang_name_short;
+                        $isActive = ($selectedLanguage == $languageShort) ? 'active' : '';
+                        ?>
+                        <a class="dropdown-item <?= $isActive ?>" href="?lang=<?= $languageShort ?>">
+                            <i class="flag-icon flag-icon-<?= $languageShort ?>"></i><?= $translate ?>
+                        </a>
+                    <?php } ?>
                 </div>
             </li>
+
+
             <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon"
                                                                                          data-feather="moon"></i></a>
             </li>

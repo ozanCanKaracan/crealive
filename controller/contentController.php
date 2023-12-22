@@ -76,16 +76,19 @@ if (isset($_POST["contentTable"])) {
         $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
         $languageName = DB::getVar("SELECT lang_name_short FROM languages WHERE id=?", [$d->content_language]);
         $access = DB::getVar("SELECT $languageName FROM roles WHERE id=?", [$role_id]);
+        $text_1='Düzenle';
+        $text_2='Kaldır';
+        $translate_1=(language($text_1)) ? language($text_1) : $text_1;
+        $translate_2=(language($text_2)) ? language($text_2) : $text_2;
 
         if ($access == 1) {
             $response[] = [
                 "id" => $d->id,
                 "title" => $d->content_title,
-                "desc" => $d->content_desc,
                 "category" => $categoryName,
                 "process" => '<div class="d-flex justify-content-center">'
-                    . ($controlEdit ? '<a href="editContent/' . $d->url . '"><button type="button" class="btn btn-relief-info btn-sm">Düzenle</button></a><span style="margin:3px;"></span>' : '')
-                    . ($controlDelete ? '<button type="button" class="btn btn-relief-danger btn-sm" onclick="deleteContent(' . $d->id . ')">Sil</button>' : '')
+                    . ($controlEdit ? '<a href="editContent/' . $d->url . '"><button type="button" class="btn btn-relief-info btn-sm">'.$translate_1.'</button></a><span style="margin:3px;"></span>' : '')
+                    . ($controlDelete ? '<button type="button" class="btn btn-relief-danger btn-sm" onclick="deleteContent(' . $d->id . ')"> '. $translate_2 .' </button>' : '')
                     . '</div>',
             ];
         }
@@ -102,11 +105,15 @@ if (isset($_POST["deleteContent"])) {
 }
 if (isset($_POST["categoryFilter"])) {
     $data = $category->getCategory();
+    $text='Kategoriye Göre Filtrele ';
+    $translate=(language($text)) ? language($text) : $text;
+    $text_2='Kategori Seçiniz';
+    $translate_2=(language($text_2)) ? language($text_2) : $text_2;
     $response = "";
     $response .= '
-     <label class="form-label-lg "><b>Kategoriye Göre Filtrele :</b></label>
+     <label class="form-label-lg "><b> '.$translate.' :</b></label>
      <select class="select2 form-control form-control select2-hidden-accessible" data-select2-id="1" aria-hidden="true" id="categoryFilter" name="categoryFilter">
-         <option value="" data-select2-id="3" selected=""> Kategori Seçiniz</option> ';
+         <option value="" data-select2-id="3" selected="">  '.$translate_2.' </option> ';
     foreach ($data as $d) {
         $response .= '   <option value="' . $d->id . '" data-select2-id="3" >' . $d->category_name . '</option>';
     }
@@ -117,11 +124,15 @@ if (isset($_POST["categoryFilter"])) {
 }
 if (isset($_POST["languageFilter"])) {
     $data = DB::get("SELECT * FROM languages");
+    $text='Dile Göre Filtrele ';
+    $text_2='Dil Seçiniz';
+    $translate_2=(language($text_2)) ? language($text_2) : $text_2;
+    $translate=(language($text)) ? language($text) : $text;
     $response = "";
     $response .= '
-     <label class="form-label-lg "><b>Dile Göre Filtrele :</b></label>
+     <label class="form-label-lg "><b>'.$translate.' :</b></label>
      <select class="select2 form-control form-control select2-hidden-accessible" data-select2-id="1" aria-hidden="true" id="languageFilter" name="categoryFilter">
-         <option value="" data-select2-id="3" selected=""> Dil Seçiniz</option> ';
+         <option value="" data-select2-id="3" selected=""> '.$translate_2.' </option> ';
     foreach ($data as $d) {
         $response .= '   <option value="' . $d->id . '" data-select2-id="3" >' . $d->lang_name . '</option>';
     }
@@ -179,12 +190,13 @@ if (isset($_POST["editContent"])) {
 }
 if (isset($_POST["tagSelect"])) {
     $categoryId = isset($_POST["categoryId"]) ? $_POST["categoryId"] : null;
-
+    $text="Etiket Seç";
+    $translate=(language($text)) ? language($text) : $text;
     if ($categoryId) {
         $data = DB::get("SELECT * FROM tag_category WHERE category_id=?", [$categoryId]);
 
         $response = '
-      <label for="tag" class="form-label-lg"><b>Etiket Seçimi</b></label>
+      <label for="tag" class="form-label-lg"><b>'.$translate.'</b></label>
         <select class="form-select" id="tag" multiple="multiple">';
         foreach ($data as $d) {
             $tagName = DB::getVar("SELECT tag_name FROM tag WHERE id=?", [$d->tag_id]);
@@ -194,7 +206,7 @@ if (isset($_POST["tagSelect"])) {
     } else {
         $response = "";
         $response .= '
-            <label for="tag" class="form-label-lg"><b>Etiket Seçimi</b></label>
+            <label for="tag" class="form-label-lg"><b>'.$translate.'</b></label>
             <select class="form-select" id="tag" multiple="multiple">
             </select>';
     }

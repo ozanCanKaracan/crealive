@@ -11,11 +11,18 @@
 
                             <div class="card ">
                                 <div class="card-title">
-                                    <p>Yeni Kategori</p>
+                                    <p><?php
+                                        $text='Kategori Oluştur';
+                                        $translate=(language($text)) ? language($text) : $text;
+                                        ?><?= $translate ?></p>
                                     <div class="card-body ">
                                         <form id="addCategoryForm">
                                             <div class="">
-                                                <label class="form-label-lg mb-1">Kategori Adı</label>
+                                                <?php
+                                                $text='Kategori Adı';
+                                                $translate=(language($text)) ? language($text) : $text;
+                                                ?>
+                                                <label class="form-label-lg mb-1"><?= $translate ?></label>
                                                 <input type="text" class="form-control " id="categoryName"
                                                        name="categoryName" maxlength="35">
                                             </div>
@@ -23,7 +30,10 @@
                                                 <button type="submit" class="btn btn-relief-success"
                                                         onclick="addCategory()"><font
                                                             style="vertical-align: inherit;"><font
-                                                                style="vertical-align: inherit;">Oluştur</font></font>
+                                                                style="vertical-align: inherit;"> <?php
+                                                                $text='Oluştur';
+                                                                $translate=(language($text)) ? language($text) : $text;
+                                                                ?><?= $translate ?></font></font>
                                                 </button>
                                             </div>
                                     </div>
@@ -45,7 +55,10 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-title">
-                                <p>Kategori Kaldır</p>
+                                <p><?php
+                                    $text='Kategori Kaldır';
+                                    $translate=(language($text)) ? language($text) : $text;
+                                    ?><?= $translate ?></p>
                                 <div class="card-body">
                                     <div class="" id="selectBoxCategory">
                                     </div>

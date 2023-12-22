@@ -49,33 +49,43 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item"><a class="d-flex align-items-center"><i data-feather="home"></i><span
-                            class="menu-title text-truncate" data-i18n="Dashboards">Ayarlar</span></a>
+                            class="menu-title text-truncate" data-i18n="Dashboards"><?php
+                        $text='Ayarlar';
+                        $translate=(language($text)) ? language($text) : $text;
+                        ?><?= $translate  ?></span></a>
                 <ul class="menu-content">
 
                 </ul>
             </li>
-            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Sayfalar</span><i
+            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages"><?php
+                    $text='Sayfalar';
+                    $translate=(language($text)) ? language($text) : $text;
+                    ?><?= $translate  ?></span></a></span><i
                         data-feather="more-horizontal"></i>
             </li>
             <?php
             $getTitle = DB::get("SELECT * FROM pages WHERE parent_id = 0");
             foreach ($getTitle as $gt) {
                 $getPages = DB::get("SELECT * FROM pages WHERE parent_id = ?", [$gt->id]);
+                $pageName=$gt->page_name;
+                $translate=(language($pageName)) ? language($pageName) : $pageName;
                 ?>
                 <li class=" nav-item nav-group-children">
                     <a class="d-flex align-items-center"><i class="<?php echo $gt->page_icon; ?> mb-1"></i><span
                                 class="menu-title text-truncate"
-                                data-i18n="Invoice"><?php echo $gt->page_name; ?></span></a>
+                                data-i18n="Invoice"><?= $translate ?></span></a>
                     <ul class="menu-content ">
                         <?php
                         foreach ($getPages as $gp) {
+                            $pageName=$gp->page_name;
+                            $translate=(language($pageName)) ? language($pageName) : $pageName;
                             $id = $gp->id;
                             $controlView = controlView($id);
                             if ($controlView) {
                                 ?>
                                 <li><a class="router-link-active router-link-exact-active" href="<?= $gp->href; ?>"><i
                                                 data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                                data-i18n="List"><?php echo $gp->page_name; ?></span></a>
+                                                                                data-i18n="List"><?= $translate ?></span></a>
                                 </li>
                                 <?php
                             }else{

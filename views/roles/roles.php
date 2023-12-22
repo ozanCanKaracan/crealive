@@ -5,33 +5,61 @@
                 <div class="card-header">
                     <div class="card-body">
                         <div class="card-title">
-                            <h4 class="d-flex justify-content-center mb-2">Rol Kontrol Paneli</h4>
+                            <?php
+                            $text = 'Rol Kontrol Paneli';
+                            $translate = (language($text)) ? language($text) : $text;
+                            ?>
+                            <h4 class="d-flex justify-content-center mb-2">
+                                <?php echo $translate; ?>
+                            </h4>
                         </div>
+
                         <?php
-                        $controlList=controlList();
-                        if($controlList){
-                        ?>
-                        <table class="table-bordered table datatables-basic table dataTable no-footer dtr-column "
-                               id="roleTable">
-                            <thead>
-                            <tr class="fw-semibold fs-6 text-gray-800">
-                                <th scope="col" class="d-none"></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 300px;">Rol Adı</th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Kullanıcılar</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>İzinler</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Türkçe</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>İngilizce</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Almanca</b></th>
-                                <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" style="width: 50px;"><b>Fransızca</b></th>
+                        $controlList = controlList();
+                        if ($controlList) {
+                            ?>
+                            <table class="table-bordered table datatables-basic table dataTable no-footer dtr-column "
+                                   id="roleTable">
+                                <thead>
+                                <tr class="fw-semibold fs-6 text-gray-800">
+                                    <th scope="col" class="d-none"></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                        style="width: 300px;"><?php $text = 'Rol Adı';
+                                        $translate = (language($text)) ? language($text) : $text;
+                                        ?><?= $translate ?></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                        style="width: 50px;"><b><?php $text = 'Kullanıcılar';
+                                            $translate = (language($text)) ? language($text) : $text;
+                                            ?><?= $translate ?></b></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                        style="width: 50px;"><b><?php $text = 'İzinler';
+                                            $translate = (language($text)) ? language($text) : $text;
+                                            ?><?= $translate ?></b></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                        style="width: 50px;"><b><?php $text = 'Türkçe';
+                                            $translate = (language($text)) ? language($text) : $text;
+                                            ?><?= $translate ?></b></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                        style="width: 50px;"><b><?php $text = 'İngilizce';
+                                            $translate = (language($text)) ? language($text) : $text;
+                                            ?><?= $translate ?></b></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                        style="width: 50px;"><b><?php $text = 'Almanca';
+                                            $translate = (language($text)) ? language($text) : $text;
+                                            ?><?= $translate ?></b></th>
+                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
+                                        style="width: 50px;"><b><?php $text = 'Fransızca';
+                                            $translate = (language($text)) ? language($text) : $text;
+                                            ?><?= $translate ?></b></th>
 
-                            </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                        <?php }else{
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        <?php } else {
 
-                        }?>
+                        } ?>
                     </div>
                 </div>
             </div>

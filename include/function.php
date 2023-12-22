@@ -62,6 +62,14 @@ function languageAcces(){
 
     return $access ? true : false;
 }
+function language($text){
+    $languageName=$_SESSION["lang"];
+    $languageID=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$languageName]);
+    $text_id=DB::getVar("SELECT text_id FROM texts WHERE text=?",[$text]);
+    $translated_text=DB::getVar("SELECT translated_text FROM translations WHERE text_id=? AND language_id=?",[$text_id,$languageID]);
+
+    return $translated_text;
+}
 ?>
 
 

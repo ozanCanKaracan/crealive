@@ -29,7 +29,6 @@ function contentTable(id, categoryId, languageId) {
         columns: [
             {data: 'id', visible: false},
             {data: 'title'},
-            {data: 'desc'},
             {data: 'category'},
             {data: 'process'},
         ],

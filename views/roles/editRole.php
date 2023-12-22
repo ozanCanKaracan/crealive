@@ -14,11 +14,18 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-title">
-                                    <p>Rol Oluştur</p>
+                                    <?php $text = 'Rol Oluştur';
+                                    $translate = (language($text)) ? language($text) : $text;
+                                    ?>
+                                    <p><?= $translate ?></p>
                                     <div class="card-body ">
                                         <form id="addRoleForm">
                                             <div class="">
-                                                <label class="form-label-lg mb-1">Rol Adı</label>
+                                                <label class="form-label-lg mb-1">
+                                                    <?php $text = 'Rol Adı';
+                                                    $translate = (language($text)) ? language($text) : $text;
+                                                    ?><?= $translate ?>
+                                                </label>
                                                 <input type="text" class="form-control " id="role" name="role"
                                                        maxlength="20"/>
                                             </div>
@@ -28,7 +35,9 @@
                                                         onclick="addRole()">
                                                     <font
                                                             style="vertical-align: inherit;"><font
-                                                                style="vertical-align: inherit;">Oluştur</font></font>
+                                                                style="vertical-align: inherit;"> <?php $text = 'Oluştur';
+                                                            $translate = (language($text)) ? language($text) : $text;
+                                                            ?><?= $translate ?></font></font>
                                                 </button>
                                             </div>
                                     </div>
@@ -53,7 +62,9 @@
                     <div class="col-md-12">
                         <div class="card ">
                             <div class="card-title">
-                                <p>Rol Kaldır</p>
+                                <p> <?php $text = 'Rol Kaldır';
+                                    $translate = (language($text)) ? language($text) : $text;
+                                    ?><?= $translate ?></p>
                                 <div class="card-body">
                                     <div class="" id="selectBox">
 

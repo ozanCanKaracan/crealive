@@ -10,17 +10,30 @@ if ($controlAdd) {
         <div class="row">
             <div class="card shadow">
                 <div class="card-header d-flex justify-content-center">
-                    <h2><b>Yeni İçerik</b></h2>
+                    <?php
+                    $text="Yeni İçerik";
+                    $translate=(language($text)) ? language($text) : $text;
+                    ?>
+                    <h2><b><?= $translate ?></b></h2>
                 </div>
                 <div class="card-body">
                     <form id="newContentForm">
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="categorySelect" class="form-label-lg"><b>İçerik Dili</b></label>
+                                    <label for="categorySelect" class="form-label-lg">
+                                        <?php
+                                        $text="İçerik Dili";
+                                        $translate=(language($text)) ? language($text) : $text;
+                                        ?>
+                                        <b><?= $translate ?></b></label>
 
                                     <select class="form-select" id="languageSelect" name="languageSelect">
-                                        <option value="">Dil seçiniz</option>
+                                        <?php
+                                        $text="Dil seçiniz";
+                                        $translate=(language($text)) ? language($text) : $text;
+                                        ?>
+                                        <option value=""><?= $translate ?></option>
 
                                         <?php
                                         $languages = DB::get("SELECT * FROM languages");
@@ -35,9 +48,17 @@ if ($controlAdd) {
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="categorySelect" class="form-label-lg"><b>Kategori</b></label>
+                                    <?php
+                                    $text="Kategori";
+                                    $translate=(language($text)) ? language($text) : $text;
+                                    ?>
+                                    <label for="categorySelect" class="form-label-lg"><b><?= $translate ?></b></label>
                                     <select class="form-select" id="categorySelect" name="categorySelect">
-                                        <option value="">Kategori seçiniz</option>
+                                        <?php
+                                        $text="Kategori Seçiniz";
+                                        $translate=(language($text)) ? language($text) : $text;
+                                        ?>
+                                        <option value=""><?= $translate ?></option>
                                         <?php
                                         $categories = DB::get("SELECT * FROM category");
                                         foreach ($categories as $c) {
@@ -49,7 +70,11 @@ if ($controlAdd) {
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="titleContent" class="form-label-lg"><b>Başlık</b></label>
+                                    <?php
+                                    $text="Başlık";
+                                    $translate=(language($text)) ? language($text) : $text;
+                                    ?>
+                                    <label for="titleContent" class="form-label-lg"><b><?= $translate ?></b></label>
                                     <input type="text" class="form-control" id="titleContent" name="titleContent">
                                 </div>
                             </div>
@@ -58,24 +83,44 @@ if ($controlAdd) {
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="titleContent" class="form-label-lg"><b>URL Özelleştir</b></label>
+                                    <?php
+                                    $text="URL Özelleştir";
+                                    $translate=(language($text)) ? language($text) : $text;
+                                    ?>
+                                    <label for="titleContent" class="form-label-lg"><b><?= $translate ?></b></label>
                                     <input type="text" class="form-control" id="url" name="url">
                                 </div>
                             </div>
-                            <div class="col-md-1 mt-2"><h6><b>Yada</h6></b></div>
+                            <?php
+                            $text="Yada";
+                            $translate=(language($text)) ? language($text) : $text;
+                            ?>
+                            <div class="col-md-1 mt-2"><h6><b><?= $translate ?></h6></b></div>
                             <div class="col-md-5">
-                                <h5 class="d-flex justify-content-center mt-1">Otomatik URL</h5>
+                                <?php
+                                $text="Otomatik URL";
+                                $translate=(language($text)) ? language($text) : $text;
+                                ?>
+                                <h5 class="d-flex justify-content-center mt-1"><?= $translate ?></h5>
                                 <div class="d-flex justify-content-center">
                                     <div class="form-check form-check-inline ">
                                         <input class="form-check-input category" type="checkbox" value="1" id="categoryCheckbox">
+                                        <?php
+                                        $text="Kategori Gözüksün";
+                                        $translate=(language($text)) ? language($text) : $text;
+                                        ?>
                                         <label class="form-check-label" for="flexCheckDefault">
-                                            Kategori Gözüksün
+                                            <?= $translate ?>
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label" for="flexCheckChecked"></label>
-                                        <input class="form-check-input tag" type="checkbox" value="2" id="tagCheckbox">
-                                        Etiket Gözüksün
+                                        <?php
+                                        $text="Etiket Gözüksün";
+                                        $translate=(language($text)) ? language($text) : $text;
+                                        ?>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            <?= $translate ?>
                                         </label>
                                     </div>
                                 </div>
@@ -85,17 +130,24 @@ if ($controlAdd) {
                                     <div class="ck-reset ck-editor...">
                                         <div>
                                             <div class="... ck-editor__editable ck-editor__editable_inline ...">
-                                                <label for="editor" class="form-label-lg mb-1"><b>İçerik
-                                                        Yazısı</b></label>
+                                                <?php
+                                                $text="İçerik Yazısı";
+                                                $translate=(language($text)) ? language($text) : $text;
+                                                ?>
+                                                <label for="editor" class="form-label-lg mb-1"><b><?= $translate ?></b></label>
                                                 <textarea name="content" id="content"></textarea>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="m-1 d-flex justify-content-end">
+                                    <?php
+                                    $text="Oluştur";
+                                    $translate=(language($text)) ? language($text) : $text;
+                                    ?>
                                     <button type="submit" class="btn btn-success btn-lg" tabindex="4"
                                             onclick="addContent()">
-                                        Oluştur
+                                        <?= $translate ?>
                                     </button>
                                 </div>
                             </div>
@@ -113,4 +165,4 @@ if ($controlAdd) {
 ?>
 
 <script src="assets/js/modules/addContent.js"></script>
-<!-- Button trigger modal -->
+
