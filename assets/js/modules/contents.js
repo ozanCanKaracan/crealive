@@ -3,37 +3,64 @@ var table;
 $(document).on('change', '#categoryFilter, #languageFilter', function () {
     var categoryId = $('#categoryFilter').val();
     var languageId = $('#languageFilter').val();
-    contentTable(id, categoryId, languageId);
+    contentTable(id,lang, categoryId, languageId);
 });
 
 
-function contentTable(id, categoryId, languageId) {
-    if (table) {
-        table.clear().destroy();
-        table = false;
+function contentTable(id, lang, categoryId, languageId) {
+    if (lang == 2) {
+        if (table) {
+            table.clear().destroy();
+            table = false;
+        }
+
+        table = $('#contentTable').DataTable({
+            sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
+            ajax: {
+                url: 'controller/contentController.php',
+                type: 'POST',
+                data: {
+                    "contentTable": 1,
+                    "categoryId": categoryId,
+                    "languageId": languageId,
+                    "id": id,
+                }
+            },
+            columns: [
+                { data: 'id', visible: false },
+                { data: 'title' },
+                { data: 'category' },
+                { data: 'process' },
+            ],
+        });
+    } else {
+        if (table) {
+            table.clear().destroy();
+            table = false;
+        }
+
+        table = $('#contentTable').DataTable({
+            sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
+            ajax: {
+                url: 'controller/contentController.php',
+                type: 'POST',
+                data: {
+                    "contentTable": 1,
+                    "categoryId": categoryId,
+                    "languageId": languageId,
+                    "id": id,
+                }
+            },
+            columns: [
+                { data: 'id', visible: false },
+                { data: 'title' },
+                { data: 'category' },
+                { data: 'process' },
+            ],
+
+            "language": { "url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json" }
+        });
     }
-
-    table = $('#contentTable').DataTable({
-        sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
-        ajax: {
-            url: 'controller/contentController.php',
-            type: 'POST',
-            data: {
-                "contentTable": 1,
-                "categoryId": categoryId,
-                "languageId":languageId,
-
-                "id": id,
-            }
-        },
-        columns: [
-            {data: 'id', visible: false},
-            {data: 'title'},
-            {data: 'category'},
-            {data: 'process'},
-        ],
-        "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
-    });
 }
 
 function categoryFilter() {
@@ -49,7 +76,7 @@ function categoryFilter() {
         }
     });
 }
-categoryFilter();
+
 function languageFilter() {
     $.ajax({
         type: 'POST',
@@ -63,9 +90,10 @@ function languageFilter() {
         }
     });
 }
+
+
+categoryFilter();
 languageFilter();
-
-
 function deleteContent(id) {
 
     Swal.fire({
@@ -112,5 +140,18 @@ function deleteContent(id) {
             });
         }
     });
+}
+function pageVisit(id){
+    $.ajax({
+        type : "POST",
+        data : {
+            "id":id,
+            "pageVisit":1
+        },
+        url : "controller/contentController.php",
+        success: function (e){
+
+        }
+    })
 }
 

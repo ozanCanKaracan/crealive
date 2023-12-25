@@ -11,6 +11,8 @@ if ($controlAdd) {
             <div class="card shadow">
                 <div class="card-header d-flex justify-content-center">
                     <?php
+                    $lang=$_SESSION["lang"];
+                    $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
                     $text="Yeni İçerik";
                     $translate=(language($text)) ? language($text) : $text;
                     ?>
@@ -19,33 +21,6 @@ if ($controlAdd) {
                 <div class="card-body">
                     <form id="newContentForm">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="categorySelect" class="form-label-lg">
-                                        <?php
-                                        $text="İçerik Dili";
-                                        $translate=(language($text)) ? language($text) : $text;
-                                        ?>
-                                        <b><?= $translate ?></b></label>
-
-                                    <select class="form-select" id="languageSelect" name="languageSelect">
-                                        <?php
-                                        $text="Dil seçiniz";
-                                        $translate=(language($text)) ? language($text) : $text;
-                                        ?>
-                                        <option value=""><?= $translate ?></option>
-
-                                        <?php
-                                        $languages = DB::get("SELECT * FROM languages");
-
-                                        foreach ($languages as $l) {
-                                            ?>
-                                            <option value="<?php echo $l->id ?>"> <?php echo $l->lang_name; ?></option>
-                                        <?php } ?>
-                                    </select>
-
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <?php
@@ -91,12 +66,7 @@ if ($controlAdd) {
                                     <input type="text" class="form-control" id="url" name="url">
                                 </div>
                             </div>
-                            <?php
-                            $text="Yada";
-                            $translate=(language($text)) ? language($text) : $text;
-                            ?>
-                            <div class="col-md-1 mt-2"><h6><b><?= $translate ?></h6></b></div>
-                            <div class="col-md-5">
+                            <div class="col-md-12">
                                 <?php
                                 $text="Otomatik URL";
                                 $translate=(language($text)) ? language($text) : $text;
@@ -114,7 +84,7 @@ if ($controlAdd) {
                                         </label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <label class="form-check-label" for="flexCheckChecked"></label>
+                                        <input class="form-check-input tag" type="checkbox" value="2" id="categoryCheckbox">
                                         <?php
                                         $text="Etiket Gözüksün";
                                         $translate=(language($text)) ? language($text) : $text;
@@ -146,7 +116,7 @@ if ($controlAdd) {
                                     $translate=(language($text)) ? language($text) : $text;
                                     ?>
                                     <button type="submit" class="btn btn-success btn-lg" tabindex="4"
-                                            onclick="addContent()">
+                                            onclick="addContent(<?= $language ?>)">
                                         <?= $translate ?>
                                     </button>
                                 </div>

@@ -77,6 +77,8 @@ if (isset($_POST["getSelectBox"])) {
     $language_1=(language($text_1)) ? language($text_1) : $text_1;
     $text_2="Kaldır";
     $language_2=(language($text_2)) ? language($text_2) : $text_2;
+    $lang=$_SESSION["lang"];
+    $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
 
     $response = '
         <form id="deleteRoleForm">
@@ -95,7 +97,7 @@ if (isset($_POST["getSelectBox"])) {
 
     $response .= '</select>
                 <div class="d-flex justify-content-end mt-1">
-                    <button type="submit" class="btn btn-relief-success" onclick="deleteRole()">
+                    <button type="submit" class="btn btn-relief-success" onclick="deleteRole('.$language.')">
                         <font style="vertical-align: inherit;">'.$language_2.'</font>
                     </button>     
                 </div>

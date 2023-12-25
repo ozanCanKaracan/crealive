@@ -4,7 +4,8 @@
     }
 </style>
 <?php
-
+$lang=$_SESSION["lang"];
+$language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
 $slug=$_GET["slug"];
 $href=$_GET["target"];
 $page_id=DB::getVar("SELECT id FROM pages WHERE href=?",[$href]);
@@ -88,7 +89,7 @@ if ($controlAdd) {
 
                             <div class="m-1 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-success btn-lg" tabindex="4"
-                                        onclick="editContent(<?=$id?>)">
+                                        onclick="editContent(<?=$id?>, <?= $language?>)">
                                     Düzenle
                                 </button>
                             </div>

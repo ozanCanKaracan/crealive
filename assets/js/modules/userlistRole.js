@@ -1,31 +1,57 @@
-
 let table;
 
-function getUserTable(id) {
-    if (table) {
-        table.destroy()
-        table = false
+function getUserTable(id, langID) {
+    if (langID == 2) {
+
+        if (table) {
+            table.destroy()
+            table = false
+        }
+
+        table = $('#userlistRoleTable').DataTable({
+            sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
+            order: [0, "desc"],
+            ajax: {
+                url: 'controller/roleController.php',
+                type: 'POST',
+                data: {
+                    "id": id,
+                    "getUserTable": 1,
+                }
+            },
+            columns: [
+                {data: 'id', visible: false},
+                {data: 'name'},
+            ],
+        });
+    } else {
+
+        if (table) {
+            table.destroy()
+            table = false
+        }
+
+        table = $('#userlistRoleTable').DataTable({
+            sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
+            order: [0, "desc"],
+            ajax: {
+                url: 'controller/roleController.php',
+                type: 'POST',
+                data: {
+                    "id": id,
+                    "getUserTable": 1,
+                }
+            },
+            columns: [
+                {data: 'id', visible: false},
+                {data: 'name'},
+            ],
+            "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
+        });
     }
 
-    table = $('#userlistRoleTable').DataTable({
-        sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
-        order: [0, "desc"],
-        ajax: {
-            url: 'controller/roleController.php',
-            type: 'POST',
-            data: {
-                "id":id,
-                "getUserTable": 1,
-            }
-        },
-        columns: [
-            {data: 'id', visible: false},
-            {data: 'name'},
-        ],
-        "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
-    });
-
 }
+
 function turkishCheckBox(id) {
     var checkedIDs = [];
     var notcheck = [];
@@ -54,6 +80,7 @@ function turkishCheckBox(id) {
         }
     });
 }
+
 function germanCheckBox(id) {
     var checkedIDs = [];
     var notcheck = [];
@@ -82,6 +109,7 @@ function germanCheckBox(id) {
         }
     });
 }
+
 function englishCheckBox(id) {
     var checkedIDs = [];
     var notcheck = [];
@@ -110,6 +138,7 @@ function englishCheckBox(id) {
         }
     });
 }
+
 function frenchCheckBox(id) {
     var checkedIDs = [];
     var notcheck = [];

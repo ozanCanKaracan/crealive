@@ -1,9 +1,11 @@
 <?php
-
+$lang=$_SESSION["lang"];
+$language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
 $page_name = $_GET["target"];
 $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
 ?>
 <script>
+    const lang = '<?php echo $language?>';
     const id = '<?php echo $page_id ?>';
 </script>
 <div class="container">
@@ -20,10 +22,10 @@ $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
                             <h2 class="d-flex justify-content-center mb-2"><?= $translate ?></h2>
                         </div>
                         <div class="row">
-                            <div class="col-md-4 mt-5" id="filterByCategory">
+                            <div class="col-md-3 mt-5" id="filterByCategory">
 
                             </div>
-                            <div class="col-md-4 mt-5" id="filterByLanguage">
+                            <div class="col-md-3 mt-5" id="filterByLanguage">
 
                             </div>
                         </div>
@@ -69,5 +71,5 @@ $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
 
 <script src="assets/js/modules/contents.js"></script>
 <script>
-    contentTable(id);
+    contentTable(id, lang);
 </script>

@@ -1,34 +1,62 @@
 
 var table;
-function getPermissionTable(id) {
-    if (table) {
-        table.destroy()
-        table = false
+function getPermissionTable(id, langID) {
+    if(langID == 2) {
+        if (table) {
+            table.destroy()
+            table = false
+        }
+
+        table = $('#permissionTable').DataTable({
+            sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
+            ajax: {
+                url: 'controller/permissionController.php',
+                type: 'POST',
+                data: {
+                    "getPermissionTable": 1,
+                    "id": id,
+                }
+            },
+            columns: [
+                {data: 'id', visible: false},
+                {data: 'pages'},
+                {data: 'add'},
+                {data: 'delete'},
+                {data: 'edit'},
+                {data: 'list'},
+                {data: 'view'},
+
+            ],
+        });
+    }else{
+        if (table) {
+            table.destroy()
+            table = false
+        }
+
+        table = $('#permissionTable').DataTable({
+            sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
+            ajax: {
+                url: 'controller/permissionController.php',
+                type: 'POST',
+                data: {
+                    "getPermissionTable": 1,
+                    "id": id,
+                }
+            },
+            columns: [
+                {data: 'id', visible: false},
+                {data: 'pages'},
+                {data: 'add'},
+                {data: 'delete'},
+                {data: 'edit'},
+                {data: 'list'},
+                {data: 'view'},
+
+            ],
+            "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
+        });
     }
-
-    table = $('#permissionTable').DataTable({
-        sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
-        ajax: {
-            url: 'controller/permissionController.php',
-            type: 'POST',
-            data: {
-                "getPermissionTable": 1,
-                "id":id,
-            }
-        },
-        columns: [
-            {data: 'id', visible: false},
-            {data: 'pages'},
-            {data: 'add'},
-            {data: 'delete'},
-            {data: 'edit'},
-            {data: 'list'},
-            {data: 'view'},
-
-        ],
-        "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
-    });
-
 }
 function addCheckBox(id) {
     var checkedIDs = [];

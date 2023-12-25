@@ -6,6 +6,8 @@
     <div class="row">
         <div class="col-md-6 ">
             <?php
+            $lang=$_SESSION["lang"];
+            $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
             $controlAdd = controlAdd();
             if ($controlAdd) {
                 ?>
@@ -32,7 +34,7 @@
                                             <div class="d-flex justify-content-end mt-1">
 
                                                 <button type="submit" class="btn btn-relief-success"
-                                                        onclick="addRole()">
+                                                        onclick="addRole(<?=$language?>)">
                                                     <font
                                                             style="vertical-align: inherit;"><font
                                                                 style="vertical-align: inherit;"> <?php $text = 'Oluştur';

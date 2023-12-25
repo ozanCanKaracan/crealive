@@ -9,6 +9,9 @@ if (!$_GET) {
         case '' :
             include('views/index.php');
             break;
+        case 'top_5' :
+            include('views/content/top_5.php');
+            break;
         case 'roles' :
             $access = access($_GET["target"]);
 

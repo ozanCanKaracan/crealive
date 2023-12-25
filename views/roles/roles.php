@@ -6,6 +6,8 @@
                     <div class="card-body">
                         <div class="card-title">
                             <?php
+                            $lang=$_SESSION["lang"];
+                            $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
                             $text = 'Rol Kontrol Paneli';
                             $translate = (language($text)) ? language($text) : $text;
                             ?>
@@ -66,5 +68,9 @@
         </div>
     </div>
 </div>
-
 <script src="assets/js/modules/roles.js"></script>
+
+<script>
+    const langID = <?php echo $language?>;
+    getRoleTable(langID);
+</script>

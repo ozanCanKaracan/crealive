@@ -11,6 +11,8 @@ if (isset($_POST["getCategorySelectBox"])) {
     $translate_2 = (language($text_2)) ? language($text_2) : $text_2;
     $text_3 = 'Kaldır';
     $translate_3 = (language($text_3)) ? language($text_3) : $text_3;
+    $lang=$_SESSION["lang"];
+    $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
     $response = '
         <form id="deleteCategoryForm">
             <label class="form-label-lg mb-1">'.$translate.'</label>
@@ -24,7 +26,7 @@ if (isset($_POST["getCategorySelectBox"])) {
     }
     $response .= '</select>
                 <div class="d-flex justify-content-end mt-1">
-                    <button type="submit" class="btn btn-relief-success" onclick="deleteCategory()">
+                    <button type="submit" class="btn btn-relief-success" onclick="deleteCategory('.$language.')">
                         <font style="vertical-align: inherit;">'.$translate_3.'</font>
                     </button>     
                 </div>

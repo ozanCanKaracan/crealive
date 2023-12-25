@@ -8,7 +8,7 @@ if (isset($_POST["addContent"])) {
     $checkedTag = isset($_POST["urlTag"]) ? $_POST["urlTag"] : null;
     $checkedCategory = isset($_POST["urlCat"]) ? $_POST["urlCat"] : null;
     $tag = $_POST["tag"];
-    $language = C($_POST["language"]);
+    $lang = $_SESSION["lang"];
     $category = C($_POST["category"]);
     $title = C($_POST["title"]);
     $editor = C($_POST["editor"]);
@@ -16,6 +16,7 @@ if (isset($_POST["addContent"])) {
     $special = $content->createUrl($specialURL);
     $autoUrl = $content->checkedFunction($checkedTag, $checkedCategory, $category, $tag);
     $url = $content->createUrl($title);
+    $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
     $controlTitle = DB::get("SELECT * FROM contents WHERE content_title=?", [$title]);
     if (!$language || !$category || !$title || !$editor) {
         echo "bos";
@@ -57,9 +58,11 @@ if (isset($_POST["contentTable"])) {
     $languageId = isset($_POST["languageId"]) ? $_POST["languageId"] : null;
     $role_id = $_SESSION["role_id"];
     $page_id = $_POST["id"];
+    $lang = $_SESSION["lang"];
+    $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
 
     if ($categoryId == null || $languageId == null) {
-        $data = DB::get("SELECT * FROM contents");
+        $data = DB::get("SELECT * FROM contents WHERE content_language=?", [$language]);
     }
     if ($categoryId and $languageId) {
         $data = DB::get("SELECT * FROM contents WHERE content_category=? AND content_language=?", [$categoryId, $languageId]);
@@ -76,10 +79,10 @@ if (isset($_POST["contentTable"])) {
         $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
         $languageName = DB::getVar("SELECT lang_name_short FROM languages WHERE id=?", [$d->content_language]);
         $access = DB::getVar("SELECT $languageName FROM roles WHERE id=?", [$role_id]);
-        $text_1='Düzenle';
-        $text_2='Kaldır';
-        $translate_1=(language($text_1)) ? language($text_1) : $text_1;
-        $translate_2=(language($text_2)) ? language($text_2) : $text_2;
+        $text_1 = 'Düzenle';
+        $text_2 = 'Kaldır';
+        $translate_1 = (language($text_1)) ? language($text_1) : $text_1;
+        $translate_2 = (language($text_2)) ? language($text_2) : $text_2;
 
         if ($access == 1) {
             $response[] = [
@@ -87,8 +90,8 @@ if (isset($_POST["contentTable"])) {
                 "title" => $d->content_title,
                 "category" => $categoryName,
                 "process" => '<div class="d-flex justify-content-center">'
-                    . ($controlEdit ? '<a href="editContent/' . $d->url . '"><button type="button" class="btn btn-relief-info btn-sm">'.$translate_1.'</button></a><span style="margin:3px;"></span>' : '')
-                    . ($controlDelete ? '<button type="button" class="btn btn-relief-danger btn-sm" onclick="deleteContent(' . $d->id . ')"> '. $translate_2 .' </button>' : '')
+                    . ($controlEdit ? '<a href="editContent/' . $d->url . '"><button type="button" class="btn btn-relief-info btn-sm" onclick="pageVisit('.$d->id.')">' . $translate_1 . '</button></a><span style="margin:3px;"></span>' : '')
+                    . ($controlDelete ? '<button type="button" class="btn btn-relief-danger btn-sm" onclick="deleteContent(' . $d->id . ')"> ' . $translate_2 . ' </button>' : '')
                     . '</div>',
             ];
         }
@@ -105,15 +108,15 @@ if (isset($_POST["deleteContent"])) {
 }
 if (isset($_POST["categoryFilter"])) {
     $data = $category->getCategory();
-    $text='Kategoriye Göre Filtrele ';
-    $translate=(language($text)) ? language($text) : $text;
-    $text_2='Kategori Seçiniz';
-    $translate_2=(language($text_2)) ? language($text_2) : $text_2;
+    $text = 'Kategoriye Göre Filtrele ';
+    $translate = (language($text)) ? language($text) : $text;
+    $text_2 = 'Kategori Seçiniz';
+    $translate_2 = (language($text_2)) ? language($text_2) : $text_2;
     $response = "";
     $response .= '
-     <label class="form-label-lg "><b> '.$translate.' :</b></label>
+     <label class="form-label-lg "><b> ' . $translate . ' :</b></label>
      <select class="select2 form-control form-control select2-hidden-accessible" data-select2-id="1" aria-hidden="true" id="categoryFilter" name="categoryFilter">
-         <option value="" data-select2-id="3" selected="">  '.$translate_2.' </option> ';
+         <option value="" data-select2-id="3" selected="">  ' . $translate_2 . ' </option> ';
     foreach ($data as $d) {
         $response .= '   <option value="' . $d->id . '" data-select2-id="3" >' . $d->category_name . '</option>';
     }
@@ -124,15 +127,15 @@ if (isset($_POST["categoryFilter"])) {
 }
 if (isset($_POST["languageFilter"])) {
     $data = DB::get("SELECT * FROM languages");
-    $text='Dile Göre Filtrele ';
-    $text_2='Dil Seçiniz';
-    $translate_2=(language($text_2)) ? language($text_2) : $text_2;
-    $translate=(language($text)) ? language($text) : $text;
+    $text = 'Dile Göre Filtrele ';
+    $text_2 = 'Dil Seçiniz';
+    $translate_2 = (language($text_2)) ? language($text_2) : $text_2;
+    $translate = (language($text)) ? language($text) : $text;
     $response = "";
     $response .= '
-     <label class="form-label-lg "><b>'.$translate.' :</b></label>
+     <label class="form-label-lg "><b>' . $translate . ' :</b></label>
      <select class="select2 form-control form-control select2-hidden-accessible" data-select2-id="1" aria-hidden="true" id="languageFilter" name="categoryFilter">
-         <option value="" data-select2-id="3" selected=""> '.$translate_2.' </option> ';
+         <option value="" data-select2-id="3" selected=""> ' . $translate_2 . ' </option> ';
     foreach ($data as $d) {
         $response .= '   <option value="' . $d->id . '" data-select2-id="3" >' . $d->lang_name . '</option>';
     }
@@ -190,13 +193,13 @@ if (isset($_POST["editContent"])) {
 }
 if (isset($_POST["tagSelect"])) {
     $categoryId = isset($_POST["categoryId"]) ? $_POST["categoryId"] : null;
-    $text="Etiket Seç";
-    $translate=(language($text)) ? language($text) : $text;
+    $text = "Etiket Seç";
+    $translate = (language($text)) ? language($text) : $text;
     if ($categoryId) {
         $data = DB::get("SELECT * FROM tag_category WHERE category_id=?", [$categoryId]);
 
         $response = '
-      <label for="tag" class="form-label-lg"><b>'.$translate.'</b></label>
+      <label for="tag" class="form-label-lg"><b>' . $translate . '</b></label>
         <select class="form-select" id="tag" multiple="multiple">';
         foreach ($data as $d) {
             $tagName = DB::getVar("SELECT tag_name FROM tag WHERE id=?", [$d->tag_id]);
@@ -206,11 +209,20 @@ if (isset($_POST["tagSelect"])) {
     } else {
         $response = "";
         $response .= '
-            <label for="tag" class="form-label-lg"><b>'.$translate.'</b></label>
+            <label for="tag" class="form-label-lg"><b>' . $translate . '</b></label>
             <select class="form-select" id="tag" multiple="multiple">
             </select>';
     }
     echo $response;
     exit;
+}
+if(isset($_POST["pageVisit"])){
+    $id=C($_POST["id"]);
+    $control = DB::get("SELECT * FROM stats WHERE content_id=?",[$id]);
+    if($control){
+        $process=DB::exec("UPDATE stats SET view_count = view_count + 1 WHERE content_id=?",[$id]);
+    }else {
+        $process = DB::insert("INSERT INTO stats (content_id,view_count) VALUES (?,?)",[$id,1]);
+    }
 }
 ?>
