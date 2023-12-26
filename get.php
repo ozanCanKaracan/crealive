@@ -80,6 +80,15 @@ if (!$_GET) {
                 include('views/404/404.php');
                 break;
             }
+        case 'content' :
+            $access = access($_GET["target"]);
+            if ($access) {
+                include('views/content/content.php');
+                break;
+            } else {
+                include('views/404/404.php');
+                break;
+            }
 
         case 'editContent' :
             $access=access($_GET["target"]);

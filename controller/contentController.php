@@ -73,6 +73,9 @@ if (isset($_POST["contentTable"])) {
     }
     $controlEdit = controlEdit($page_id);
     $controlDelete = controlDeleteBack($page_id);
+    $controlList = controlPageList($page_id);
+
+
     $response = [];
 
     foreach ($data as $d) {
@@ -81,8 +84,10 @@ if (isset($_POST["contentTable"])) {
         $access = DB::getVar("SELECT $languageName FROM roles WHERE id=?", [$role_id]);
         $text_1 = 'Düzenle';
         $text_2 = 'Kaldır';
+        $text_3 = 'Görüntüle';
         $translate_1 = (language($text_1)) ? language($text_1) : $text_1;
         $translate_2 = (language($text_2)) ? language($text_2) : $text_2;
+        $translate_3 = (language($text_3)) ? language($text_3) : $text_3;
 
         if ($access == 1) {
             $response[] = [
@@ -90,8 +95,9 @@ if (isset($_POST["contentTable"])) {
                 "title" => $d->content_title,
                 "category" => $categoryName,
                 "process" => '<div class="d-flex justify-content-center">'
-                    . ($controlEdit ? '<a href="editContent/' . $d->url . '"><button type="button" class="btn btn-relief-info btn-sm" onclick="pageVisit('.$d->id.')">' . $translate_1 . '</button></a><span style="margin:3px;"></span>' : '')
-                    . ($controlDelete ? '<button type="button" class="btn btn-relief-danger btn-sm" onclick="deleteContent(' . $d->id . ')"> ' . $translate_2 . ' </button>' : '')
+                    . ($controlEdit ? '<a href="editContent/' . $d->url . '"><button type="button" class="btn btn-relief-info btn-sm ">' . $translate_1 . '</button></a><span style="margin:3px;"></span>' : '')
+                    . ($controlDelete ? '<button type="button" class="btn btn-relief-danger btn-sm " onclick="deleteContent(' . $d->id . ')"> ' . $translate_2 . ' </button><span style="margin:3px;"></span>' : '')
+                    . ($controlList ? '<a href="content/' . $d->url . '"><button type="button" class="btn btn-relief-warning btn-sm " onclick="pageVisit(' . $d->id . ')">' . $translate_3 . '</button></a>' : '')
                     . '</div>',
             ];
         }
@@ -216,13 +222,13 @@ if (isset($_POST["tagSelect"])) {
     echo $response;
     exit;
 }
-if(isset($_POST["pageVisit"])){
-    $id=C($_POST["id"]);
-    $control = DB::get("SELECT * FROM stats WHERE content_id=?",[$id]);
-    if($control){
-        $process=DB::exec("UPDATE stats SET view_count = view_count + 1 WHERE content_id=?",[$id]);
-    }else {
-        $process = DB::insert("INSERT INTO stats (content_id,view_count) VALUES (?,?)",[$id,1]);
+if (isset($_POST["pageVisit"])) {
+    $id = C($_POST["id"]);
+    $control = DB::get("SELECT * FROM stats WHERE content_id=?", [$id]);
+    if ($control) {
+        $process = DB::exec("UPDATE stats SET view_count = view_count + 1 WHERE content_id=?", [$id]);
+    } else {
+        $process = DB::insert("INSERT INTO stats (content_id,view_count) VALUES (?,?)", [$id, 1]);
     }
 }
 ?>

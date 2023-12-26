@@ -24,6 +24,11 @@ function controlDeleteBack($page_id){
     $control=DB::getVar("SELECT permission_delete FROM permission WHERE page_id=? AND role_id=?",[$page_id,$role_id]);
     return $control ? true : false ;
 }
+function controlPageList($page_id){
+    $role_id=$_SESSION["role_id"];
+    $control=DB::getVar("SELECT permission_list FROM permission WHERE page_id=? AND role_id=?",[$page_id,$role_id]);
+    return $control ? true : false ;
+}
 function controlEdit($page_id){
     $role_id=$_SESSION["role_id"];
     $control=DB::getVar("SELECT permission_edit FROM permission WHERE page_id=? AND role_id=?",[$page_id,$role_id]);
