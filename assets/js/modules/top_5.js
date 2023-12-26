@@ -48,17 +48,3 @@ function top_5(langID) {
         });
     }
 }
-function pageVisit(id){
-    $.ajax({
-        type : "POST",
-        data : {
-            "id":id,
-            "pageVisit":1
-        },
-        url : "controller/contentController.php",
-        success: function (e){
-
-        }
-    })
-}
-

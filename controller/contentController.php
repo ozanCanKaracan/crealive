@@ -231,4 +231,22 @@ if (isset($_POST["pageVisit"])) {
         $process = DB::insert("INSERT INTO stats (content_id,view_count) VALUES (?,?)", [$id, 1]);
     }
 }
+if (isset($_POST["question"])) {
+    $question_2 = isset($_POST["number"]) ? $_POST["number"] : null;
+    $id = C($_POST["id"]);
+
+    if ($question_2 == 1) {
+        $response = '<h3>Teşekkürler</h3>';
+    } else if ($question_2 == null) {
+        $response = '
+<button type="button" class="btn m-1" onclick="question(' . $id . ' , '.'1'.')">Evet</button>
+<button type="button" class="btn m-1" onclick="question(' . $id . ' , 1)">Hayır</button>
+';
+
+    }
+
+    echo $response;
+    exit;
+}
+
 ?>
