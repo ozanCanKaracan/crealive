@@ -25,9 +25,9 @@ $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
                             <div class="col-md-3 mt-5" id="filterByCategory">
 
                             </div>
-                            <div class="col-md-3 mt-5" id="filterByLanguage">
-
-                            </div>
+<!--                            <div class="col-md-3 mt-5" id="filterByLanguage">-->
+<!---->
+<!--                            </div>-->
                         </div>
                         <?php
                         $controlList = controlList();

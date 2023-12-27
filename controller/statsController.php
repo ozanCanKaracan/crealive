@@ -30,3 +30,84 @@ if (isset($_POST["top_5"])) {
     echo json_encode(["recordsTotal" => count($response), "recordsFiltered" => count($response), "data" => $response]);
     exit();
 }
+if (isset($_POST["statsTable"])) {
+    $filter = isset($_POST["filter"]) ? $_POST["filter"] : null;
+    $data = DB::get("SELECT * FROM contents");
+    $response = [];
+    $maxConversionRate = 0;
+    $maxStat = 0;
+    $maxConversionRateContent = null;
+    $maxStatContent = null;
+
+    foreach ($data as $d) {
+        $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
+        $likeCount = DB::getVar("SELECT COUNT(*) FROM content_likes WHERE content_id=? AND content_like = '1'", [$d->id]);
+        $dislikeCount = DB::getVar("SELECT COUNT(*) FROM content_likes WHERE content_id=? AND content_dislike = '1'", [$d->id]);
+        $stat = DB::getVar("SELECT view_count FROM stats WHERE content_id=?", [$d->id]);
+        $totalVotes = $likeCount + $dislikeCount;
+
+        $conversionRate = ($stat > 0 && $totalVotes > 0) ? ($totalVotes / $stat) * 100 : 0;
+        $conversionRate = round($conversionRate, 2);
+
+        if ($filter == 1) {
+            if ($conversionRate > $maxConversionRate) {
+                $maxConversionRate = $conversionRate;
+                $maxConversionRateContent = [
+                    "id" => $d->id,
+                    "title" => $d->content_title,
+                    "category" => $categoryName,
+                    "like" => $likeCount,
+                    "dislike" => $dislikeCount,
+                    "conversion_rate" => '%' . $conversionRate,
+                ];
+            }
+        } else if ($filter == 2) {
+            if ($stat > $maxStat) {
+                $maxStat = $stat;
+                $maxStatContent = [
+                    "id" => $d->id,
+                    "title" => $d->content_title,
+                    "category" => $categoryName,
+                    "like" => $likeCount,
+                    "dislike" => $dislikeCount,
+                    "conversion_rate" => '%' . $conversionRate,
+                ];
+            }
+        } else {
+            $response[] = [
+                "id" => $d->id,
+                "title" => $d->content_title,
+                "category" => $categoryName,
+                "like" => $likeCount,
+                "dislike" => $dislikeCount,
+                "conversion_rate" => '%' . $conversionRate,
+            ];
+        }
+    }
+
+    if ($filter == 1 && $maxConversionRateContent !== null) {
+        $response[] = $maxConversionRateContent;
+    } else if ($filter == 2 && $maxStatContent !== null) {
+        $response[] = $maxStatContent;
+    }
+
+    echo json_encode(["recordsTotal" => count($response), "recordsFiltered" => count($response), "data" => $response]);
+    exit();
+}
+
+if (isset($_POST["statsFilter"])) {
+
+
+    $response = '
+      <label for="tag" class="form-label-lg"><b>Filtrele :</b></label>
+        <select class="form-select" id="filterSelect">
+            <option value="">Filtre Seçin</option>
+            <option value="1">En Çok Dönüşüm Alan</option>
+            <option value="2">En Çok Ziyaret Edilen</option>
+        </select>';
+
+
+    echo $response;
+    exit;
+
+}

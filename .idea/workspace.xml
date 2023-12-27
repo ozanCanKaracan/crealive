@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="commit">
-      <change afterPath="$PROJECT_DIR$/assets/js/modules/content.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/js/modules/stats.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/views/stats/conversion_rates.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/top_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/top_5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/content.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/content.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/contentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get.php" beforeDir="false" afterPath="$PROJECT_DIR$/get.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/content/content.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/content.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/content/contents.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/contents.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/content/top_5.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/stats/top_5.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,27 +31,32 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2a4QsL0WbAfEQcHUJLS9Oivv32l" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "yeni-dal",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;yeni-dal&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\cms\views\stats" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -54,7 +65,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1703575576233</updated>
-      <workItem from="1703575577764" duration="12821000" />
+      <workItem from="1703575577764" duration="14100000" />
+      <workItem from="1703663131821" duration="15563000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -64,7 +76,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703590680782</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="commit">
+      <option name="closed" value="true" />
+      <created>1703603129434</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1703603129434</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

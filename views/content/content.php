@@ -36,5 +36,6 @@ const id= <?php echo $id?>;
 </div>
 <script src="assets/js/modules/content.js"></script>
 <script>
-    question(id)
+    question()
+    takeID(id)
 </script>

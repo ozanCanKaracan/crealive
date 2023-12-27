@@ -233,20 +233,29 @@ if (isset($_POST["pageVisit"])) {
 }
 if (isset($_POST["question"])) {
     $question_2 = isset($_POST["number"]) ? $_POST["number"] : null;
-    $id = C($_POST["id"]);
-
+    $id=$_POST["id"];
+    $user_id=$_SESSION["user"];
+    $control=DB::get("SELECT * FROM content_likes WHERE user_id=? AND content_id=?",[$user_id,$id]);
     if ($question_2 == 1) {
         $response = '<h3>Teşekkürler</h3>';
-    } else if ($question_2 == null) {
-        $response = '
-<button type="button" class="btn m-1" onclick="question(' . $id . ' , '.'1'.')">Evet</button>
-<button type="button" class="btn m-1" onclick="question(' . $id . ' , 1)">Hayır</button>
-';
+            $insert=DB::insert("INSERT INTO content_likes (user_id,content_id,content_like) VALUES (?,?,?)",[$user_id,$id,1]);
+    }else if($question_2 == 2){
+        $response = '<h3>Teşekkürler</h3>';
+        $insert=DB::insert("INSERT INTO content_likes (user_id,content_id,content_dislike) VALUES (?,?,?)",[$user_id,$id,1]);
 
+    }else if($control){
+        $response = '<h3>Teşekkürler</h3>';
+    } else if ($question_2 === null) {
+        $response = '
+        <button type="button" class="btn m-1" onclick="question(1)">Evet</button>
+        <button type="button" class="btn m-1" onclick="question(2)">Hayır</button>
+        ';
     }
 
     echo $response;
     exit;
 }
+
+
 
 ?>

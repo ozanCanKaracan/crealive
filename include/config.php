@@ -3,7 +3,7 @@ session_start();
 include'db.php';
 include'function.php';
 error_reporting(E_ALL);
-ini_set('display_errors', 0);
+ini_set('display_errors', 2);
 
 const MYSQL_HOST = 'localhost';
 const MYSQL_DB = 'cms';

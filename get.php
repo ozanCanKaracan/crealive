@@ -10,7 +10,7 @@ if (!$_GET) {
             include('views/index.php');
             break;
         case 'top_5' :
-            include('views/content/top_5.php');
+            include('views/stats/top_5.php');
             break;
         case 'roles' :
             $access = access($_GET["target"]);
@@ -84,6 +84,15 @@ if (!$_GET) {
             $access = access($_GET["target"]);
             if ($access) {
                 include('views/content/content.php');
+                break;
+            } else {
+                include('views/404/404.php');
+                break;
+            }
+        case 'conversion_rates' :
+            $access = access($_GET["target"]);
+            if ($access) {
+                include('views/stats/conversion_rates.php');
                 break;
             } else {
                 include('views/404/404.php');
