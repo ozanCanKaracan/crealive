@@ -96,14 +96,21 @@ if (isset($_POST["statsTable"])) {
 }
 
 if (isset($_POST["statsFilter"])) {
-
+    $text_1 = "Filtrele";
+    $text_2 = 'Filtre Seçin';
+    $text_3 = 'En Çok Dönüşüm Alan';
+    $text_4 = 'En Çok Ziyaret Edilen';
+    $translate_1 = (language($text_1)) ? language($text_1) : $text_1;
+    $translate_2 = (language($text_2)) ? language($text_2) : $text_2;
+    $translate_3 = (language($text_3)) ? language($text_3) : $text_3;
+    $translate_4 = (language($text_4)) ? language($text_4) : $text_4;
 
     $response = '
-      <label for="tag" class="form-label-lg"><b>Filtrele :</b></label>
+      <label for="tag" class="form-label-lg"><b>'.$translate_1.' :</b></label>
         <select class="form-select" id="filterSelect">
-            <option value="">Filtre Seçin</option>
-            <option value="1">En Çok Dönüşüm Alan</option>
-            <option value="2">En Çok Ziyaret Edilen</option>
+            <option value="">' . $translate_2 . '</option>
+            <option value="1">'.$translate_3.'</option>
+            <option value="2">'.$translate_4.'</option>
         </select>';
 
 

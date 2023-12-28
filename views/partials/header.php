@@ -86,7 +86,11 @@
                                                                                          data-feather="credit-card"></i>
                         Pricing</a><a class="dropdown-item" href="page-faq.html"><i class="me-50"
                                                                                     data-feather="help-circle"></i> FAQ</a>
-                    <a class="dropdown-item" href="#" onclick="logout()"><i class="me-50" data-feather="power"></i>
+                    <?php
+                    $lang=$_SESSION['lang'];
+                    $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
+                    ?>
+                    <a class="dropdown-item" href="#" onclick="logout(<?=$language?>)"><i class="me-50" data-feather="power"></i>
                         Logout</a>
                 </div>
             </li>

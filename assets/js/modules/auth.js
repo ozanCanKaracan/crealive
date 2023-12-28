@@ -108,7 +108,7 @@ function register() {
                             "phone": $("#phone").val(),
                             "mail": $("#email").val(),
                             "mail2": $("#email2").val(),
-                            "selectLang":$("#selectLang").val(),
+                            "selectLang": $("#selectLang").val(),
                             "pass": $("#password").val(),
                             "pass2": $("#password2").val(),
                         },
@@ -259,55 +259,100 @@ function login() {
     });
 }
 
-function logout() {
-    Swal.fire({
-        title: 'Çıkış yapmak istediğinize emin misiniz?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonColor: '#00FF00',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Evet',
-        cancelButtonText: 'İptal',
-        showClass: {
-            popup: 'swal2-show',
-            backdrop: 'swal2-backdrop-show',
-            icon: 'swal2-icon-show'
-        },
-        hideClass: {
-            popup: 'swal2-hide',
-            backdrop: 'swal2-backdrop-hide',
-            icon: 'swal2-icon-hide'
-        }
-    }).then((result) => {
-        if (result.isConfirmed) {
-            $.ajax({
-                type: "POST",
-                url: "controller/authController.php",
-                data: {
-                    "logout": 1,
-                },
-                success: function (e) {
-                    if (e.trim() === "ok") {
-                        Swal.fire({
-                            title: 'Başarılı!',
-                            text: 'Çıkış yapılıyor!',
-                            icon: 'success',
-                            timer: 1500,
-                            showConfirmButton: true,
-                            confirmButtonColor: '#3085d6'
-                        }).then((result) => {
-                            window.location.href = "";
-                        });
+function logout(lang) {
+    if (lang == 2) {
+        Swal.fire({
+            title: 'Are you sure you want to log out?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#00FF00',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes',
+            cancelButtonText: 'Cancel',
+            showClass: {
+                popup: 'swal2-show',
+                backdrop: 'swal2-backdrop-show',
+                icon: 'swal2-icon-show'
+            },
+            hideClass: {
+                popup: 'swal2-hide',
+                backdrop: 'swal2-backdrop-hide',
+                icon: 'swal2-icon-hide'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "controller/authController.php",
+                    data: {
+                        "logout": 1,
+                    },
+                    success: function (e) {
+                        if (e.trim() === "ok") {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'Signing out!',
+                                icon: 'success',
+                                timer: 1500,
+                                showConfirmButton: true,
+                                confirmButtonColor: '#3085d6'
+                            }).then((result) => {
+                                window.location.href = "";
+                            });
+                        }
                     }
-                }
-            })
-        }
-    })
+                })
+            }
+        })
+    } else {
+        Swal.fire({
+            title: 'Çıkış yapmak istediğinize emin misiniz?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#00FF00',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Evet',
+            cancelButtonText: 'İptal',
+            showClass: {
+                popup: 'swal2-show',
+                backdrop: 'swal2-backdrop-show',
+                icon: 'swal2-icon-show'
+            },
+            hideClass: {
+                popup: 'swal2-hide',
+                backdrop: 'swal2-backdrop-hide',
+                icon: 'swal2-icon-hide'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    type: "POST",
+                    url: "controller/authController.php",
+                    data: {
+                        "logout": 1,
+                    },
+                    success: function (e) {
+                        if (e.trim() === "ok") {
+                            Swal.fire({
+                                title: 'Başarılı!',
+                                text: 'Çıkış yapılıyor!',
+                                icon: 'success',
+                                timer: 1500,
+                                showConfirmButton: true,
+                                confirmButtonColor: '#3085d6'
+                            }).then((result) => {
+                                window.location.href = "";
+                            });
+                        }
+                    }
+                })
+            }
+        })
+    }
 }
-
-$("#phone").on("input", function () {
-    var sanitizedValue = $(this).val().replace(/[^0-9]/g, "");
-    $(this).val(sanitizedValue);
-});
+    $("#phone").on("input", function () {
+        var sanitizedValue = $(this).val().replace(/[^0-9]/g, "");
+        $(this).val(sanitizedValue);
+    });
 
 

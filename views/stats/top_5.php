@@ -10,7 +10,11 @@ $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang])
         <div class="card shadow">
             <div class="card-header d-flex justify-content-center">
                 <div class="card-title">
-                    <h3 class="">TOP 5 Listesi</h3>
+                    <h3 class="">
+                        <?php
+                        $text='Listesi';
+                        $translate=(language($text)) ? language($text) : $text;
+                        ?>TOP 5 <?= $translate ?></h3>
                 </div>
             </div>
             <div class="card-body">
@@ -19,9 +23,18 @@ $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang])
                     <thead>
                     <tr class="fw-semibold fs-6 text-gray-800">
                         <th class="d-none"></th>
-                        <th>Başlık</th>
-                        <th>Kategori</th>
-                        <th>İşlem</th>
+                        <th><?php
+                            $text='Başlık';
+                            $translate=(language($text)) ? language($text) : $text;
+                            ?><?= $translate ?></th>
+                        <th><?php
+                            $text='Kategori';
+                            $translate=(language($text)) ? language($text) : $text;
+                            ?><?= $translate ?></th>
+                        <th><?php
+                            $text='İşlemler';
+                            $translate=(language($text)) ? language($text) : $text;
+                            ?><?= $translate ?></th>
                     </tr>
                     </thead>
                 </table>
