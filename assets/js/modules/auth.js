@@ -355,4 +355,32 @@ function logout(lang) {
         $(this).val(sanitizedValue);
     });
 
+function selectLanguage() {
+    $.ajax({
+        type: 'POST',
+        data: {
+            'selectLanguage': 1,
+        },
+        url: "controller/authController.php",
+        success: function (e) {
 
+            $('#selectLanguage').empty();
+            $('#selectLanguage').append(e);
+        }
+    });
+}
+
+selectLanguage()
+function updateSidebar(){
+    $.ajax({
+        type: 'POST',
+        data: {
+            'selectLanguage': 1,
+        },
+        url: "controller/authController.php",
+        success: function (e) {
+            $('#sidebar-container').html(response);
+
+        }
+    });
+}

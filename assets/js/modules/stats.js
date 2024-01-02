@@ -1,12 +1,12 @@
 $(document).on('change', '#filterSelect', function () {
     var filter = $('#filterSelect').val();
-    statsTable(lang, filter);
+    statsTable(language, filter);
 });
 
 var table;
 
-function statsTable(lang, filter) {
-    if (lang == 2) {
+function statsTable(language, filter) {
+    if (language == 2) {
         if (table) {
             table.clear().destroy();
             table = false;

@@ -1,18 +1,21 @@
+
 <nav class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow container-xxl">
     <div class="navbar-container d-flex content">
         <ul class="nav navbar-nav align-items-center ms-auto">
             <?php
+            // Url'de lang parametresi var mı?
+            // Var ise session'da tut.
             if (isset($_GET['lang'])) {
                 $selectedLanguage = $_GET['lang'];
                 $_SESSION['lang'] = $selectedLanguage;
             } elseif ($_SESSION['lang']) {
                 $selectedLanguage = $_SESSION['lang'];
-                $_SESSION['lang'] = $selectedLanguage;
             } else {
                 $browserLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
                 $result = substr($browserLanguage, 0, 2);
                 $selectedLanguage = DB::getVar("SELECT lang_name_short FROM languages WHERE lang_name_short=?", [$result]);
                 $_SESSION['lang'] = $selectedLanguage;
+
             }
             $fullName = DB::getVar("SELECT lang_name FROM languages WHERE lang_name_short=?", [$selectedLanguage]);
             $translate=(language($fullName)) ? language($fullName) : $fullName;
@@ -23,19 +26,8 @@
                    aria-haspopup="true" aria-expanded="false">
                     <i class="flag-icon flag-icon-<?= $selectedLanguage ?>"></i><?= $translate ?>
                 </a>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag">
-                    <?php
-                    $allLanguages = DB::get("SELECT * FROM languages");
-                    foreach ($allLanguages as $language) {
-                        $langName=$language->lang_name;
-                        $translate=(language($langName)) ? language($langName) : $langName;
-                        $languageShort = $language->lang_name_short;
-                        $isActive = ($selectedLanguage == $languageShort) ? 'active' : '';
-                        ?>
-                        <a class="dropdown-item <?= $isActive ?>" href="?lang=<?= $languageShort ?>">
-                            <i class="flag-icon flag-icon-<?= $languageShort ?>"></i><?= $translate ?>
-                        </a>
-                    <?php } ?>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag" id="selectLanguage">
+
                 </div>
             </li>
 

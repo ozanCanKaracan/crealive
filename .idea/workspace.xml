@@ -8,11 +8,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/modules/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/modules/stats.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/stats.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/authController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/authController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/partials/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/stats/conversion_rates.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/stats/conversion_rates.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/stats/top_5.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/stats/top_5.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/partials/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/sidebar.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +27,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\wamp64\bin\php\php7.4.33\php.exe" />
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -46,6 +46,7 @@
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -65,6 +66,12 @@
       <workItem from="1703575577764" duration="14100000" />
       <workItem from="1703663131821" duration="15590000" />
       <workItem from="1703747892184" duration="3798000" />
+      <workItem from="1703775873863" duration="96000" />
+      <workItem from="1703836608375" duration="425000" />
+      <workItem from="1704180470668" duration="6549000" />
+      <workItem from="1704196692241" duration="337000" />
+      <workItem from="1704197238865" duration="6337000" />
+      <workItem from="1704205868620" duration="708000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -90,7 +97,23 @@
       <option name="project" value="LOCAL" />
       <updated>1703691769577</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="commit">
+      <option name="closed" value="true" />
+      <created>1703775885673</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1703775885673</updated>
+    </task>
+    <task id="LOCAL-00005" summary="commit">
+      <option name="closed" value="true" />
+      <created>1703775920793</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1703775920793</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

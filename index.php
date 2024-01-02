@@ -1,5 +1,9 @@
 <?php
 include "include/config.php";
+$hash=md5_file(__FILE__);
+header('Set-Cookie: name='.$hash.' ');
+var_dump($_SERVER['HTTP_IF_NONE_MATCH']);
+
 
 if (isset($_SESSION['user'])) {
     ?>

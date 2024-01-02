@@ -1,4 +1,4 @@
-<div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
+<div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true" id="sidebarContainer">
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item me-auto"><a class="navbar-brand"
@@ -50,6 +50,7 @@
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item"><a class="d-flex align-items-center"><i data-feather="home"></i><span
                             class="menu-title text-truncate" data-i18n="Dashboards"><?php
+                        header("Refresh:1");
                         $text='Ayarlar';
                         $translate=(language($text)) ? language($text) : $text;
                         ?><?= $translate  ?></span></a>
