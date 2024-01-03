@@ -54,7 +54,7 @@ if (isset($_POST["logout"])) {
 
 }
 if (isset($_POST["selectLanguage"])) {
-    if ($_GET['lang']) {
+    if (@$_GET['lang']) {
         $selectedLanguage = $_GET['lang'];
         $_SESSION['lang'] = $selectedLanguage;
     } elseif ($_SESSION['lang']) {

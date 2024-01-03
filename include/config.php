@@ -3,7 +3,7 @@ session_start();
 include'db.php';
 include'function.php';
 error_reporting(E_ALL);
-ini_set('display_errors', 2);
+ini_set('display_errors', 1);
 
 const MYSQL_HOST = 'localhost';
 const MYSQL_DB = 'cms';
@@ -13,12 +13,10 @@ const MYSQL_PASS = '';
 const site_url = "http://localhost/cms/";
 
 
-include "../classes/User.php";
-include "../classes/Roles.php";
-include "../classes/Permission.php";
-include "../classes/Category.php";
-include "../classes/Content.php";
-include "../classes/Pages.php";
 
-
-
+require_once __DIR__ ."/../classes/User.php";
+require_once __DIR__ . "/../classes/Roles.php";
+require_once __DIR__ ."/../classes/Permission.php";
+require_once __DIR__ ."/../classes/Category.php";
+require_once __DIR__ . "/../classes/Content.php";
+require_once __DIR__ . "/../classes/Pages.php";
