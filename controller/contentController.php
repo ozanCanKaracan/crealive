@@ -224,13 +224,29 @@ if (isset($_POST["tagSelect"])) {
 }
 if (isset($_POST["pageVisit"])) {
     $id = C($_POST["id"]);
-    $control = DB::get("SELECT * FROM stats WHERE content_id=?", [$id]);
-    if ($control) {
-        $process = DB::exec("UPDATE stats SET view_count = view_count + 1 WHERE content_id=?", [$id]);
-    } else {
-        $process = DB::insert("INSERT INTO stats (content_id,view_count) VALUES (?,?)", [$id, 1]);
+    $user_id = $_SESSION["user"];
+    $cookieName = "visited_pages_user".$user_id;
+
+    // Eğer daha önce bir cookie varsa, değerini al, yoksa boş bir dizi oluştur
+    $visitedPages = isset($_COOKIE[$cookieName]) ? json_decode($_COOKIE[$cookieName], true) : array();
+
+    // Eğer ziyaret edilen sayfa daha önce eklenmemişse, ekleyin
+    if (!in_array($id, $visitedPages)) {
+        $visitedPages[] = $id;
+
+        // Cookie'yi güncelle
+        setcookie($cookieName, json_encode($visitedPages), time() + (86400 * 30), "/");
+
+        // Stats tablosunu güncelle
+        $control = DB::get("SELECT * FROM stats WHERE content_id=?", [$id]);
+        if ($control) {
+            $process = DB::exec("UPDATE stats SET view_count = view_count + 1 WHERE content_id=?", [$id]);
+        } else {
+            $process = DB::insert("INSERT INTO stats (content_id,view_count) VALUES (?,?)", [$id, 1]);
+        }
     }
 }
+
 if (isset($_POST["question"])) {
     $question_2 = isset($_POST["number"]) ? $_POST["number"] : null;
     $id=$_POST["id"];

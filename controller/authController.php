@@ -58,7 +58,7 @@ if (isset($_POST["selectLanguage"])) {
         $selectedLanguage = $_GET['lang'];
         $_SESSION['lang'] = $selectedLanguage;
     } elseif ($_SESSION['lang']) {
-        //url'de yoksa sessionda var ise bunu çallıştır
+        //url'de yoksa sessionda var ise bunu çalıştır
         $selectedLanguage = $_SESSION['lang'];
     } else {
         // kullanıcı tarayıcı dili
@@ -70,7 +70,7 @@ if (isset($_POST["selectLanguage"])) {
     }
     $fullName = DB::getVar("SELECT lang_name FROM languages WHERE lang_name_short=?", [$selectedLanguage]);
     $translate = (language($fullName)) ? language($fullName) : $fullName;
-    $allLanguages = DB::get("SELECT * FROM languages");
+    $allLanguages = DB::get("SELECT * FROM languages ORDER BY id ASC");
     $response = '';
 
     foreach ($allLanguages as $language) {
@@ -80,11 +80,72 @@ if (isset($_POST["selectLanguage"])) {
         $isActive = ($selectedLanguage == $languageShort) ? 'active' : '';
 
         $response .= '
-    <a class="dropdown-item  '.$isActive. '" href="?lang='.$languageShort.' ">
+    <a class="dropdown-item  ' . $isActive . '" href="?lang=' . $languageShort . ' ">
         <i class="flag-icon flag-icon-' . $languageShort . ' " "></i> ' . $translate . '
     </a>';
     }
 
     echo $response;
     exit;
+}
+if (isset($_POST["sidebarAjax"])) {
+    $response = '';
+    $response .= '
+    <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+        <li class="nav-item">
+            <a class="d-flex align-items-center">
+                <i class="bi bi-house mb-1"></i>
+                <span class="menu-title text-truncate" data-i18n="Dashboards">';
+    $text = 'Ayarlar';
+    $translate = (language($text)) ? language($text) : $text;
+    $response .= ' ' . $translate . ' </span></a>
+        </li>
+        <li class="navigation-header">
+            <span data-i18n="Apps &amp; Pages">';
+    $text = 'Sayfalar';
+    $translate = (language($text)) ? language($text) : $text;
+    $response .= ' ' . $translate . '</span></a></span><i data-feather="more-horizontal"></i>
+        </li>';
+
+    $getTitle = DB::get("SELECT * FROM pages WHERE parent_id = 0");
+    foreach ($getTitle as $gt) {
+        $getPages = DB::get("SELECT * FROM pages WHERE parent_id = ?", [$gt->id]);
+        $pageName = $gt->page_name;
+        $translate = (language($pageName)) ? language($pageName) : $pageName;
+
+        $response .= '
+        <li class="nav-item nav-group-children">
+            <a class="d-flex align-items-center">
+                <i class="' . $gt->page_icon . ' mb-1"></i>
+                <span class="menu-title text-truncate" data-i18n="Invoice">' . $translate . '</span>
+            </a>
+            <ul class="menu-content">';
+
+        foreach ($getPages as $gp) {
+            $pageName = $gp->page_name;
+            $translate = (language($pageName)) ? language($pageName) : $pageName;
+            $id = $gp->id;
+            $controlView = controlView($id);
+
+            if ($controlView) {
+                $response .= '
+                <li>
+                    <a class="router-link-active router-link-exact-active" href="' . $gp->href . '">
+                        <i data-feather="circle"></i>
+                        <span class="menu-item text-truncate" data-i18n="List">' . $translate . '</span>
+                    </a>
+                </li>';
+            } else {
+            }
+        }
+
+        $response .= '
+            </ul>
+        </li>';
+    }
+
+    $response .= '
+    </ul>';
+    echo $response;
+    exit();
 }

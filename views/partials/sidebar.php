@@ -37,7 +37,7 @@
                                     </g>
                                 </g>
                             </svg></span>
-                    <h2 class="brand-text">Vuexy</h2>
+                    <h2 class="brand-text">CMS</h2>
                 </a></li>
             <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pe-0" data-bs-toggle="collapse"><i
                             class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i
@@ -46,60 +46,8 @@
         </ul>
     </div>
     <div class="shadow-bottom"></div>
-    <div class="main-menu-content">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class=" nav-item"><a class="d-flex align-items-center"><i data-feather="home"></i><span
-                            class="menu-title text-truncate" data-i18n="Dashboards"><?php
-                        $text='Ayarlar';
-                        $translate=(language($text)) ? language($text) : $text;
-                        ?><?= $translate  ?></span></a>
-                <ul class="menu-content">
+    <div class="main-menu-content" id="sidebar">
 
-                </ul>
-            </li>
-            <li class=" navigation-header"><span data-i18n="Apps &amp; Pages"><?php
-                    $text='Sayfalar';
-                    $translate=(language($text)) ? language($text) : $text;
-                    ?><?= $translate  ?></span></a></span><i
-                        data-feather="more-horizontal"></i>
-            </li>
-            <?php
-            $getTitle = DB::get("SELECT * FROM pages WHERE parent_id = 0");
-            foreach ($getTitle as $gt) {
-                $getPages = DB::get("SELECT * FROM pages WHERE parent_id = ?", [$gt->id]);
-                $pageName=$gt->page_name;
-                $translate=(language($pageName)) ? language($pageName) : $pageName;
-                ?>
-                <li class=" nav-item nav-group-children">
-                    <a class="d-flex align-items-center"><i class="<?php echo $gt->page_icon; ?> mb-1"></i><span
-                                class="menu-title text-truncate"
-                                data-i18n="Invoice"><?= $translate ?></span></a>
-                    <ul class="menu-content ">
-                        <?php
-                        foreach ($getPages as $gp) {
-                            $pageName=$gp->page_name;
-                            $translate=(language($pageName)) ? language($pageName) : $pageName;
-                            $id = $gp->id;
-                            $controlView = controlView($id);
-                            if ($controlView) {
-                                ?>
-                                <li><a class="router-link-active router-link-exact-active" href="<?= $gp->href; ?>"><i
-                                                data-feather="circle"></i><span class="menu-item text-truncate"
-                                                                                data-i18n="List"><?= $translate ?></span></a>
-                                </li>
-                                <?php
-                            }else{
-
-                            }
-                        }
-                        ?>
-                    </ul>
-                </li>
-                <?php
-            }
-            ?>
-            </li>
-        </ul>
     </div>
 </div>
 

@@ -45,7 +45,6 @@ if (isset($_POST["statsTable"])) {
         $dislikeCount = DB::getVar("SELECT COUNT(*) FROM content_likes WHERE content_id=? AND content_dislike = '1'", [$d->id]);
         $stat = DB::getVar("SELECT view_count FROM stats WHERE content_id=?", [$d->id]);
         $totalVotes = $likeCount + $dislikeCount;
-
         $conversionRate = ($stat > 0 && $totalVotes > 0) ? ($totalVotes / $stat) * 100 : 0;
         $conversionRate = round($conversionRate, 2);
 
@@ -59,6 +58,7 @@ if (isset($_POST["statsTable"])) {
                     "like" => $likeCount,
                     "dislike" => $dislikeCount,
                     "conversion_rate" => '%' . $conversionRate,
+                    "view"=> $stat
                 ];
             }
         } else if ($filter == 2) {
@@ -71,6 +71,7 @@ if (isset($_POST["statsTable"])) {
                     "like" => $likeCount,
                     "dislike" => $dislikeCount,
                     "conversion_rate" => '%' . $conversionRate,
+                    "view"=> $stat
                 ];
             }
         } else {
@@ -81,6 +82,7 @@ if (isset($_POST["statsTable"])) {
                 "like" => $likeCount,
                 "dislike" => $dislikeCount,
                 "conversion_rate" => '%' . $conversionRate,
+                "view"=> $stat
             ];
         }
     }
@@ -94,7 +96,6 @@ if (isset($_POST["statsTable"])) {
     echo json_encode(["recordsTotal" => count($response), "recordsFiltered" => count($response), "data" => $response]);
     exit();
 }
-
 if (isset($_POST["statsFilter"])) {
     $text_1 = "Filtrele";
     $text_2 = 'Filtre Seçin';

@@ -11,7 +11,7 @@ $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang])
                         const language= <?php echo $language?>;
                     </script>
                     <h3 class=""><?php
-                        $text='Geri Dönüş Oranları';
+                        $text='İstatistikler';
                         $translate=(language($text)) ? language($text) : $text;
                         ?><?=$translate?></h3>
                 </div>
@@ -42,6 +42,10 @@ $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang])
                                 ?><?= $translate ?> </th>
                             <th scope="col"><?php
                                 $text='Geri Dönüş Oranları';
+                                $translate=(language($text)) ? language($text) : $text;
+                                ?><?= $translate ?> </th>
+                            <th scope="col"><?php
+                                $text='Görüntülenme Sayısı';
                                 $translate=(language($text)) ? language($text) : $text;
                                 ?><?= $translate ?> </th>
                         </tr>

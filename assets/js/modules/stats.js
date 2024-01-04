@@ -29,6 +29,8 @@ function statsTable(language, filter) {
                 {data: 'like'},
                 {data: 'dislike'},
                 {data: 'conversion_rate'},
+                {data: 'view'},
+
 
             ],
 
@@ -56,6 +58,7 @@ function statsTable(language, filter) {
                 {data: 'like'},
                 {data: 'dislike'},
                 {data: 'conversion_rate'},
+                {data: 'view'},
 
             ],
 

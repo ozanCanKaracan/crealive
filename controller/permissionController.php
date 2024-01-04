@@ -8,12 +8,23 @@ if(isset($_POST["getPermissionTable"])){
     $response = [];
     if (count($data) > 0) {
         foreach ($data as $d) {
-            $control=DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=?",[$d->id,$id]);
-            $checkedAdd = ($control[0]->permission_add == 1) ? 'checked' : '';
-            $checkedDelete = ($control[0]->permission_delete == 1) ? 'checked' : '';
-            $checkedEdit= ($control[0]->permission_edit == 1) ? 'checked' : '';
-            $checkedList= ($control[0]->permission_list == 1) ? 'checked' : '';
-            $checkedView= ($control[0]->permission_view == 1) ? 'checked' : '';
+            $control = DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=?", [$d->id, $id]);
+
+// Kontrol et
+            if (isset($control[0])) {
+                $checkedAdd = ($control[0]->permission_add == 1) ? 'checked' : '';
+                $checkedDelete = ($control[0]->permission_delete == 1) ? 'checked' : '';
+                $checkedEdit = ($control[0]->permission_edit == 1) ? 'checked' : '';
+                $checkedList = ($control[0]->permission_list == 1) ? 'checked' : '';
+                $checkedView = ($control[0]->permission_view == 1) ? 'checked' : '';
+            } else {
+                // Eğer $control[0] anahtarı yoksa, varsayılan değerleri ayarla veya hata işlemlerini gerçekleştir
+                $checkedAdd = '';
+                $checkedDelete = '';
+                $checkedEdit = '';
+                $checkedList = '';
+                $checkedView = '';
+            }
 
 
             $response[] = [

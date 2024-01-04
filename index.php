@@ -1,5 +1,8 @@
 <?php
 include "include/config.php";
+$user_id=$_SESSION['user'];
+$cookieName = "visited_pages_user" . $user_id;
+
 if (isset($_SESSION['user'])) {
     ?>
     <!DOCTYPE html>
@@ -22,9 +25,9 @@ if (isset($_SESSION['user'])) {
 
     </html>
     <?php
-}else if(@$_GET["target"]== "login"){
+}else if(@$_GET["target"] == "login"){
     include "views/login.php";
-}else if(@$_GET["target"]== "register"){
+}else if(@$_GET["target"] == "register"){
     include "views/register.php";
 }else {
     include "views/login.php";

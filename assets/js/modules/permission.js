@@ -8,6 +8,7 @@ function getPermissionTable(id, langID) {
         }
 
         table = $('#permissionTable').DataTable({
+
             sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
             ajax: {
                 url: 'controller/permissionController.php',
@@ -28,6 +29,8 @@ function getPermissionTable(id, langID) {
 
             ],
         });
+        table.page.len(100).draw();
+
     }else{
         if (table) {
             table.destroy()
@@ -57,6 +60,8 @@ function getPermissionTable(id, langID) {
             "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
         });
     }
+    table.page.len(100).draw();
+
 }
 function addCheckBox(id) {
     var checkedIDs = [];

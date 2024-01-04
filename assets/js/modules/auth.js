@@ -363,7 +363,7 @@ function selectLanguage() {
         },
         url: "controller/authController.php",
         success: function (e) {
-
+            sidebarAjax()
             $('#selectLanguage').empty();
             $('#selectLanguage').append(e);
         }
@@ -371,16 +371,19 @@ function selectLanguage() {
 }
 
 selectLanguage()
-function updateSidebar(){
+function sidebarAjax() {
     $.ajax({
         type: 'POST',
         data: {
-            'selectLanguage': 1,
+            'sidebarAjax': 1,
         },
         url: "controller/authController.php",
         success: function (e) {
-            $('#sidebar-container').html(response);
 
+            $('#sidebar').empty();
+            $('#sidebar').append(e);
         }
     });
 }
+
+sidebarAjax()
