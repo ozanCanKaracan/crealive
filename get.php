@@ -89,6 +89,15 @@ if (!$_GET) {
                 include('views/404/404.php');
                 break;
             }
+        case 'recommended' :
+            $access = access($_GET["target"]);
+            if ($access) {
+                include('views/content/recommended.php');
+                break;
+            } else {
+                include('views/404/404.php');
+                break;
+            }
         case 'conversion_rates' :
             $access = access($_GET["target"]);
             if ($access) {

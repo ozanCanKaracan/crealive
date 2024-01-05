@@ -363,7 +363,6 @@ function selectLanguage() {
         },
         url: "controller/authController.php",
         success: function (e) {
-            sidebarAjax()
             $('#selectLanguage').empty();
             $('#selectLanguage').append(e);
         }
