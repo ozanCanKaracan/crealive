@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="commit">
-      <change afterPath="$PROJECT_DIR$/assets/js/modules/recommended.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/recommendedController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/content/recommended.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get.php" beforeDir="false" afterPath="$PROJECT_DIR$/get.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/userlistRole.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/userlistRole.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/roleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/roleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/roles/userlistRole.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/roles/userlistRole.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +71,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\wamp64\www\cms" />
       <recent name="C:\wamp64\www\cms\views\stats" />
     </key>
   </component>
@@ -94,6 +95,8 @@
       <workItem from="1704270722871" duration="8660000" />
       <workItem from="1704355697301" duration="13965000" />
       <workItem from="1704437092298" duration="12169000" />
+      <workItem from="1704456098867" duration="59000" />
+      <workItem from="1704701019222" duration="18130000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -159,7 +162,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704382243243</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="commit">
+      <option name="closed" value="true" />
+      <created>1704456146059</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1704456146059</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,6 +1,7 @@
 let table;
 
-function getUserTable(id, langID) {
+function getUserTable(id, langID,columns) {
+    console.log(...columns)
     if (langID == 2) {
 
         if (table) {
@@ -22,6 +23,7 @@ function getUserTable(id, langID) {
             columns: [
                 {data: 'id', visible: false},
                 {data: 'name'},
+                ...columns
             ],
         });
     } else {
@@ -45,6 +47,8 @@ function getUserTable(id, langID) {
             columns: [
                 {data: 'id', visible: false},
                 {data: 'name'},
+                ...columns
+
             ],
             "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
         });
@@ -52,20 +56,22 @@ function getUserTable(id, langID) {
 
 }
 
-function turkishCheckBox(id) {
+function langCheckBox(id, langName,userID) {
+    console.log(userID)
     var checkedIDs = [];
     var notcheck = [];
 
-    $(".turkishCheck:checked").each(function () {
+    $("." + langName + "Check:checked").each(function () {
         var checkedID = $(this).val();
         checkedIDs.push(checkedID);
+
     });
 
-    $(".turkishCheck:not(:checked)").each(function () {
+    $("." + langName + "Check:not(:checked)").each(function () {
         var checkedIDNot = $(this).val();
         notcheck.push(checkedIDNot);
     });
-
+    console.log(notcheck , checkedIDs)
     $.ajax({
         type: "POST",
         url: "controller/roleController.php",
@@ -73,99 +79,11 @@ function turkishCheckBox(id) {
             "id": id,
             "checkedID": checkedIDs,
             "notCheckedID": notcheck,
-            "turkishCheckBox": 1,
+            "langCheckBox": 1,
+            "langName": langName,
+            "userID":userID
         },
-        success: function (response) {
-
+        success: function (e) {
         }
     });
 }
-
-function germanCheckBox(id) {
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".germanCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".germanCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/roleController.php",
-        data: {
-            "id": id,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "germanCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
-
-function englishCheckBox(id) {
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".englishCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".englishCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/roleController.php",
-        data: {
-            "id": id,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "englishCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
-
-function frenchCheckBox(id) {
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".frenchCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".frenchCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/roleController.php",
-        data: {
-            "id": id,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "frenchCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
-
-

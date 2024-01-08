@@ -1,6 +1,6 @@
 <?php
 include "include/config.php";
-$user_id=$_SESSION['user'];
+@$user_id=$_SESSION['user'];
 $cookieName = "visited_pages_user" . $user_id;
 
 if (isset($_SESSION['user'])) {
