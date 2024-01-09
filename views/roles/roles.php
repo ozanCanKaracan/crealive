@@ -37,23 +37,6 @@
                                         style="width: 50px;"><b><?php $text = 'İzinler';
                                             $translate = (language($text)) ? language($text) : $text;
                                             ?><?= $translate ?></b></th>
-                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
-                                        style="width: 50px;"><b><?php $text = 'Türkçe';
-                                            $translate = (language($text)) ? language($text) : $text;
-                                            ?><?= $translate ?></b></th>
-                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
-                                        style="width: 50px;"><b><?php $text = 'İngilizce';
-                                            $translate = (language($text)) ? language($text) : $text;
-                                            ?><?= $translate ?></b></th>
-                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
-                                        style="width: 50px;"><b><?php $text = 'Almanca';
-                                            $translate = (language($text)) ? language($text) : $text;
-                                            ?><?= $translate ?></b></th>
-                                    <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
-                                        style="width: 50px;"><b><?php $text = 'Fransızca';
-                                            $translate = (language($text)) ? language($text) : $text;
-                                            ?><?= $translate ?></b></th>
-
                                 </tr>
                                 </thead>
                                 <tbody>

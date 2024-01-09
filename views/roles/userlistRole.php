@@ -21,6 +21,7 @@ $languageID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$l
                         <table class="table-bordered table datatables-basic table dataTable no-footer dtr-column "
                                id="userlistRoleTable">
                             <thead>
+
                             <tr class="fw-semibold fs-6 text-gray-800">
                                 <th scope="col" class="d-none"></th>
                                 <?php
@@ -35,7 +36,6 @@ $languageID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$l
                                     $datatableColumns[] = "{ 'data': '" . $language->lang_name_short . "' }";
                                 }
                                 $datatableColumnsString = implode(", ", $datatableColumns);
-                                var_dump($datatableColumnsString);
                                 foreach ($languages as $language) {
                                     $text=$language->lang_name;
                                     $translate = (language($text)) ? (language($text)) : $text;
@@ -44,7 +44,6 @@ $languageID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$l
                                 <?php } ?>
                             </tr>
                             </thead>
-                            </tbody>
                         </table>
                     </div>
                 </div>

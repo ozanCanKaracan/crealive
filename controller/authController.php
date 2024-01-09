@@ -7,29 +7,38 @@ if (isset($_POST["register"])) {
     $name = C($_POST["name"]);
     $phone = C($_POST["phone"]);
     $email = C($_POST["mail"]);
-    $email2 = C($_POST["mail2"]);
+    $emailConfirmation = C($_POST["mail2"]);
     $lang = C($_POST["selectLang"]);
     $pass = C($_POST["pass"]);
-    $pass2 = C($_POST["pass2"]);
+    $passConfirmation = C($_POST["pass2"]);
     $encryptedPass = md5(sha1(md5($pass)));
-    $controlEmail = $auth->controlEmail($email);
-    $controlPhone = $auth->controlPhone($phone);
-    if (!$name || !$phone || !$email || !$email2 || !$lang || !$pass || !$pass2) {
+
+    if (empty($name) || empty($phone) || empty($email) || empty($emailConfirmation) || empty($lang) || empty($pass) || empty($passConfirmation)) {
         echo "bos";
-    } else if ($controlPhone) {
-        echo "phone";
-    } else if ($email != $email2) {
-        echo "mail2";
-    } else if ($controlEmail) {
+    } elseif (strlen($pass) < 3) {
+        echo "pass";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "mail";
-    } else if ($pass != $pass2) {
+    } elseif ($email !== $emailConfirmation) {
+        echo "mail2";
+    } elseif ($pass !== $passConfirmation) {
         echo "pass";
     } else {
-        $add = $auth->addUser($name, $lang, $phone, $email2, $encryptedPass);
-        echo "ok";
-        exit();
+        $controlEmail = $auth->controlEmail($email);
+        $controlPhone = $auth->controlPhone($phone);
+
+        if ($controlEmail) {
+            echo "email";
+        } elseif ($controlPhone) {
+            echo "phone";
+        } else {
+            $add = $auth->addUser($name, $lang, $phone, $email, $encryptedPass);
+            echo "ok";
+        }
     }
 }
+
+
 if (isset($_POST["login"])) {
     $email = C($_POST["email"]);
     $password = C($_POST["password"]);
@@ -51,8 +60,8 @@ if (isset($_POST["logout"])) {
     session_unset();
     echo "ok";
     exit();
-
 }
+
 if (isset($_POST["selectLanguage"])) {
     if (@$_GET['lang']) {
         $selectedLanguage = $_GET['lang'];

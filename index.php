@@ -10,10 +10,12 @@ if (isset($_SESSION['user'])) {
 
     <head>
         <?php include "views/partials/head.php"; ?>
+
     </head>
 
     <body class="vertical-layout vertical-menu-modern  navbar-floating footer-static  " data-open="click"
           data-menu="vertical-menu-modern" data-col="">
+
     <?php include "views/partials/sidebar.php"; ?>
     <?php include "views/partials/header.php"; ?>
     <div class="app-content content ">

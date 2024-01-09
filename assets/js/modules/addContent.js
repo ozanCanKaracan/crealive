@@ -30,61 +30,96 @@ function addContent(id) {
         return content_length > 0;
     }, "Please add page content.");
 
-    if (id == 2) {
-        $("#newContentForm").validate({
-            ignore: [],
-            rules: {
-                languageSelect: {
-                    required: true,
-                },
-                categorySelect: {
-                    required: true,
-                },
-                titleContent: {
-                    required: true,
-                },
-                content: {
-                    ck_editor: true
-                },
+    function translatedText() {
+        return new Promise((resolve, reject) => {
+            const originalText = editorTextarea.getData();
+            const title = $("#titleContent").val();
+            const language = $("#translateSelect").val();
+            const endpoint = "https://translation.googleapis.com/language/translate/v2";
+            const apiKey = "AIzaSyBdH8gjaAKplDXc_rxfTAHI9wCjxTO_U70";
 
+            const targetLanguage = language;
+
+            const requestBody = {
+                q: [originalText, title],
+                target: targetLanguage
+            };
+
+            fetch(`${endpoint}?key=${apiKey}`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(requestBody)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const translatedText = data.data.translations[0].translatedText;
+                    const translatedTitle = data.data.translations[1].translatedText;
+                    resolve({ translatedText, translatedTitle });
+                })
+                .catch(error => reject(error));
+        });
+    }
+
+
+    $("#newContentForm").validate({
+        ignore: [],
+        rules: {
+            languageSelect: {
+                required: true,
             },
-            errorPlacement: function (error, element) {
-                error.addClass("invalid-feedback");
-                error.insertAfter(element);
-                element.addClass("is-invalid");
+            categorySelect: {
+                required: true,
             },
-            success: function (label, element) {
-                label.remove();
-                $(element).removeClass("is-invalid");
-                $(element).addClass("is-valid");
+            titleContent: {
+                required: true,
             },
-            submitHandler: function (form, event) {
-                event.preventDefault();
-                Swal.fire({
-                    title: 'Create Content?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#00FF00',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes',
-                    cancelButtonText: 'Cancel',
-                    showClass: {
-                        popup: 'swal2-show',
-                        backdrop: 'swal2-backdrop-show',
-                        icon: 'swal2-icon-show'
-                    },
-                    hideClass: {
-                        popup: 'swal2-hide',
-                        backdrop: 'swal2-backdrop-hide',
-                        icon: 'swal2-icon-hide'
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
+            content: {
+                ck_editor: true
+            },
+
+        },
+        errorPlacement: function (error, element) {
+            error.addClass("invalid-feedback");
+            error.insertAfter(element);
+            element.addClass("is-invalid");
+        },
+        success: function (label, element) {
+            label.remove();
+            $(element).removeClass("is-invalid");
+            $(element).addClass("is-valid");
+        },
+        submitHandler: function (form, event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Create Content?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#00FF00',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'Cancel',
+                showClass: {
+                    popup: 'swal2-show',
+                    backdrop: 'swal2-backdrop-show',
+                    icon: 'swal2-icon-show'
+                },
+                hideClass: {
+                    popup: 'swal2-hide',
+                    backdrop: 'swal2-backdrop-hide',
+                    icon: 'swal2-icon-hide'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    translatedText().then(({ translatedText, translatedTitle }) => {
+
                         $.ajax({
                             type: "POST",
                             url: "controller/contentController.php",
                             data: {
                                 "addContent": 1,
+                                "translateLanguage":$("#translateSelect").val(),
                                 "tag": $("#tag").val(),
                                 "specialURL": $("#url").val(),
                                 "category": $("#categorySelect").val(),
@@ -92,6 +127,8 @@ function addContent(id) {
                                 "urlCat": selectedCategory,
                                 "urlTag": selectedTag,
                                 "editor": editorTextarea.getData(),
+                                "translatedText": translatedText,
+                                "translatedTitle":translatedTitle,
                             },
                             success: function (e) {
                                 if (e.trim() === "bos") {
@@ -147,145 +184,13 @@ function addContent(id) {
                                 }
                             }
                         });
-                    }
-                });
-            }
-        });
-    } else {
-        $("#newContentForm").validate({
-            ignore: [],
-            rules: {
-                languageSelect: {
-                    required: true,
-                },
-                categorySelect: {
-                    required: true,
-                },
-                titleContent: {
-                    required: true,
-                },
-                content: {
-                    ck_editor: true
-                },
-            },
-            messages: {
-                languageSelect: {
-                    required: "Bu alan zorunludur!",
-                },
-                categorySelect: {
-                    required: "Bu alan zorunludur!",
-                },
-                titleContent: {
-                    required: "Bu alan zorunludur!",
-                },
-                content: {
-                    ck_editor: "Bu alan zorunludur!",
-                },
-            },
-            errorPlacement: function (error, element) {
-                error.addClass("invalid-feedback");
-                error.insertAfter(element);
-                element.addClass("is-invalid");
-            },
-            success: function (label, element) {
-                label.remove();
-                $(element).removeClass("is-invalid");
-                $(element).addClass("is-valid");
-            },
-            submitHandler: function (form, event) {
-                event.preventDefault();
-                Swal.fire({
-                    title: 'İçerik oluşturulsun mu?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#00FF00',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Evet',
-                    cancelButtonText: 'İptal',
-                    showClass: {
-                        popup: 'swal2-show',
-                        backdrop: 'swal2-backdrop-show',
-                        icon: 'swal2-icon-show'
-                    },
-                    hideClass: {
-                        popup: 'swal2-hide',
-                        backdrop: 'swal2-backdrop-hide',
-                        icon: 'swal2-icon-hide'
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: "POST",
-                            url: "controller/contentController.php",
-                            data: {
-                                "addContent": 1,
-                                "tag": $("#tag").val(),
-                                "specialURL": $("#url").val(),
-                                "category": $("#categorySelect").val(),
-                                "title": $("#titleContent").val(),
-                                "urlCat": selectedCategory,
-                                "urlTag": selectedTag,
-                                "editor": editorTextarea.getData(),
-                            },
-                            success: function (e) {
-                                if (e.trim() === "bos") {
-                                    Swal.fire({
-                                        title: 'Hata!',
-                                        text: 'Boş alan bırakmayınız!',
-                                        icon: 'error',
-                                        timer: 1500,
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#3085d6'
-                                    });
-                                } else if (e.trim() === "title") {
-                                    Swal.fire({
-                                        title: 'Hata!',
-                                        text: 'Bu başlık kullanılıyor!',
-                                        icon: 'error',
-                                        timer: 1500,
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#3085d6'
-                                    });
-                                } else if (e.trim() === "special") {
-                                    Swal.fire({
-                                        title: 'Hata!',
-                                        text: 'Oluşturmak istediğiniz URL kullanılıyor!',
-                                        icon: 'error',
-                                        timer: 1500,
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#3085d6'
-                                    });
-                                } else if (e.trim() === "auto") {
-                                    Swal.fire({
-                                        title: 'Hata!',
-                                        text: 'Oluşturmak istediğiniz otomatik URL kullanılıyor!',
-                                        icon: 'error',
-                                        timer: 1500,
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#3085d6'
-                                    }).then((result) => {
-                                        $(".tag:checked").prop('checked', false);
-                                        $(".category:checked").prop('checked', false);
-                                    });
-                                } else if (e.trim() === "ok") {
-                                    Swal.fire({
-                                        title: 'Başarılı!',
-                                        text: 'İçerik eklenmiştir!',
-                                        icon: 'success',
-                                        timer: 1500,
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#3085d6'
-                                    }).then((result) => {
-                                        window.location.reload();
-                                    });
-                                }
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    }
+                    }).catch((error) => {
+                        console.error("Translation error:", error);
+                    });
+                }
+            });
+        }
+    });
 }
 
 

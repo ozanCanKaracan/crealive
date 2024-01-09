@@ -58,13 +58,12 @@ function access($href)
 
 }
 function languageAcces(){
-    $slug=$_GET["slug"];
-    $role_id=$_SESSION["role_id"];
-    $id=DB::getVar("SELECT id FROM contents WHERE url=?",[$slug]);
-    $content=DB::getVar("SELECT content_language FROM contents WHERE id=?",[$id]);
-    $languageName = DB::getVar("SELECT lang_name_short FROM languages WHERE id=?", [$content]);
-    $access = DB::getVar("SELECT $languageName FROM roles WHERE id=?", [$role_id]);
 
+    $slug=$_GET["slug"];
+    $user_id=$_SESSION["user"];
+    $content_id=DB::getVar("SELECT id FROM contents WHERE url=?",[$slug]);
+    $language_id=DB::getVar("SELECT content_language FROM contents WHERE id=?",[$content_id]);
+    $access = DB::getVar("SELECT status FROM language_permission WHERE user_id=? AND language_id=?", [$user_id,$language_id]);
     return $access ? true : false;
 }
 function language($text){

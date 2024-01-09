@@ -82,13 +82,20 @@ if (!$_GET) {
             }
         case 'content' :
             $access = access($_GET["target"]);
-            if ($access) {
-                include('views/content/content.php');
-                break;
-            } else {
+            $languageAccess = languageAcces();
+            if($languageAccess){
+                if ($access) {
+                    include('views/content/content.php');
+                    break;
+                } else {
+                    include('views/404/404.php');
+                    break;
+                }
+            }else{
                 include('views/404/404.php');
                 break;
             }
+
         case 'recommended' :
             $access = access($_GET["target"]);
             if ($access) {
@@ -102,6 +109,15 @@ if (!$_GET) {
             $access = access($_GET["target"]);
             if ($access) {
                 include('views/stats/conversion_rates.php');
+                break;
+            } else {
+                include('views/404/404.php');
+                break;
+            }
+        case 'language' :
+            $access = access($_GET["target"]);
+            if ($access) {
+                include('views/langManagement/language.php');
                 break;
             } else {
                 include('views/404/404.php');

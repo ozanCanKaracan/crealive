@@ -12,6 +12,7 @@ if ($controlAdd) {
                 <div class="card-header d-flex justify-content-center">
                     <?php
                     $lang=$_SESSION["lang"];
+
                     $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
                     $text="Yeni İçerik";
                     $translate=(language($text)) ? language($text) : $text;
@@ -66,7 +67,7 @@ if ($controlAdd) {
                                     <input type="text" class="form-control" id="url" name="url">
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <?php
                                 $text="Otomatik URL";
                                 $translate=(language($text)) ? language($text) : $text;
@@ -94,6 +95,23 @@ if ($controlAdd) {
                                         </label>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-6">
+                                <p><b>İçeriğin başka bir dile çevirisini eklemek ister misiniz?</b></p>
+
+                                <label for="titleContent" class="form-label-lg"><b>Diller</b></label>
+                                <select class="form-select" id="translateSelect" name="translateSelect">
+                                    <option value="">Dil Seçiniz</option>
+                                    <?php
+                                    $languages=DB::get("SELECT * FROM languages ORDER BY id ASC");
+                                    var_dump($lang);
+
+                                    foreach ($languages as $lg) {
+                                        $disabled=($lg->id == $language) ? 'disabled' : '';
+                                        ?>
+                                    <option value="<?= $lg->lang_name_short ?>" <?= $disabled ?>><?=$lg->lang_name?></option>
+                                    <?php }?>
+                                </select>
                             </div>
                                 <div class="col-md-12">
                                     <div id="editor1" style="display:none"></div>

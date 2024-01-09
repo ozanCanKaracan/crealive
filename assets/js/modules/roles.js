@@ -21,11 +21,6 @@ function getRoleTable(langID) {
                 {data: 'role_name'},
                 {data: 'users'},
                 {data: 'pages'},
-                {data: 'TR'},
-                {data: 'ENG'},
-                {data: 'GER'},
-                {data: 'FR'},
-
             ],
         });
     } else {
@@ -48,11 +43,6 @@ function getRoleTable(langID) {
                 {data: 'role_name'},
                 {data: 'users'},
                 {data: 'pages'},
-                {data: 'TR'},
-                {data: 'ENG'},
-                {data: 'GER'},
-                {data: 'FR'},
-
             ],
             "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
         });

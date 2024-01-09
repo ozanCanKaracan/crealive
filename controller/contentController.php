@@ -7,7 +7,11 @@ if (isset($_POST["addContent"])) {
     $specialURL = isset($_POST["specialURL"]) ? $_POST["specialURL"] : null;
     $checkedTag = isset($_POST["urlTag"]) ? $_POST["urlTag"] : null;
     $checkedCategory = isset($_POST["urlCat"]) ? $_POST["urlCat"] : null;
-    $tag = $_POST["tag"];
+    $tag = isset($_POST["tag"]) ? $_POST["tag"] : null;
+    $translatedText = isset($_POST["translatedText"]) ? $_POST["translatedText"] : null;
+    $translatedTitle = isset($_POST["translatedTitle"]) ? $_POST["translatedTitle"] : null;
+    $translateLanguage = isset($_POST["translateLanguage"]) ? $_POST["translateLanguage"] : null;
+    var_dump($translatedTitle);
     $lang = $_SESSION["lang"];
     $category = C($_POST["category"]);
     $title = C($_POST["title"]);
@@ -16,6 +20,7 @@ if (isset($_POST["addContent"])) {
     $special = $content->createUrl($specialURL);
     $autoUrl = $content->checkedFunction($checkedTag, $checkedCategory, $category, $tag);
     $url = $content->createUrl($title);
+    $user_id=$_SESSION["user"];
     $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
     $controlTitle = DB::get("SELECT * FROM contents WHERE content_title=?", [$title]);
     if (!$language || !$category || !$title || !$editor) {
@@ -25,18 +30,20 @@ if (isset($_POST["addContent"])) {
     } else {
         if ($special) {
             $controlSpecial = DB::get("SELECT * FROM contents WHERE url=?", [$special]);
-
             if ($controlSpecial) {
                 echo "special";
             } else {
                 $add = DB::insert("INSERT INTO contents (content_title, content_category, content_language, content_text, url) VALUES (?,?,?,?,?)", [$title, $category, $language, $editor, $special]);
+                $lastID=DB::lastInsertID($add);
+                if($translatedText){
+                    $translateLangID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$translateLanguage]);
+                    $add= DB::insert("INSERT INTO translated_contents (user_id,content_id,language_id,title,text) VALUES (?,?,?,?,?)",[$user_id,$lastID,$translateLangID,$translatedTitle,$translatedText]);
+               }
                 echo "ok";
                 exit;
             }
-
         } else if ($autoUrl) {
             $controlAuto = DB::get("SELECT * FROM contents WHERE url=?", [$autoUrl]);
-
             if ($controlAuto) {
                 echo "auto";
             } else {
@@ -44,12 +51,10 @@ if (isset($_POST["addContent"])) {
                 echo "ok";
                 exit();
             }
-
         } else {
             $add = $content->addContent($language, $category, $title, $editorContent, $url);
             echo "ok";
             exit();
-
         }
     }
 }
@@ -225,7 +230,7 @@ if (isset($_POST["tagSelect"])) {
 if (isset($_POST["pageVisit"])) {
     $id = C($_POST["id"]);
     $user_id = $_SESSION["user"];
-    $cookieName = "visited_pages_user".$user_id;
+    $cookieName = "visited_pages_user" . $user_id;
 
     // Eğer daha önce bir cookie varsa, değerini al, yoksa boş bir dizi oluştur
     $visitedPages = isset($_COOKIE[$cookieName]) ? json_decode($_COOKIE[$cookieName], true) : array();
@@ -249,17 +254,17 @@ if (isset($_POST["pageVisit"])) {
 
 if (isset($_POST["question"])) {
     $question_2 = isset($_POST["number"]) ? $_POST["number"] : null;
-    $id=$_POST["id"];
-    $user_id=$_SESSION["user"];
-    $control=DB::get("SELECT * FROM content_likes WHERE user_id=? AND content_id=?",[$user_id,$id]);
+    $id = $_POST["id"];
+    $user_id = $_SESSION["user"];
+    $control = DB::get("SELECT * FROM content_likes WHERE user_id=? AND content_id=?", [$user_id, $id]);
     if ($question_2 == 1) {
         $response = '<h3>Teşekkürler</h3>';
-            $insert=DB::insert("INSERT INTO content_likes (user_id,content_id,content_like) VALUES (?,?,?)",[$user_id,$id,1]);
-    }else if($question_2 == 2){
+        $insert = DB::insert("INSERT INTO content_likes (user_id,content_id,content_like) VALUES (?,?,?)", [$user_id, $id, 1]);
+    } else if ($question_2 == 2) {
         $response = '<h3>Teşekkürler</h3>';
-        $insert=DB::insert("INSERT INTO content_likes (user_id,content_id,content_dislike) VALUES (?,?,?)",[$user_id,$id,1]);
+        $insert = DB::insert("INSERT INTO content_likes (user_id,content_id,content_dislike) VALUES (?,?,?)", [$user_id, $id, 1]);
 
-    }else if($control){
+    } else if ($control) {
         $response = '<h3>Teşekkürler</h3>';
     } else if ($question_2 === null) {
         $response = '
@@ -271,7 +276,6 @@ if (isset($_POST["question"])) {
     echo $response;
     exit;
 }
-
 
 
 ?>
