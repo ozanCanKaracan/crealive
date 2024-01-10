@@ -41,8 +41,11 @@ if (isset($_POST["statsTable"])) {
 
     foreach ($data as $d) {
         $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
-        $likeCount = DB::getVar("SELECT COUNT(*) FROM content_likes WHERE content_id=? AND content_like = '1'", [$d->id]);
-        $dislikeCount = DB::getVar("SELECT COUNT(*) FROM content_likes WHERE content_id=? AND content_dislike = '1'", [$d->id]);
+
+        $result = DB::getVar("SELECT COUNT(CASE WHEN content_like = '1' THEN 1 END) AS likeCount, COUNT(CASE WHEN content_dislike = '1' THEN 1 END) AS dislikeCount FROM content_likes WHERE content_id = ?", [$d->id]);
+        $likeCount = $result;
+        $dislikeCount = $result;
+
         $stat = DB::getVar("SELECT view_count FROM stats WHERE content_id=?", [$d->id]);
         $totalVotes = $likeCount + $dislikeCount;
         $conversionRate = ($stat > 0 && $totalVotes > 0) ? ($totalVotes / $stat) * 100 : 0;

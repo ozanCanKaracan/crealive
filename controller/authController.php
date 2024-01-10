@@ -12,29 +12,26 @@ if (isset($_POST["register"])) {
     $pass = C($_POST["pass"]);
     $passConfirmation = C($_POST["pass2"]);
     $encryptedPass = md5(sha1(md5($pass)));
-
-    if (empty($name) || empty($phone) || empty($email) || empty($emailConfirmation) || empty($lang) || empty($pass) || empty($passConfirmation)) {
+    $controlEmail = $auth->controlEmail($email);
+    $controlPhone = $auth->controlPhone($phone);
+    if ($controlEmail) {
+        echo "email";
+    } elseif ($controlPhone) {
+        echo "phone";
+    }
+    elseif (empty($name) || empty($phone) || empty($email) || empty($emailConfirmation) || empty($lang) || empty($pass) || empty($passConfirmation)) {
         echo "bos";
-    } elseif (strlen($pass) < 3) {
-        echo "pass";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    }  elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "mail";
     } elseif ($email !== $emailConfirmation) {
         echo "mail2";
+    }elseif (strlen($pass) < 3) {
+        echo "pass";
     } elseif ($pass !== $passConfirmation) {
         echo "pass";
     } else {
-        $controlEmail = $auth->controlEmail($email);
-        $controlPhone = $auth->controlPhone($phone);
-
-        if ($controlEmail) {
-            echo "email";
-        } elseif ($controlPhone) {
-            echo "phone";
-        } else {
-            $add = $auth->addUser($name, $lang, $phone, $email, $encryptedPass);
-            echo "ok";
-        }
+        $add = $auth->addUser($name, $lang, $phone, $email, $encryptedPass);
+        echo "ok";
     }
 }
 

@@ -34,7 +34,6 @@ if (isset($_POST["getCategorySelectBox"])) {
     ';
     echo $response;
 }
-
 if (isset($_POST["categoryAdd"])) {
     $categoryName = C($_POST["categoryName"]);
 
@@ -49,7 +48,6 @@ if (isset($_POST["categoryAdd"])) {
         exit();
     }
 }
-
 if (isset($_POST["deleteCategory"])) {
     $categoryID = C($_POST["id"]);
     $control = $content->controlContent($categoryID);

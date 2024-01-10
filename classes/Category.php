@@ -16,7 +16,7 @@ class Category
 
     function getCategory()
     {
-        return DB::get("SELECT * FROM category");
+        return DB::get("SELECT id,category_name FROM category");
     }
 
     function addCategory($categoryName)

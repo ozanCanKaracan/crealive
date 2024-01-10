@@ -12,10 +12,10 @@ class User{
         return DB::getRow("SELECT id,role_id FROM {$this->table} WHERE mail =? AND password=?",[$email,$encryptedPass]);
     }
     function controlEmail($email){
-        return DB:: get("SELECT * FROM {$this->table} WHERE mail=?",[$email]);
+        return DB:: getVar("SELECT mail FROM {$this->table} WHERE mail=?",[$email]);
     }
     function controlPhone($phone){
-        return DB:: get("SELECT * FROM {$this->table} WHERE phone=?",[$phone]);
+        return DB:: getVar("SELECT phone FROM {$this->table} WHERE phone=?",[$phone]);
     }
     function addUser($name,$language,$phone,$email,$encryptedPass){
         return DB::exec("INSERT INTO users (name,language_id,phone,mail,password) VALUES (?,?,?,?,?)",[$name,$language,$phone,$email,$encryptedPass]);

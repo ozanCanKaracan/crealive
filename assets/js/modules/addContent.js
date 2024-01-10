@@ -24,44 +24,70 @@ ClassicEditor
 function addContent(id) {
     var selectedCategory = $(".category:checked").val();
     var selectedTag = $(".tag:checked").val();
+    const language = $("#translateSelect").val();
 
     $.validator.addMethod("ck_editor", function () {
         var content_length = editorTextarea.getData().trim().length;
         return content_length > 0;
     }, "Please add page content.");
 
-    function translatedText() {
-        return new Promise((resolve, reject) => {
-            const originalText = editorTextarea.getData();
-            const title = $("#titleContent").val();
-            const language = $("#translateSelect").val();
-            const endpoint = "https://translation.googleapis.com/language/translate/v2";
-            const apiKey = "AIzaSyBdH8gjaAKplDXc_rxfTAHI9wCjxTO_U70";
+    let data;
 
-            const targetLanguage = language;
+    if (language) {
+        function translatedText() {
+            return new Promise((resolve, reject) => {
+                const originalText = editorTextarea.getData();
+                const title = $("#titleContent").val();
+                const endpoint = "https://translation.googleapis.com/language/translate/v2";
+                const apiKey = "AIzaSyBdH8gjaAKplDXc_rxfTAHI9wCjxTO_U70";
+                const targetLanguage = language;
 
-            const requestBody = {
-                q: [originalText, title],
-                target: targetLanguage
-            };
+                const requestBody = {
+                    q: [originalText, title],
+                    target: targetLanguage
+                };
 
-            fetch(`${endpoint}?key=${apiKey}`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(requestBody)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    const translatedText = data.data.translations[0].translatedText;
-                    const translatedTitle = data.data.translations[1].translatedText;
-                    resolve({ translatedText, translatedTitle });
+                fetch(`${endpoint}?key=${apiKey}`, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
                 })
-                .catch(error => reject(error));
-        });
-    }
+                    .then(response => response.json())
+                    .then(data => {
+                        const translatedText = data.data.translations[0].translatedText;
+                        const translatedTitle = data.data.translations[1].translatedText;
+                        resolve({translatedText, translatedTitle});
+                    })
+                    .catch(error => reject(error));
+            });
+        }
 
+        data = {
+            "addContent": 1,
+            "translateLanguage": $("#translateSelect").val(),
+            "tag": $("#tag").val(),
+            "specialURL": $("#url").val(),
+            "category": $("#categorySelect").val(),
+            "title": $("#titleContent").val(),
+            "urlCat": selectedCategory,
+            "urlTag": selectedTag,
+            "editor": editorTextarea.getData(),
+        };
+    } else {
+        data = {
+            "addContent": 1,
+            "translateLanguage": $("#translateSelect").val(),
+            "tag": $("#tag").val(),
+            "specialURL": $("#url").val(),
+            "category": $("#categorySelect").val(),
+            "title": $("#titleContent").val(),
+            "urlCat": selectedCategory,
+            "urlTag": selectedTag,
+            "editor": editorTextarea.getData(),
+        };
+    }
 
     $("#newContentForm").validate({
         ignore: [],
@@ -78,7 +104,6 @@ function addContent(id) {
             content: {
                 ck_editor: true
             },
-
         },
         errorPlacement: function (error, element) {
             error.addClass("invalid-feedback");
@@ -112,24 +137,86 @@ function addContent(id) {
                 }
             }).then((result) => {
                 if (result.isConfirmed) {
-                    translatedText().then(({ translatedText, translatedTitle }) => {
+                    if (language) {
+                        translatedText().then(({translatedText, translatedTitle}) => {
+                            data.translatedText = translatedText;
+                            data.translatedTitle = translatedTitle;
 
+                            $.ajax({
+                                data: data,
+                                type: "POST",
+                                url: "controller/contentController.php",
+                                success: function (e) {
+                                    if (e.trim() === "bos") {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: 'Do not leave empty space!',
+                                            icon: 'error',
+                                            timer: 1500,
+                                            showConfirmButton: true,
+                                            confirmButtonColor: '#3085d6'
+                                        });
+                                    } else if (e.trim() === "title") {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: 'This title is used!',
+                                            icon: 'error',
+                                            timer: 1500,
+                                            showConfirmButton: true,
+                                            confirmButtonColor: '#3085d6'
+                                        });
+                                    } else if (e.trim() === "auto") {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: 'This url is used!',
+                                            icon: 'error',
+                                            timer: 1500,
+                                            showConfirmButton: true,
+                                            confirmButtonColor: '#3085d6'
+                                        });
+                                    } else if (e.trim() === "special") {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: 'The URL you want to create is already in use!',
+                                            icon: 'error',
+                                            timer: 1500,
+                                            showConfirmButton: true,
+                                            confirmButtonColor: '#3085d6'
+                                        });
+                                    } else if (e.trim() === "auto") {
+                                        Swal.fire({
+                                            title: 'Error!',
+                                            text: 'The automatic URL you want to create is already in use!',
+                                            icon: 'error',
+                                            timer: 1500,
+                                            showConfirmButton: true,
+                                            confirmButtonColor: '#3085d6'
+                                        }).then((result) => {
+                                            $(".tag:checked").prop('checked', false);
+                                            $(".category:checked").prop('checked', false);
+                                        });
+                                    } else if (e.trim() === "ok") {
+                                        Swal.fire({
+                                            title: 'Success!',
+                                            text: 'Content added successfully!',
+                                            icon: 'success',
+                                            timer: 1500,
+                                            showConfirmButton: true,
+                                            confirmButtonColor: '#3085d6'
+                                        }).then((result) => {
+                                            window.location.reload();
+                                        });
+                                    }
+                                }
+                            });
+                        }).catch((error) => {
+                            console.error("Translation error:", error);
+                        });
+                    } else {
                         $.ajax({
+                            data: data,
                             type: "POST",
                             url: "controller/contentController.php",
-                            data: {
-                                "addContent": 1,
-                                "translateLanguage":$("#translateSelect").val(),
-                                "tag": $("#tag").val(),
-                                "specialURL": $("#url").val(),
-                                "category": $("#categorySelect").val(),
-                                "title": $("#titleContent").val(),
-                                "urlCat": selectedCategory,
-                                "urlTag": selectedTag,
-                                "editor": editorTextarea.getData(),
-                                "translatedText": translatedText,
-                                "translatedTitle":translatedTitle,
-                            },
                             success: function (e) {
                                 if (e.trim() === "bos") {
                                     Swal.fire({
@@ -144,6 +231,15 @@ function addContent(id) {
                                     Swal.fire({
                                         title: 'Error!',
                                         text: 'This title is used!',
+                                        icon: 'error',
+                                        timer: 1500,
+                                        showConfirmButton: true,
+                                        confirmButtonColor: '#3085d6'
+                                    });
+                                } else if (e.trim() === "auto") {
+                                    Swal.fire({
+                                        title: 'Error!',
+                                        text: 'This url is used!',
                                         icon: 'error',
                                         timer: 1500,
                                         showConfirmButton: true,
@@ -184,15 +280,12 @@ function addContent(id) {
                                 }
                             }
                         });
-                    }).catch((error) => {
-                        console.error("Translation error:", error);
-                    });
+                    }
                 }
             });
         }
     });
 }
-
 
 function editContent(id, lang) {
     $.validator.addMethod("ck_editor", function () {

@@ -4,21 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/views/langManagement/language.php" afterDir="false" />
+    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Yeni dil ekleme sayfası oluşturuldu,&#10;Dil izinleri kullanıcı bazlı hale getirildi,&#10;Dil eklendikten sonraki hali dinamik hale getirildi,&#10;Api entegrasyonu yapıldı,&#10;İçeriğin istenilen dilde çevirisi eklenebiliyor.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/modules/addContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/addContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/roles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/Content.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Content.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/authController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/authController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/categoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/categoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/contentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/roleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/roleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get.php" beforeDir="false" afterPath="$PROJECT_DIR$/get.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/function.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/function.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/content/newContent.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/newContent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/roles/roles.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/roles/roles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/roles/userlistRole.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/roles/userlistRole.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/langManagement/language.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/langManagement/language.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +103,9 @@
       <workItem from="1704437092298" duration="12169000" />
       <workItem from="1704456098867" duration="59000" />
       <workItem from="1704701019222" duration="19044000" />
-      <workItem from="1704784603078" duration="19834000" />
+      <workItem from="1704784603078" duration="20709000" />
+      <workItem from="1704828280757" duration="1291000" />
+      <workItem from="1704871684717" duration="18997000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -188,7 +187,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704727568007</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Yeni dil ekleme sayfası oluşturuldu,&#10;Dil izinleri kullanıcı bazlı hale getirildi,&#10;Dil eklendikten sonraki hali dinamik hale getirildi,&#10;Api entegrasyonu yapıldı,&#10;İçeriğin istenilen dilde çevirisi eklenebiliyor.">
+      <option name="closed" value="true" />
+      <created>1704812583651</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1704812583651</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +203,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
+    <MESSAGE value="Yeni dil ekleme sayfası oluşturuldu,&#10;Dil izinleri kullanıcı bazlı hale getirildi,&#10;Dil eklendikten sonraki hali dinamik hale getirildi,&#10;Api entegrasyonu yapıldı,&#10;İçeriğin istenilen dilde çevirisi eklenebiliyor." />
+    <option name="LAST_COMMIT_MESSAGE" value="Yeni dil ekleme sayfası oluşturuldu,&#10;Dil izinleri kullanıcı bazlı hale getirildi,&#10;Dil eklendikten sonraki hali dinamik hale getirildi,&#10;Api entegrasyonu yapıldı,&#10;İçeriğin istenilen dilde çevirisi eklenebiliyor." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

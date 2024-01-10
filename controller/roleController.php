@@ -76,8 +76,6 @@ if (isset($_POST["getUserTable"])) {
     echo json_encode(["recordsTotal" => count($data), "recordsFiltered" => count($data), "data" => $response]);
     exit();
 }
-
-
 if (isset($_POST["getSelectBox"])) {
     $text_1 = "Rol Seçiniz";
     $language_1 = (language($text_1)) ? language($text_1) : $text_1;
@@ -130,7 +128,8 @@ if (isset($_POST["langCheckBox"])) {
     $notCheckedID = isset($_POST["notCheckedID"]) ? $_POST["notCheckedID"] : [];
     if ($checkedID) {
         foreach ($checkedID as $checked) {
-            $control = DB::get("SELECT * FROM language_permission WHERE user_id=? AND language_id=?", [$userID, $checked]);
+
+            $control = DB::getVar("SELECT 1 FROM language_permission WHERE user_id=? AND language_id=?", [$userID, $checked]);
             if ($control) {
                 $update = DB::exec("UPDATE language_permission SET status = 1 WHERE user_id=? AND language_id=?", [$userID, $checked]);
                 echo "update işlemi";
