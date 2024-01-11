@@ -76,7 +76,7 @@ if (isset($_POST["selectLanguage"])) {
     }
     $fullName = DB::getVar("SELECT lang_name FROM languages WHERE lang_name_short=?", [$selectedLanguage]);
     $translate = (language($fullName)) ? language($fullName) : $fullName;
-    $allLanguages = DB::get("SELECT * FROM languages ORDER BY id ASC");
+    $allLanguages = DB::get("SELECT * FROM languages WHERE status = 1 ORDER BY id ASC");
     $response = '';
 
     foreach ($allLanguages as $language) {
@@ -110,7 +110,7 @@ if (isset($_POST["sidebarAjax"])) {
             <span data-i18n="Apps &amp; Pages">';
     $text = 'Sayfalar';
     $translate = (language($text)) ? language($text) : $text;
-    $response .= ' ' . $translate . '</span></a></span><i data-feather="more-horizontal"></i>
+    $response .= ' ' . $translate . '</a></span><i data-feather="more-horizontal"></i>
         </li>';
 
     $getTitle = DB::get("SELECT * FROM pages WHERE parent_id = 0");

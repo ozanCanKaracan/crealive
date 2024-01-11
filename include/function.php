@@ -74,6 +74,40 @@ function language($text){
 
     return $translated_text;
 }
+function translateText($text, $targetLanguage, $apiKey, $originalTextID, $languageID) {
+    $endpoint = 'https://translation.googleapis.com/language/translate/v2';
+
+    $queryParams = [
+        'key' => $apiKey,
+        'q' => $text,
+        'target' => $targetLanguage,
+    ];
+
+    $url = $endpoint . '?' . http_build_query($queryParams);
+
+    $response = file_get_contents($url);
+
+    $data = json_decode($response, true);
+
+    if ($data && isset($data['data']['translations'][0]['translatedText'])) {
+        $translatedText = $data['data']['translations'][0]['translatedText'];
+
+        // İşlem başarılı, ancak çeviri hakkında bir sorun olabilir
+        if (isset($data['data']['translations'][0]['detectedSourceLanguage'])) {
+            $detectedSourceLanguage = $data['data']['translations'][0]['detectedSourceLanguage'];
+          // Log kaydı ekleme için
+        }
+
+        $insertQuery = DB::insert("INSERT INTO translations (text_id, translated_text, language_id) VALUES (?, ?, ?)",[$originalTextID,$translatedText,$languageID]);
+
+        return "Çeviri Başarılı";
+    } else {
+        $errorDetails = isset($data['error']['message']) ? $data['error']['message'] : 'Çeviri Hatası';
+        return 'Translation Error: ' . $errorDetails;
+    }
+}
+
+
 ?>
 
 

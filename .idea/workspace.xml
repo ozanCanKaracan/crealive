@@ -4,18 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Yeni dil ekleme sayfası oluşturuldu,&#10;Dil izinleri kullanıcı bazlı hale getirildi,&#10;Dil eklendikten sonraki hali dinamik hale getirildi,&#10;Api entegrasyonu yapıldı,&#10;İçeriğin istenilen dilde çevirisi eklenebiliyor.">
+    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Content.php'deki checkedFunction düzenlendi.addContent'deki control sorguları düzenlendi.&#10;StatsTable'daki toplama sorgusunda count kullanılıp tek sorguya çevrilmiştir.&#10;contentController.php'deki isset bulunan değişkenler ve sorgular düzenlendi.&#10;Yeni dil ekleme sayfası içeriği düzenlendi.">
+      <change afterPath="$PROJECT_DIR$/assets/js/modules/language.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/classes/Language.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/languageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/modules/addContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/addContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/Content.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Content.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/roles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/authController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/authController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/categoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/categoryController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/contentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/roleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/roleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/function.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/function.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/langManagement/language.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/langManagement/language.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/partials/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +105,8 @@
       <workItem from="1704701019222" duration="19044000" />
       <workItem from="1704784603078" duration="20709000" />
       <workItem from="1704828280757" duration="1291000" />
-      <workItem from="1704871684717" duration="18997000" />
+      <workItem from="1704871684717" duration="20189000" />
+      <workItem from="1704959761431" duration="15092000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -195,7 +196,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704812583651</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Content.php'deki checkedFunction düzenlendi.addContent'deki control sorguları düzenlendi.&#10;StatsTable'daki toplama sorgusunda count kullanılıp tek sorguya çevrilmiştir.&#10;contentController.php'deki isset bulunan değişkenler ve sorgular düzenlendi.&#10;Yeni dil ekleme sayfası içeriği düzenlendi.">
+      <option name="closed" value="true" />
+      <created>1704898909229</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1704898909230</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,7 +213,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="commit" />
     <MESSAGE value="Yeni dil ekleme sayfası oluşturuldu,&#10;Dil izinleri kullanıcı bazlı hale getirildi,&#10;Dil eklendikten sonraki hali dinamik hale getirildi,&#10;Api entegrasyonu yapıldı,&#10;İçeriğin istenilen dilde çevirisi eklenebiliyor." />
-    <option name="LAST_COMMIT_MESSAGE" value="Yeni dil ekleme sayfası oluşturuldu,&#10;Dil izinleri kullanıcı bazlı hale getirildi,&#10;Dil eklendikten sonraki hali dinamik hale getirildi,&#10;Api entegrasyonu yapıldı,&#10;İçeriğin istenilen dilde çevirisi eklenebiliyor." />
+    <MESSAGE value="Content.php'deki checkedFunction düzenlendi.addContent'deki control sorguları düzenlendi.&#10;StatsTable'daki toplama sorgusunda count kullanılıp tek sorguya çevrilmiştir.&#10;contentController.php'deki isset bulunan değişkenler ve sorgular düzenlendi.&#10;Yeni dil ekleme sayfası içeriği düzenlendi." />
+    <option name="LAST_COMMIT_MESSAGE" value="Content.php'deki checkedFunction düzenlendi.addContent'deki control sorguları düzenlendi.&#10;StatsTable'daki toplama sorgusunda count kullanılıp tek sorguya çevrilmiştir.&#10;contentController.php'deki isset bulunan değişkenler ve sorgular düzenlendi.&#10;Yeni dil ekleme sayfası içeriği düzenlendi." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

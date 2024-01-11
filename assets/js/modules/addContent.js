@@ -13,7 +13,6 @@ ClassicEditor
     .then(editor => {
         editorTextarea = editor;
         editorTextarea.model.document.on('change:data', function () {
-            // Buraya düzenleme yapıldığında tetiklenecek işlemleri ekleyebilirsiniz
         });
     })
     .catch(error => {
@@ -286,7 +285,6 @@ function addContent(id) {
         }
     });
 }
-
 function editContent(id, lang) {
     $.validator.addMethod("ck_editor", function () {
         var content_length = editorTextarea.getData().trim().length;
@@ -496,7 +494,6 @@ function editContent(id, lang) {
         });
     }
 }
-
 function tagSelect(categoryId) {
     $.ajax({
         type: 'POST',

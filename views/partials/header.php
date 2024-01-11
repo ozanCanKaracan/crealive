@@ -13,11 +13,11 @@
             } else {
                 $browserLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
                 $result = substr($browserLanguage, 0, 2);
-                $selectedLanguage = DB::getVar("SELECT lang_name_short FROM languages WHERE lang_name_short=?", [$result]);
+                $selectedLanguage = DB::getVar("SELECT lang_name_short FROM languages WHERE lang_name_short=? AND status=1", [$result]);
                 $_SESSION['lang'] = $selectedLanguage;
 
             }
-            $fullName = DB::getVar("SELECT lang_name FROM languages WHERE lang_name_short=?", [$selectedLanguage]);
+            $fullName = DB::getVar("SELECT lang_name FROM languages WHERE lang_name_short=? AND status=1", [$selectedLanguage]);
             $translate=(language($fullName)) ? language($fullName) : $fullName;
             ?>
 

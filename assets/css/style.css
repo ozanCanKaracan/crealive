@@ -1,11 +1,42 @@
-/*================================================================================
-	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-	Version: 2.0
-	Author: PIXINVENT
-	Author URL: http://www.themeforest.net/user/pixinvent
-================================================================================
+#loader-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    backdrop-filter: blur(5px); /* Bulanıklık efekti ekleyin (isteğe bağlı değer) */
+    background: rgba(255, 255, 255, 0.3);
+}
 
-NOTE:
-------
-PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
-WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #10163a;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -25px;
+    transform: translate(-50%, -50%);
+    z-index: 1001;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.content {
+    filter: blur(0); /* Sayfa içeriğini bulanık yapma */
+    transition: filter 0.0s ease; /* Geçiş efekti ekleme */
+}
+
+.blurred {
+    filter: blur(5px); /* Bulanıklaştırma miktarı, ihtiyaca göre ayarlayabilirsiniz */
+}
