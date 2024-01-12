@@ -56,8 +56,7 @@ function getUserTable(id, langID,columns) {
 
 }
 
-function langCheckBox(id, langName,userID) {
-    console.log(userID)
+function langCheckBox(id, langName) {
     var checkedIDs = [];
     var notcheck = [];
 
@@ -66,12 +65,11 @@ function langCheckBox(id, langName,userID) {
         checkedIDs.push(checkedID);
 
     });
-
     $("." + langName + "Check:not(:checked)").each(function () {
         var checkedIDNot = $(this).val();
         notcheck.push(checkedIDNot);
+
     });
-    console.log(notcheck , checkedIDs)
     $.ajax({
         type: "POST",
         url: "controller/roleController.php",
@@ -80,8 +78,6 @@ function langCheckBox(id, langName,userID) {
             "checkedID": checkedIDs,
             "notCheckedID": notcheck,
             "langCheckBox": 1,
-            "langName": langName,
-            "userID":userID
         },
         success: function (e) {
         }

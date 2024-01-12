@@ -59,41 +59,7 @@ if (isset($_POST["logout"])) {
     exit();
 }
 
-if (isset($_POST["selectLanguage"])) {
-    if (@$_GET['lang']) {
-        $selectedLanguage = $_GET['lang'];
-        $_SESSION['lang'] = $selectedLanguage;
-    } elseif ($_SESSION['lang']) {
-        //url'de yoksa sessionda var ise bunu çalıştır
-        $selectedLanguage = $_SESSION['lang'];
-    } else {
-        // kullanıcı tarayıcı dili
-        $browserLanguage = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
-        $result = substr($browserLanguage, 0, 2);
-        $selectedLanguage = DB::getVar("SELECT lang_name_short FROM languages WHERE lang_name_short=?", [$result]);
-        $_SESSION['lang'] = $selectedLanguage;
 
-    }
-    $fullName = DB::getVar("SELECT lang_name FROM languages WHERE lang_name_short=?", [$selectedLanguage]);
-    $translate = (language($fullName)) ? language($fullName) : $fullName;
-    $allLanguages = DB::get("SELECT * FROM languages WHERE status = 1 ORDER BY id ASC");
-    $response = '';
-
-    foreach ($allLanguages as $language) {
-        $langName = $language->lang_name;
-        $translate = (language($langName)) ? language($langName) : $langName;
-        $languageShort = $language->lang_name_short;
-        $isActive = ($selectedLanguage == $languageShort) ? 'active' : '';
-
-        $response .= '
-    <a class="dropdown-item  ' . $isActive . '" href="?lang=' . $languageShort . ' ">
-        <i class="flag-icon flag-icon-' . $languageShort . ' " "></i> ' . $translate . '
-    </a>';
-    }
-
-    echo $response;
-    exit;
-}
 if (isset($_POST["sidebarAjax"])) {
     $response = '';
     $response .= '

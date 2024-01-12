@@ -29,7 +29,7 @@ languageTable()
 
 function addLangPackage() {
     Swal.fire({
-        title: 'Yeni dil Paketi Eklensin mi ?',
+        title: 'Yeni Dil Paketi Eklensin mi ?',
         icon: 'question',
         showCancelButton: true,
         confirmButtonColor: '#00FF00',
@@ -69,7 +69,7 @@ function addLangPackage() {
                             showConfirmButton: true,
                             confirmButtonColor: '#3085d6'
                         })
-                    }else if(e.trim()==="ok"){
+                    } else if (e.trim() === "ok") {
                         Swal.fire({
                             title: 'Başarılı!',
                             text: 'Dil başarıyla eklendi!',
@@ -78,6 +78,7 @@ function addLangPackage() {
                             showConfirmButton: true,
                             confirmButtonColor: '#3085d6'
                         })
+                        table.ajax.reload();
                     }
                 },
                 complete: function () {
@@ -113,6 +114,67 @@ function loadData() {
 $(document).ready(function () {
     loadData();
 });
+
+function removeLanguage(id) {
+    Swal.fire({
+        title: 'Dil Paketi Kaldırılsın mı ?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#00FF00',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Evet',
+        cancelButtonText: 'İptal',
+        showClass: {
+            popup: 'swal2-show',
+            backdrop: 'swal2-backdrop-show',
+            icon: 'swal2-icon-show'
+        },
+        hideClass: {
+            popup: 'swal2-hide',
+            backdrop: 'swal2-backdrop-hide',
+            icon: 'swal2-icon-hide'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type:"POST",
+                data:{
+                    "id":id,
+                    "removeLanguage":1,
+                },
+                url:"controller/languageController.php",
+                beforeSend: function () {
+                    showLoader();
+                },
+                success:function (e){
+                    if(e.trim()==="ok"){
+                        Swal.fire({
+                            title: 'Başarılı!',
+                            text: 'Dil başarıyla kaldırıldı!',
+                            icon: 'success',
+                            timer: 1500,
+                            showConfirmButton: true,
+                            confirmButtonColor: '#3085d6'
+                        })
+                        table.ajax.reload();
+                    }else if(e.trim()==="error"){
+                        Swal.fire({
+                            title: 'Hata!',
+                            text: 'Seçili Olan Dil Kaldırılamaz!',
+                            icon: 'error',
+                            timer: 1500,
+                            showConfirmButton: true,
+                            confirmButtonColor: '#3085d6'
+                        })
+                    }
+                },
+                complete: function () {
+                    hideLoader();
+                }
+            });
+        }
+    });
+}
 
 /*function translateText() {
     const originalText = document.getElementById("originalText").innerText;

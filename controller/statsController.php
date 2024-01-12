@@ -42,7 +42,7 @@ if (isset($_POST["statsTable"])) {
     foreach ($data as $d) {
         $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
 
-        $result = DB::getVar("SELECT COUNT(CASE WHEN content_like = '1' THEN 1 END) AS likeCount, COUNT(CASE WHEN content_dislike = '1' THEN 1 END) AS dislikeCount FROM content_likes WHERE content_id = ?", [$d->id]);
+        $result = DB::getVar("SELECT COUNT(CASE WHEN status = '1' THEN 1 END) AS likeCount, COUNT(CASE WHEN status = '0' THEN 1 END) AS dislikeCount FROM content_likes WHERE content_id = ?", [$d->id]);
         $likeCount = $result;
         $dislikeCount = $result;
 

@@ -13,7 +13,7 @@ const MYSQL_PASS = '';
 const site_url = "http://localhost/cms/";
 
 
-
+require_once __DIR__ . "/../classes/Language.php";
 require_once __DIR__ ."/../classes/User.php";
 require_once __DIR__ . "/../classes/Roles.php";
 require_once __DIR__ ."/../classes/Permission.php";

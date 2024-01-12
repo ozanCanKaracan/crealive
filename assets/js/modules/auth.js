@@ -361,7 +361,7 @@ function selectLanguage() {
         data: {
             'selectLanguage': 1,
         },
-        url: "controller/authController.php",
+        url: "controller/languageController.php",
         success: function (e) {
             $('#selectLanguage').empty();
             $('#selectLanguage').append(e);

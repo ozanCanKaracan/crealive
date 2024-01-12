@@ -26,10 +26,7 @@ if (isset($_POST["getRoleTable"])) {
     $response = [];
     if (count($data) > 0) {
         foreach ($data as $d) {
-            $checkedTR = ($d->tr == 1) ? 'checked' : '';
-            $checkedENG = ($d->us == 1) ? 'checked' : '';
-            $checkedGER = ($d->de == 1) ? 'checked' : '';
-            $checkedFR = ($d->fr == 1) ? 'checked' : '';
+
             $text_1 = "Kişi Listesi";
             $language_1 = (language($text_1)) ? language($text_1) : $text_1;
             $text_2 = "Sayfa izinleri";
@@ -63,10 +60,11 @@ if (isset($_POST["getUserTable"])) {
             ];
 
             foreach ($languages as $lg) {
+
                 $checkedControl=DB::getVar("SELECT status FROM language_permission WHERE user_id=? AND language_id=?",[$d->id , $lg->id]);
                 $checked= ($checkedControl == 1) ? 'checked' : '';
                 $userData[$lg->lang_name_short] = '<input type="checkbox" class="custom-control-input ' . $lg->lang_name_short . 'Check" 
-                id="' . $lg->lang_name_short . 'CheckBox" value="' . $lg->id . '" onclick="langCheckBox(' . $lg->id . ',\'' . $lg->lang_name_short . '\',' . $d->id . ')" '.$checked.'>';
+                id="' . $lg->lang_name_short . 'CheckBox" value="' . $d->id . '" onclick="langCheckBox(' . $lg->id . ', \'' . addslashes($lg->lang_name_short) . '\')" '.$checked.'>';
             }
 
             $response[] = $userData;
@@ -81,12 +79,14 @@ if (isset($_POST["getSelectBox"])) {
     $language_1 = (language($text_1)) ? language($text_1) : $text_1;
     $text_2 = "Kaldır";
     $language_2 = (language($text_2)) ? language($text_2) : $text_2;
+    $text_2 = "Rolleri Listele";
+    $language_3 = (language($text_2)) ? language($text_2) : $text_2;
     $lang = $_SESSION["lang"];
     $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
 
     $response = '
         <form id="deleteRoleForm">
-            <label class="form-label-lg mb-1">Rolleri Listele</label>
+            <label class="form-label-lg mb-1">'.$language_3.'</label>
             <select class="select2 form-control form-control select2-hidden-accessible" data-select2-id="1" aria-hidden="true" id="roleSelect" name="roleSelect">
                 <option value="" data-select2-id="3" selected> ' . $language_1 . ' </option>
     ';
@@ -122,25 +122,23 @@ if (isset($_POST["deleteRole"])) {
 }
 if (isset($_POST["langCheckBox"])) {
     $id = $_POST["id"];
-    $userID = $_POST["userID"];
-    $langName = $_POST["langName"];
-    $checkedID = isset($_POST["checkedID"]) ? $_POST["checkedID"] : [];
-    $notCheckedID = isset($_POST["notCheckedID"]) ? $_POST["notCheckedID"] : [];
+    $checkedID = isset($_POST["checkedID"]) ? $_POST["checkedID"] : []; // user_id var
+    $notCheckedID = isset($_POST["notCheckedID"]) ? $_POST["notCheckedID"] : [];// user_id var
+    var_dump($checkedID);
     if ($checkedID) {
         foreach ($checkedID as $checked) {
-
-            $control = DB::getVar("SELECT 1 FROM language_permission WHERE user_id=? AND language_id=?", [$userID, $checked]);
+            $control = DB::get("SELECT * FROM language_permission WHERE user_id=? AND language_id=?", [$checked, $id]);
             if ($control) {
-                $update = DB::exec("UPDATE language_permission SET status = 1 WHERE user_id=? AND language_id=?", [$userID, $checked]);
+                $update = DB::exec("UPDATE language_permission SET status = 1 WHERE user_id=? AND language_id=?", [$checked, $id]);
                 echo "update işlemi";
             } else {
-                $add = DB::insert("INSERT INTO language_permission (user_id,language_id,status) VALUES (?,?,?)", [$userID, $checked, 1]);
+                $add = DB::insert("INSERT INTO language_permission (user_id,language_id,status) VALUES (?,?,?)", [$checked, $id, 1]);
                 echo "insert işlemi";
             }
         }
     }if ($notCheckedID) {
         foreach ($notCheckedID as $notChecked) {
-            $update = DB::exec("UPDATE language_permission SET status = 0 WHERE user_id=? AND language_id=?", [$userID, $notChecked]);
+            $update = DB::exec("UPDATE language_permission SET status = 0 WHERE user_id=? AND language_id=?", [$notChecked, $id]);
             echo "update işlemi not";
         }
     }

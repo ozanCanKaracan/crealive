@@ -5,17 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Content.php'deki checkedFunction düzenlendi.addContent'deki control sorguları düzenlendi.&#10;StatsTable'daki toplama sorgusunda count kullanılıp tek sorguya çevrilmiştir.&#10;contentController.php'deki isset bulunan değişkenler ve sorgular düzenlendi.&#10;Yeni dil ekleme sayfası içeriği düzenlendi.">
-      <change afterPath="$PROJECT_DIR$/assets/js/modules/language.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/classes/Language.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/languageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/addContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/addContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/roles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/language.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/language.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/userlistRole.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/userlistRole.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/Language.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Language.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/authController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/authController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/languageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/languageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/permissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/permissionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/roleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/roleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/config.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/function.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/function.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/content/recommended.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/recommended.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/langManagement/language.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/langManagement/language.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/partials/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/roles/roles.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/roles/roles.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +112,7 @@
       <workItem from="1704828280757" duration="1291000" />
       <workItem from="1704871684717" duration="20189000" />
       <workItem from="1704959761431" duration="15092000" />
+      <workItem from="1705045820944" duration="15698000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />

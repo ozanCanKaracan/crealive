@@ -10,7 +10,6 @@ if(isset($_POST["getPermissionTable"])){
         foreach ($data as $d) {
             $control = DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=?", [$d->id, $id]);
 
-// Kontrol et
             if (isset($control[0])) {
                 $checkedAdd = ($control[0]->permission_add == 1) ? 'checked' : '';
                 $checkedDelete = ($control[0]->permission_delete == 1) ? 'checked' : '';
@@ -66,6 +65,7 @@ if (isset($_POST["addCheckBox"])) {
     if ($notCheckedID) {
         foreach ($notCheckedID as $not) {
             $update = $permission->updateAddOFF($not,$role_id);
+            echo "not";
         }
     }
 }
@@ -115,6 +115,7 @@ if (isset($_POST["editCheckBox"])) {
     if ($notCheckedID) {
         foreach ($notCheckedID as $not) {
             $update = $permission->updateEditOFF($not,$role_id);
+
         }
     }
 }
