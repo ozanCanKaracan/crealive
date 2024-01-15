@@ -97,19 +97,29 @@ if ($controlAdd) {
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <p><b>İçeriğin başka bir dile çevirisini eklemek ister misiniz?</b></p>
+                                <p><b> <?php
+                                        $text="İçeriğin başka bir dile çevirisini eklemek ister misiniz?";
+                                        $translate=(language($text)) ? language($text) : $text;
+                                        ?>
+                                       <?=$translate?></b></p>
 
                                 <label for="titleContent" class="form-label-lg"><b>Diller</b></label>
                                 <select class="form-select" id="translateSelect" name="translateSelect">
-                                    <option value="">Dil Seçiniz</option>
+                                    <option value="">
+                                        <?php
+                                        $text="Dil Seçiniz";
+                                        $translate=(language($text)) ? language($text) : $text;
+                                        ?><?=$translate?></option>
                                     <?php
                                     $languages=DB::get("SELECT * FROM languages ORDER BY id ASC");
                                     var_dump($lang);
 
                                     foreach ($languages as $lg) {
+                                        $text=$lg->lang_name;
+                                        $translate=(language($text)) ? language($text) : $text;
                                         $disabled=($lg->id == $language) ? 'disabled' : '';
                                         ?>
-                                    <option value="<?= $lg->lang_name_short ?>" <?= $disabled ?>><?=$lg->lang_name?></option>
+                                    <option value="<?= $lg->lang_name_short ?>" <?= $disabled ?>><?=$translate?></option>
                                     <?php }?>
                                 </select>
                             </div>

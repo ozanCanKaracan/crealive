@@ -4,23 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Content.php'deki checkedFunction düzenlendi.addContent'deki control sorguları düzenlendi.&#10;StatsTable'daki toplama sorgusunda count kullanılıp tek sorguya çevrilmiştir.&#10;contentController.php'deki isset bulunan değişkenler ve sorgular düzenlendi.&#10;Yeni dil ekleme sayfası içeriği düzenlendi.">
+    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Kullanıcı ingilizce dil ekleyememe API sorunu düzeltildi.&#10;Dil seçme yetkileri. Düzenlendi.&#10;Kullanıcının dil kısmında kişilere verdiği izinler tamamlandı.Artık x kullanıcısın örneğin İngilizce'de yetkisi yoksa ingilizceyi göremiyor.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/language.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/language.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/userlistRole.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/userlistRole.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/Language.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Language.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/authController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/authController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/languageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/languageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/permissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/permissionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/roleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/roleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/contentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/function.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/function.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/content/recommended.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/recommended.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/langManagement/language.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/langManagement/language.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/roles/roles.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/roles/roles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/content/content.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/content.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/content/newContent.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/newContent.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +101,8 @@
       <workItem from="1704828280757" duration="1291000" />
       <workItem from="1704871684717" duration="20189000" />
       <workItem from="1704959761431" duration="15092000" />
-      <workItem from="1705045820944" duration="15698000" />
+      <workItem from="1705045820944" duration="16049000" />
+      <workItem from="1705305217824" duration="17588000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -210,7 +200,15 @@
       <option name="project" value="LOCAL" />
       <updated>1704898909230</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Kullanıcı ingilizce dil ekleyememe API sorunu düzeltildi.&#10;Dil seçme yetkileri. Düzenlendi.&#10;Kullanıcının dil kısmında kişilere verdiği izinler tamamlandı.Artık x kullanıcısın örneğin İngilizce'de yetkisi yoksa ingilizceyi göremiyor.">
+      <option name="closed" value="true" />
+      <created>1705071514773</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1705071514773</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,7 +218,8 @@
     <MESSAGE value="commit" />
     <MESSAGE value="Yeni dil ekleme sayfası oluşturuldu,&#10;Dil izinleri kullanıcı bazlı hale getirildi,&#10;Dil eklendikten sonraki hali dinamik hale getirildi,&#10;Api entegrasyonu yapıldı,&#10;İçeriğin istenilen dilde çevirisi eklenebiliyor." />
     <MESSAGE value="Content.php'deki checkedFunction düzenlendi.addContent'deki control sorguları düzenlendi.&#10;StatsTable'daki toplama sorgusunda count kullanılıp tek sorguya çevrilmiştir.&#10;contentController.php'deki isset bulunan değişkenler ve sorgular düzenlendi.&#10;Yeni dil ekleme sayfası içeriği düzenlendi." />
-    <option name="LAST_COMMIT_MESSAGE" value="Content.php'deki checkedFunction düzenlendi.addContent'deki control sorguları düzenlendi.&#10;StatsTable'daki toplama sorgusunda count kullanılıp tek sorguya çevrilmiştir.&#10;contentController.php'deki isset bulunan değişkenler ve sorgular düzenlendi.&#10;Yeni dil ekleme sayfası içeriği düzenlendi." />
+    <MESSAGE value="Kullanıcı ingilizce dil ekleyememe API sorunu düzeltildi.&#10;Dil seçme yetkileri. Düzenlendi.&#10;Kullanıcının dil kısmında kişilere verdiği izinler tamamlandı.Artık x kullanıcısın örneğin İngilizce'de yetkisi yoksa ingilizceyi göremiyor." />
+    <option name="LAST_COMMIT_MESSAGE" value="Kullanıcı ingilizce dil ekleyememe API sorunu düzeltildi.&#10;Dil seçme yetkileri. Düzenlendi.&#10;Kullanıcının dil kısmında kişilere verdiği izinler tamamlandı.Artık x kullanıcısın örneğin İngilizce'de yetkisi yoksa ingilizceyi göremiyor." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
