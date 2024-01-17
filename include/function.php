@@ -104,8 +104,6 @@ function translateText($text, $targetLanguage, $apiKey, $originalTextID, $langua
     }
 }
 
-
-
 ?>
 
 

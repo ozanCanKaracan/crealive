@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Kullanıcı ingilizce dil ekleyememe API sorunu düzeltildi.&#10;Dil seçme yetkileri. Düzenlendi.&#10;Kullanıcının dil kısmında kişilere verdiği izinler tamamlandı.Artık x kullanıcısın örneğin İngilizce'de yetkisi yoksa ingilizceyi göremiyor.">
+    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Beğeni yapıldıktan sonra sayfa yenilenince card divi ortadan kaldırılması eklendi. Beğeni yapan user'ların idleri artık cookilerde tutuluyor. Veritabanındaki stats tablosunun yapısı değiştirildi. Content_likes tablosu kaldırıldı stats tablosuna eklenip düzeltildi. Veritabanındaki enum yapısı düzeltdi, tiny int kullanımına başlandı. Stats Tablosundaki sorgular değiştirldi.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/contents.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/contents.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/permission.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/Pages.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Pages.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/contentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/content/content.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/content.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/content/newContent.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/newContent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/permissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/permissionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/function.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/function.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +104,9 @@
       <workItem from="1704871684717" duration="20189000" />
       <workItem from="1704959761431" duration="15092000" />
       <workItem from="1705045820944" duration="16049000" />
-      <workItem from="1705305217824" duration="17588000" />
+      <workItem from="1705305217824" duration="17809000" />
+      <workItem from="1705393352254" duration="7510000" />
+      <workItem from="1705485304466" duration="13245000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -208,7 +212,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705071514773</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Beğeni yapıldıktan sonra sayfa yenilenince card divi ortadan kaldırılması eklendi. Beğeni yapan user'ların idleri artık cookilerde tutuluyor. Veritabanındaki stats tablosunun yapısı değiştirildi. Content_likes tablosu kaldırıldı stats tablosuna eklenip düzeltildi. Veritabanındaki enum yapısı düzeltdi, tiny int kullanımına başlandı. Stats Tablosundaki sorgular değiştirldi.">
+      <option name="closed" value="true" />
+      <created>1705334117044</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1705334117044</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +231,8 @@
     <MESSAGE value="Yeni dil ekleme sayfası oluşturuldu,&#10;Dil izinleri kullanıcı bazlı hale getirildi,&#10;Dil eklendikten sonraki hali dinamik hale getirildi,&#10;Api entegrasyonu yapıldı,&#10;İçeriğin istenilen dilde çevirisi eklenebiliyor." />
     <MESSAGE value="Content.php'deki checkedFunction düzenlendi.addContent'deki control sorguları düzenlendi.&#10;StatsTable'daki toplama sorgusunda count kullanılıp tek sorguya çevrilmiştir.&#10;contentController.php'deki isset bulunan değişkenler ve sorgular düzenlendi.&#10;Yeni dil ekleme sayfası içeriği düzenlendi." />
     <MESSAGE value="Kullanıcı ingilizce dil ekleyememe API sorunu düzeltildi.&#10;Dil seçme yetkileri. Düzenlendi.&#10;Kullanıcının dil kısmında kişilere verdiği izinler tamamlandı.Artık x kullanıcısın örneğin İngilizce'de yetkisi yoksa ingilizceyi göremiyor." />
-    <option name="LAST_COMMIT_MESSAGE" value="Kullanıcı ingilizce dil ekleyememe API sorunu düzeltildi.&#10;Dil seçme yetkileri. Düzenlendi.&#10;Kullanıcının dil kısmında kişilere verdiği izinler tamamlandı.Artık x kullanıcısın örneğin İngilizce'de yetkisi yoksa ingilizceyi göremiyor." />
+    <MESSAGE value="Beğeni yapıldıktan sonra sayfa yenilenince card divi ortadan kaldırılması eklendi. Beğeni yapan user'ların idleri artık cookilerde tutuluyor. Veritabanındaki stats tablosunun yapısı değiştirildi. Content_likes tablosu kaldırıldı stats tablosuna eklenip düzeltildi. Veritabanındaki enum yapısı düzeltdi, tiny int kullanımına başlandı. Stats Tablosundaki sorgular değiştirldi." />
+    <option name="LAST_COMMIT_MESSAGE" value="Beğeni yapıldıktan sonra sayfa yenilenince card divi ortadan kaldırılması eklendi. Beğeni yapan user'ların idleri artık cookilerde tutuluyor. Veritabanındaki stats tablosunun yapısı değiştirildi. Content_likes tablosu kaldırıldı stats tablosuna eklenip düzeltildi. Veritabanındaki enum yapısı düzeltdi, tiny int kullanımına başlandı. Stats Tablosundaki sorgular değiştirldi." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

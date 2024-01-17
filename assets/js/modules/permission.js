@@ -1,7 +1,36 @@
-
 var table;
+
+function languageCheckbox(roleID, type, parentID) {
+    var checkedIDs = [];
+    var notcheck = [];
+    $("." + type + "CheckLanguage:checked").each(function () {
+        var checkedID = $(this).val();
+        checkedIDs.push(checkedID);
+    });
+
+    $("." + type + "CheckLanguage:not(:checked)").each(function () {
+        var checkedIDNot = $(this).val();
+        notcheck.push(checkedIDNot);
+    });
+    $.ajax({
+        type: "POST",
+        url: "controller/permissionController.php",
+        data: {
+            "languageCheckbox": 1,
+            "roleID": roleID,
+            "type":type,
+            "parentID": parentID,
+            "checkedID": checkedIDs,
+            "notCheckedID": notcheck,
+        },
+        success: function (response) {
+
+        }
+    });
+}
+
 function getPermissionTable(id, langID) {
-    if(langID == 2) {
+    if (langID == 2) {
         if (table) {
             table.destroy()
             table = false
@@ -31,7 +60,7 @@ function getPermissionTable(id, langID) {
         });
         table.page.len(100).draw();
 
-    }else{
+    } else {
         if (table) {
             table.destroy()
             table = false
@@ -63,7 +92,9 @@ function getPermissionTable(id, langID) {
     table.page.len(100).draw();
 
 }
-function addCheckBox(id) {
+
+function addCheckBox(id, lang) {
+    console.log(lang)
     var checkedIDs = [];
     var notcheck = [];
 
@@ -82,6 +113,7 @@ function addCheckBox(id) {
         url: "controller/permissionController.php",
         data: {
             "role_id": id,
+            "lang": lang,
             "checkedID": checkedIDs,
             "notCheckedID": notcheck,
             "addCheckBox": 1,
@@ -91,7 +123,9 @@ function addCheckBox(id) {
         }
     });
 }
-function deleteCheckBox(id) {
+
+function deleteCheckBox(id, lang) {
+
     var checkedIDs = [];
     var notcheck = [];
 
@@ -110,6 +144,7 @@ function deleteCheckBox(id) {
         url: "controller/permissionController.php",
         data: {
             "role_id": id,
+            "lang": lang,
             "checkedID": checkedIDs,
             "notCheckedID": notcheck,
             "deleteCheckBox": 1,
@@ -119,7 +154,8 @@ function deleteCheckBox(id) {
         }
     });
 }
-function editCheckBox(id) {
+
+function editCheckBox(id, lang) {
     var checkedIDs = [];
     var notcheck = [];
 
@@ -138,6 +174,7 @@ function editCheckBox(id) {
         url: "controller/permissionController.php",
         data: {
             "role_id": id,
+            "lang": lang,
             "checkedID": checkedIDs,
             "notCheckedID": notcheck,
             "editCheckBox": 1,
@@ -147,7 +184,8 @@ function editCheckBox(id) {
         }
     });
 }
-function listCheckBox(id) {
+
+function listCheckBox(id, lang) {
     var checkedIDs = [];
     var notcheck = [];
 
@@ -166,6 +204,7 @@ function listCheckBox(id) {
         url: "controller/permissionController.php",
         data: {
             "role_id": id,
+            "lang": lang,
             "checkedID": checkedIDs,
             "notCheckedID": notcheck,
             "listCheckBox": 1,
@@ -175,7 +214,8 @@ function listCheckBox(id) {
         }
     });
 }
-function viewCheckBox(id) {
+
+function viewCheckBox(id, lang) {
     var checkedIDs = [];
     var notcheck = [];
 
@@ -195,6 +235,7 @@ function viewCheckBox(id) {
         data: {
             "role_id": id,
             "checkedID": checkedIDs,
+            "lang": lang,
             "notCheckedID": notcheck,
             "viewCheckBox": 1,
         },

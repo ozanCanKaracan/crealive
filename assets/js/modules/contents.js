@@ -93,7 +93,7 @@ function languageFilter() {
 
 
 categoryFilter();
-languageFilter();
+//languageFilter();
 function deleteContent(id) {
 
     Swal.fire({

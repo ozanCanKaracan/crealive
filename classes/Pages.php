@@ -10,6 +10,6 @@ Class Pages{
         $this->primary= 'id';
     }
     function getPages(){
-        return DB::get("SELECT * FROM pages WHERE parent_id > 0 ");
+        return DB::get("SELECT * FROM pages WHERE parent_id = 0 ");
     }
 }

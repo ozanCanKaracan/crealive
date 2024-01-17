@@ -44,6 +44,7 @@ if (isset($_POST["addContent"])) {
                 if ($translatedText) {
                     $translateLangID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$translateLanguage]);
                     $add = DB::insert("INSERT INTO translated_contents (user_id,content_id,language_id,title,text) VALUES (?,?,?,?,?)", [$user_id, $lastID, $translateLangID, $translatedTitle, $translatedText]);
+
                 }
                 echo "ok";
                 exit;
@@ -83,7 +84,6 @@ if (isset($_POST["contentTable"])) {
     $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
     if ($categoryId == null || $languageId == null) {
         $data = DB::get("SELECT * FROM contents WHERE content_language=?", [$language]);
-        $data = DB::get("SELECT * FROM translated_contents WHERE language_id=?",[$language]);
     }
     if ($categoryId and $languageId) {
         $data = DB::get("SELECT * FROM contents WHERE content_category=? AND content_language=?", [$categoryId, $languageId]);
@@ -154,7 +154,7 @@ if (isset($_POST["categoryFilter"])) {
     exit();
 
 }
-if (isset($_POST["languageFilter"])) {
+/*if (isset($_POST["languageFilter"])) {
     $data = DB::getVar("SELECT id,lang_name FROM languages");
     $text = 'Dile Göre Filtrele ';
     $text_2 = 'Dil Seçiniz';
@@ -171,7 +171,7 @@ if (isset($_POST["languageFilter"])) {
     $response .= '</select>';
     echo $response;
     exit();
-}
+}*/
 if (isset($_FILES['upload']['name'])) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
