@@ -1,4 +1,5 @@
 <?php
+$target=$_GET["target"];
 $lang=$_SESSION["lang"];
 $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
 $page_name = $_GET["target"];
@@ -30,7 +31,7 @@ $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
 <!--                            </div>-->
                         </div>
                         <?php
-                        $controlList = controlList();
+                        $controlList = controlList($target);
                         if ($controlList) {
                             ?>
                             <table class="table-bordered table datatables-basic table dataTable no-footer dtr-column "

@@ -92,9 +92,9 @@ if (isset($_POST["contentTable"])) {
     } else if ($languageId) {
         $data = DB::get("SELECT * FROM contents WHERE content_language=?", [$languageId]);
     }
-    $controlEdit = controlEdit($page_id);
-    $controlDelete = controlDeleteBack($page_id);
-    $controlList = controlPageList($page_id);
+    $controlEdit = controlEdit($page_id,$language);
+    $controlDelete = controlDeleteBack($page_id,$language);
+    $controlList = controlPageList($page_id,$language);
 
 
     $response = [];

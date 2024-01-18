@@ -4,7 +4,8 @@
             <?php
             $lang=$_SESSION["lang"];
             $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
-            $controlAdd = controlAdd();
+            $target=$_GET["target"];
+            $controlAdd = controlAdd($target);
             if ($controlAdd) {
                 ?>
                 <div class="card shadow">
@@ -48,7 +49,7 @@
             <?php } ?>
         </div>
         <?php
-        $controlDelete = controlDelete();
+        $controlDelete = controlDelete($target);
         if ($controlDelete){
         ?>
         <div class="col-md-6">

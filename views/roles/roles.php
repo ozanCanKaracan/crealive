@@ -18,7 +18,8 @@
                         </div>
 
                         <?php
-                        $controlList = controlList();
+                        $target=$_GET["target"];
+                        $controlList = controlList($target);
                         if ($controlList) {
                             ?>
                             <table class="table-bordered table datatables-basic table dataTable no-footer dtr-column "

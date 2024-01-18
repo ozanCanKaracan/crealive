@@ -9,10 +9,7 @@ $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang])
 ?>
 <div class="container">
     <div class="row">
-        <?php
-        $edit = controlEdit($page_id);
-        if ($edit) {
-            ?>
+
             <div class="col-md-12">
                 <div class="card shadow">
                     <div class="card-header">
@@ -72,17 +69,14 @@ $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang])
                     </div>
                 </div>
             </div>
-            <?php
-        } else {
-        }
 
-        ?>
     </div>
 </div>
 
 <script src="assets/js/modules/permission.js"></script>
 <script>
+    const pageID=<?php echo $page_id?>;
     const langID= <?php echo $language?>;
-    getPermissionTable(<?php echo $id;?>,langID)
+    getPermissionTable(<?php echo $id;?>,langID,pageID)
 </script>
 

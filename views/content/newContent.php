@@ -3,7 +3,9 @@
         min-height: 400px;
     }
 </style>
-<?php $controlAdd = controlAdd();
+<?php
+$target=$_GET["target"];
+$controlAdd = controlAdd($target);
 if ($controlAdd) {
     ?>
     <div class="container">

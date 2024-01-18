@@ -18,7 +18,7 @@ function languageCheckbox(roleID, type, parentID) {
         data: {
             "languageCheckbox": 1,
             "roleID": roleID,
-            "type":type,
+            "type": type,
             "parentID": parentID,
             "checkedID": checkedIDs,
             "notCheckedID": notcheck,
@@ -29,219 +29,70 @@ function languageCheckbox(roleID, type, parentID) {
     });
 }
 
-function getPermissionTable(id, langID) {
-    if (langID == 2) {
-        if (table) {
-            table.destroy()
-            table = false
+function permissionCheckbox(roleID, type) {
+    var checkedIDs = [];
+    var notcheck = [];
+    $("." + type + "Check:checked").each(function () {
+        var checkedID = $(this).val();
+        checkedIDs.push(checkedID);
+    });
+
+    $("." + type + "Check:not(:checked)").each(function () {
+        var checkedIDNot = $(this).val();
+        notcheck.push(checkedIDNot);
+    });
+    $.ajax({
+        type: "POST",
+        url: "controller/permissionController.php",
+        data: {
+            "permissionCheckbox": 1,
+            "roleID": roleID,
+            "type": type,
+            "checkedID": checkedIDs,
+            "notCheckedID": notcheck,
+        },
+        success: function (response) {
+
         }
+    });
+}
 
-        table = $('#permissionTable').DataTable({
 
-            sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
-            ajax: {
-                url: 'controller/permissionController.php',
-                type: 'POST',
-                data: {
-                    "getPermissionTable": 1,
-                    "id": id,
-                }
-            },
-            columns: [
-                {data: 'id', visible: false},
-                {data: 'pages'},
-                {data: 'add'},
-                {data: 'delete'},
-                {data: 'edit'},
-                {data: 'list'},
-                {data: 'view'},
+function getPermissionTable(id, langID, pageID) {
 
-            ],
-        });
-        table.page.len(100).draw();
-
-    } else {
-        if (table) {
-            table.destroy()
-            table = false
-        }
-
-        table = $('#permissionTable').DataTable({
-            sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
-            ajax: {
-                url: 'controller/permissionController.php',
-                type: 'POST',
-                data: {
-                    "getPermissionTable": 1,
-                    "id": id,
-                }
-            },
-            columns: [
-                {data: 'id', visible: false},
-                {data: 'pages'},
-                {data: 'add'},
-                {data: 'delete'},
-                {data: 'edit'},
-                {data: 'list'},
-                {data: 'view'},
-
-            ],
-            "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
-        });
+    if (table) {
+        table.destroy()
+        table = false
     }
+
+    table = $('#permissionTable').DataTable({
+        sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
+        ajax: {
+            url: 'controller/permissionController.php',
+            type: 'POST',
+            data: {
+                "getPermissionTable": 1,
+                "id": id,
+                "pageID": pageID
+
+            }
+        },
+        columns: [
+            {data: 'id', visible: false},
+            {data: 'pages'},
+            {data: 'add'},
+            {data: 'delete'},
+            {data: 'edit'},
+            {data: 'list'},
+            {data: 'view'},
+
+        ],
+        "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
+    });
     table.page.len(100).draw();
 
 }
 
-function addCheckBox(id, lang) {
-    console.log(lang)
-    var checkedIDs = [];
-    var notcheck = [];
 
-    $(".addCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
 
-    $(".addCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/permissionController.php",
-        data: {
-            "role_id": id,
-            "lang": lang,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "addCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
-
-function deleteCheckBox(id, lang) {
-
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".deleteCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".deleteCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/permissionController.php",
-        data: {
-            "role_id": id,
-            "lang": lang,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "deleteCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
-
-function editCheckBox(id, lang) {
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".editCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".editCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/permissionController.php",
-        data: {
-            "role_id": id,
-            "lang": lang,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "editCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
-
-function listCheckBox(id, lang) {
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".listCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".listCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/permissionController.php",
-        data: {
-            "role_id": id,
-            "lang": lang,
-            "checkedID": checkedIDs,
-            "notCheckedID": notcheck,
-            "listCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
-
-function viewCheckBox(id, lang) {
-    var checkedIDs = [];
-    var notcheck = [];
-
-    $(".viewCheck:checked").each(function () {
-        var checkedID = $(this).val();
-        checkedIDs.push(checkedID);
-    });
-
-    $(".viewCheck:not(:checked)").each(function () {
-        var checkedIDNot = $(this).val();
-        notcheck.push(checkedIDNot);
-    });
-
-    $.ajax({
-        type: "POST",
-        url: "controller/permissionController.php",
-        data: {
-            "role_id": id,
-            "checkedID": checkedIDs,
-            "lang": lang,
-            "notCheckedID": notcheck,
-            "viewCheckBox": 1,
-        },
-        success: function (response) {
-
-        }
-    });
-}
 
