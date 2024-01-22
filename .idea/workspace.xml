@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Yetki değiştirme kısmı abac yolunda ilerlendi ve dinamik bir yapıya getiriliyor. content table'daki bug düzeltildi.">
+    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Yetki ekleme tarafı 5 fonksiyondan tek fonksiyona düşürülüp dinamik bir hale getirilmiştir. Artık abac mantığı ile çalışmaktadır. Html responsları kaldırılmıştır.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/permission.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/contentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/authController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/authController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/permissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/permissionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get.php" beforeDir="false" afterPath="$PROJECT_DIR$/get.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/function.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/function.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/category/editCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/category/editCategory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/content/contents.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/contents.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/content/newContent.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/newContent.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/partials/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/sidebar.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/permission/permission.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/permission/permission.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/roles/editRole.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/roles/editRole.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/roles/roles.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/roles/roles.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +107,9 @@
       <workItem from="1705305217824" duration="17809000" />
       <workItem from="1705393352254" duration="7510000" />
       <workItem from="1705485304466" duration="13616000" />
-      <workItem from="1705565081734" duration="15787000" />
+      <workItem from="1705565081734" duration="15945000" />
+      <workItem from="1705651993960" duration="2810000" />
+      <workItem from="1705911054368" duration="15576000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -234,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705508037906</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Yetki ekleme tarafı 5 fonksiyondan tek fonksiyona düşürülüp dinamik bir hale getirilmiştir. Artık abac mantığı ile çalışmaktadır. Html responsları kaldırılmıştır.">
+      <option name="closed" value="true" />
+      <created>1705590401193</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1705590401193</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,7 +252,8 @@
     <MESSAGE value="Kullanıcı ingilizce dil ekleyememe API sorunu düzeltildi.&#10;Dil seçme yetkileri. Düzenlendi.&#10;Kullanıcının dil kısmında kişilere verdiği izinler tamamlandı.Artık x kullanıcısın örneğin İngilizce'de yetkisi yoksa ingilizceyi göremiyor." />
     <MESSAGE value="Beğeni yapıldıktan sonra sayfa yenilenince card divi ortadan kaldırılması eklendi. Beğeni yapan user'ların idleri artık cookilerde tutuluyor. Veritabanındaki stats tablosunun yapısı değiştirildi. Content_likes tablosu kaldırıldı stats tablosuna eklenip düzeltildi. Veritabanındaki enum yapısı düzeltdi, tiny int kullanımına başlandı. Stats Tablosundaki sorgular değiştirldi." />
     <MESSAGE value="Yetki değiştirme kısmı abac yolunda ilerlendi ve dinamik bir yapıya getiriliyor. content table'daki bug düzeltildi." />
-    <option name="LAST_COMMIT_MESSAGE" value="Yetki değiştirme kısmı abac yolunda ilerlendi ve dinamik bir yapıya getiriliyor. content table'daki bug düzeltildi." />
+    <MESSAGE value="Yetki ekleme tarafı 5 fonksiyondan tek fonksiyona düşürülüp dinamik bir hale getirilmiştir. Artık abac mantığı ile çalışmaktadır. Html responsları kaldırılmıştır." />
+    <option name="LAST_COMMIT_MESSAGE" value="Yetki ekleme tarafı 5 fonksiyondan tek fonksiyona düşürülüp dinamik bir hale getirilmiştir. Artık abac mantığı ile çalışmaktadır. Html responsları kaldırılmıştır." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

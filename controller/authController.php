@@ -58,66 +58,55 @@ if (isset($_POST["logout"])) {
     echo "ok";
     exit();
 }
-
-
 if (isset($_POST["sidebarAjax"])) {
-    $response = '';
-    $response .= '
-    <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-        <li class="nav-item">
-            <a class="d-flex align-items-center">
-                <i class="bi bi-house mb-1"></i>
-                <span class="menu-title text-truncate" data-i18n="Dashboards">';
-    $text = 'Ayarlar';
-    $translate = (language($text)) ? language($text) : $text;
-    $response .= ' ' . $translate . ' </span></a>
-        </li>
-        <li class="navigation-header">
-            <span data-i18n="Apps &amp; Pages">';
-    $text = 'Sayfalar';
-    $translate = (language($text)) ? language($text) : $text;
-    $response .= ' ' . $translate . '</a></span><i data-feather="more-horizontal"></i>
-        </li>';
+    $role_id = $_SESSION["role_id"];
+    $language = $_SESSION["lang"];
+    $languageID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$language]);
+    $response = '
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class="navigation-header">
+                <span data-i18n="Apps &amp; Pages">Sayfalar</span><i data-feather="more-horizontal"></i>
+            </li>';
 
     $getTitle = DB::get("SELECT * FROM pages WHERE parent_id = 0");
     foreach ($getTitle as $gt) {
-        $getPages = DB::get("SELECT * FROM pages WHERE parent_id = ?", [$gt->id]);
+        $getPages = DB::get("SELECT * FROM pages WHERE parent_id = ? AND `property` != '0' ", [$gt->id]);
+
         $pageName = $gt->page_name;
         $translate = (language($pageName)) ? language($pageName) : $pageName;
 
         $response .= '
-        <li class="nav-item nav-group-children">
-            <a class="d-flex align-items-center">
-                <i class="' . $gt->page_icon . ' mb-1"></i>
-                <span class="menu-title text-truncate" data-i18n="Invoice">' . $translate . '</span>
-            </a>
-            <ul class="menu-content">';
+            <li class="nav-item nav-group-children">
+                <a class="d-flex align-items-center">
+                    <i class="' . $gt->page_icon . ' mb-1"></i>
+                    <span class="menu-title text-truncate" data-i18n="Invoice">' . $translate . '</span>
+                </a>
+                <ul class="menu-content">';
 
         foreach ($getPages as $gp) {
             $pageName = $gp->page_name;
             $translate = (language($pageName)) ? language($pageName) : $pageName;
             $id = $gp->id;
             $controlView = controlView($id);
-
-            if ($controlView) {
+            $addID = DB::getVar("SELECT parent_id FROM pages WHERE property = 'add' ");
+            $control = controlFunction($addID, $languageID, $role_id);
+var_dump($languageID);
+            if ($controlView && ($gp->property != 'add' || ($gp->property == 'add' AND $control))) {
                 $response .= '
-                <li>
-                    <a class="router-link-active router-link-exact-active" href="' . $gp->href . '">
-                        <i data-feather="circle"></i>
-                        <span class="menu-item text-truncate" data-i18n="List">' . $translate . '</span>
-                    </a>
-                </li>';
-            } else {
+                    <li>
+                        <a class="router-link-active router-link-exact-active" href="' . $gp->href . '">
+                            <i data-feather="circle"></i>
+                            <span class="menu-item text-truncate" data-i18n="List">' . $translate . '</span>
+                        </a>
+                    </li>';
             }
         }
-
         $response .= '
-            </ul>
-        </li>';
+                </ul>
+            </li>';
     }
-
     $response .= '
-    </ul>';
+        </ul>';
     echo $response;
-    exit();
+    exit;
 }

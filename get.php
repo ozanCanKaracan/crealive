@@ -43,17 +43,24 @@ if (!$_GET) {
             }
         case 'newContent' :
             $access = access($_GET["target"]);
-
             if ($access) {
-                include('views/content/newContent.php');
-                break;
+                $parent_id=DB::getVar("SELECT parent_id FROM pages WHERE href=?",[$_GET["target"]]);
+                $langID=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$_SESSION["lang"]]);
+                $role_id=$_SESSION["role_id"];
+                $control=controlFunction($parent_id,$langID,$role_id);
+                if($control){
+                    include('views/content/newContent.php');
+                    break;
+                }else {
+                    include('views/404/404.php');
+                    break;
+                }
             } else {
                 include('views/404/404.php');
                 break;
             }
         case 'editCategory' :
             $access = access($_GET["target"]);
-
             if ($access) {
                 include('views/category/editCategory.php');
                 break;

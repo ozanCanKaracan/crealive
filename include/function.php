@@ -105,6 +105,11 @@ function translateText($text, $targetLanguage, $apiKey, $originalTextID, $langua
     }
 }
 
+function controlFunction($page_id,$languageID,$role_id){
+    $control=DB::getVar("SELECT permission_add FROM permission WHERE page_id=? AND language_id=? AND role_id=? ",[$page_id,$languageID,$role_id]);
+    return $control ? true : false;
+}
+
 ?>
 
 

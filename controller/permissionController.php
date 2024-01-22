@@ -31,6 +31,7 @@ if (isset($_POST["getPermissionTable"])) {
                 foreach ($languages as $language) {
                     $controlLanguage=DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=? AND language_id=?",[$d->id,$id,$language->id]);
 
+
                     if(isset($controlLanguage[0])){
                         $checkedAddLanguage = ($controlLanguage[0]->permission_add == 1) ? 'checked' : '';
                         $checkedDeleteLanguage = ($controlLanguage[0]->permission_delete == 1) ? 'checked' : '';
@@ -44,10 +45,16 @@ if (isset($_POST["getPermissionTable"])) {
                         $checkedListLanguage = '';
                         $checkedViewLanguage = '';
                     }
-                    $names = $d->page_name . " (" . $language->lang_name . ")";
+                    $names = $d->page_name . " " . $language->lang_name . "";
+                    $parts = explode(' ',$names);
+                    $firstVariable = $parts[0];
+                    $secondVariable = $parts[1];
+                    $translate_1 = (language($firstVariable)) ? language($firstVariable) : $firstVariable;
+                    $translate_2 = (language($secondVariable)) ? language($secondVariable) : $secondVariable;
+
                     $response[] = [
                         "id" => $d->id,
-                        "pages" => $names,
+                        "pages" => $translate_1 . " (" . $translate_2 . ")",
                         "add" => '<input type="checkbox" class="custom-control-input addCheckLanguage" id="languageAddCheckBox" value="' . $language->id . '" onclick="languageCheckbox(' . $id . ', \'add\',\'' . $d->id . '\')" ' . $checkedAddLanguage . ' >',
                         "delete" => '<input type="checkbox" class="custom-control-input deleteCheckLanguage" id="languageDeleteCheckBox" value="' . $language->id . '" onclick="languageCheckbox(' . $id . ', \'delete\',\'' . $d->id . '\')" ' . $checkedDeleteLanguage . ' >',
                         "edit" => '<input type="checkbox" class="custom-control-input editCheckLanguage" id="languageEditCheckBox" value="' . $language->id . '" onclick="languageCheckbox(' . $id . ', \'edit\',\'' . $d->id . '\')" ' . $checkedEditLanguage . '>',
@@ -58,10 +65,11 @@ if (isset($_POST["getPermissionTable"])) {
                 }
             } else {
                 // "İçerik" sayfası dışındaki diğer sayfalar için dil döngüsünü kullanma
-
+                $text=$d->page_name;
+                $translate=(language($text)) ? language($text) : $text;
                 $response[] = [
                     "id" => $d->id,
-                    "pages" => $d->page_name,
+                    "pages" => $translate,
                     "add" => '<input type="checkbox" class="custom-control-input addCheck" id="addCheckBox" value="' . $d->id . '" onclick="permissionCheckbox(' . $id . ', \'add\')" ' . $checkedAdd . '>',
                     "delete" => '<input type="checkbox" class="custom-control-input deleteCheck" id="deleteCheckBox" value="' . $d->id . '" onclick="permissionCheckbox(' . $id . ', \'delete\')" ' . $checkedDelete . '>',
                     "edit" => '<input type="checkbox" class="custom-control-input editCheck" id="editCheckBox" value="' . $d->id . '" onclick="permissionCheckbox(' . $id . ', \'edit\')" ' . $checkedEdit . '>',

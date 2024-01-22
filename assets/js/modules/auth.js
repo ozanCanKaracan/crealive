@@ -370,6 +370,7 @@ function selectLanguage() {
 }
 
 selectLanguage()
+
 function sidebarAjax() {
     $.ajax({
         type: 'POST',
@@ -386,3 +387,4 @@ function sidebarAjax() {
 }
 
 sidebarAjax()
+

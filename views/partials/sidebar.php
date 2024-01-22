@@ -46,57 +46,9 @@
                             data-feather="disc" data-ticon="disc"></i></a></li>
         </ul>
     </div>
-    <div class="shadow-bottom"></div>
-    <div class="main-menu-content">
-        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-            <li class="nav-item">
-                <a class="d-flex align-items-center">
-                    <i class="bi bi-house mb-1"></i>
-                    <span class="menu-title text-truncate" data-i18n="Dashboards">Ayarlar</span>
-                </a>
-            </li>
-            <li class="navigation-header">
-                <span data-i18n="Apps &amp; Pages">Sayfalar</span><i data-feather="more-horizontal"></i>
-            </li>
-            <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
-                <?php
-                $getTitle = DB::get("SELECT * FROM pages WHERE parent_id = 0");
-                foreach ($getTitle as $gt) {
-                    $getPages = DB::get("SELECT * FROM pages WHERE parent_id = ?", [$gt->id]);
-                    $pageName = $gt->page_name;
-                    $translate = (language($pageName)) ? language($pageName) : $pageName;
-                    ?>
-                    <li class="nav-item nav-group-children">
-                        <a class="d-flex align-items-center">
-                            <div id="sidebar1">
-                                <i class="<?= $gt->page_icon ?> mb-1"></i>
-                                <span class="menu-title text-truncate" data-i18n="Invoice"><?= $translate ?></span>
-                            </div>
-                        </a>
-                        <ul class="menu-content">
-                            <?php
-                            foreach ($getPages as $gp) {
-                                $pageName = $gp->page_name;
-                                $translate = (language($pageName)) ? language($pageName) : $pageName;
-                                $id = $gp->id;
-                                $controlView = controlView($id);
-                                if ($controlView) { ?>
-                                    <li>
-                                        <a class="router-link-active router-link-exact-active" href="<?= $gp->href ?>">
-                                            <i class="<?= $gp->page_icon ?>"></i>
-                                            <span class="menu-item text-truncate" data-i18n="List"><?= $translate ?></span>
-                                        </a>
-                                    </li>
-                                    <?php
-                                }
-                            } ?>
-                        </ul>
-                    </li>
-                    <?php
-                }
-                ?>
-            </ul>
+    <div class="shadow-bottom" ></div>
+    <div class="main-menu-content" id="sidebar">
+
     </div>
 </div>
-
 <!-- END: Main Menu-->
