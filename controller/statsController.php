@@ -7,23 +7,24 @@ if (isset($_POST["top_5"])) {
     $text_3 = 'Görüntüle';
     $translate_3 = (language($text_3)) ? language($text_3) : $text_3;
 
-    $data = DB::get("SELECT c.id, c.content_title, c.content_category,c.url
+    $data = DB::get("SELECT c.id, c.content_title, c.content_category, c.url
                     FROM stats s
                     JOIN contents c ON s.content_id = c.id
                     WHERE c.content_language = ?
-                    ORDER BY s.view_count DESC
+                    ORDER BY s.updated_date DESC, s.view_count DESC
                     LIMIT 5", [$language]);
+
 
     $response = [];
 
-    foreach ($data as $c) {
-        $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$c->content_category]);
+    foreach ($data as $d) {
+        $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
 
         $response[] = [
-            "id" => $c->id,
-            "title" => $c->content_title,
+            "id" => $d->id,
+            "title" => $d->content_title,
             "category" => $categoryName,
-            "process" => '<a href="content/' . $c->url . '"><button type="button" class="btn btn-relief-warning btn-sm " onclick="pageVisit(' . $c->id . ')">' . $translate_3 . '</button></a>',
+            "process" => '<a href="content/' . $d->url . '"><button type="button" class="btn btn-relief-warning btn-sm " onclick="pageVisit(' . $d->id . ')">' . $translate_3 . '</button></a>',
         ];
     }
 

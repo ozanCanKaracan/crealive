@@ -61,7 +61,6 @@ if (isset($_POST["getPermissionTable"])) {
                         "list" => '<input type="checkbox" class="custom-control-input listCheckLanguage" id="languageListCheckBox" value="' . $language->id . '" onclick="languageCheckbox(' . $id . ', \'list\',\'' . $d->id . '\')" ' . $checkedListLanguage . ' >',
                         "view" => '<input type="checkbox" class="custom-control-input viewCheckLanguage" id="languageViewCheckBox" value="' . $language->id . '" onclick="languageCheckbox(' . $id . ', \'view\',\'' . $d->id . '\')" ' . $checkedViewLanguage . ' >',
                     ];
-
                 }
             } else {
                 // "İçerik" sayfası dışındaki diğer sayfalar için dil döngüsünü kullanma

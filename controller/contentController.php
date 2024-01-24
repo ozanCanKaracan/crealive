@@ -83,8 +83,10 @@ if (isset($_POST["contentTable"])) {
     $lang = $_SESSION["lang"];
     $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
     if ($categoryId == null || $languageId == null) {
-        $data = DB::get("SELECT * FROM contents WHERE content_language=?", [$language]);
-    }
+        $data = DB::get("SELECT c.*, tc.title, tc.text 
+                FROM contents c LEFT JOIN translated_contents tc
+                ON c.id = tc.content_id AND tc.language_id = ? 
+                WHERE c.content_language = ?;", [$language, $language]);}
     if ($categoryId and $languageId) {
         $data = DB::get("SELECT * FROM contents WHERE content_category=? AND content_language=?", [$categoryId, $languageId]);
     } else if ($categoryId) {
@@ -104,6 +106,7 @@ if (isset($_POST["contentTable"])) {
         FROM category
         INNER JOIN contents ON contents.content_category = category.id
         WHERE contents.id=?", [$d->id]);*/
+
         $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
         $access = DB::getVar("SELECT status FROM language_permission WHERE user_id=? AND language_id=?", [$user_id, $d->content_language]);
         $text_1 = 'Düzenle';
@@ -255,17 +258,15 @@ if (isset($_POST["pageVisit"])) {
     // Eğer ziyaret edilen sayfa daha önce eklenmemişse, ekle
     if (!in_array($id, $visitedPages)) {
         $visitedPages[] = $id;
-
         // Cookie'yi güncelle
         setcookie($cookieName, json_encode($visitedPages), time() + (86400 * 30), "/");
-
-        // Stats tablosunu güncelle
-        $control = DB::getVar("SELECT * FROM stats WHERE content_id=?", [$id]);
-        if ($control) {
-            $process = DB::exec("UPDATE stats SET view_count = view_count + 1 WHERE content_id=?", [$id]);
-        } else {
-            $process = DB::insert("INSERT INTO stats (content_id,view_count) VALUES (?,?)", [$id, 1]);
-        }
+    }   // Stats tablosunu güncelle
+    $control = DB::getVar("SELECT 1 FROM stats WHERE content_id=?", [$id]);
+    if ($control == true) {
+        var_dump($id);
+        $process = DB::exec("UPDATE stats SET view_count = view_count + 1, updated_date = NOW() WHERE content_id=?", [$id]);
+    } else {
+        $process = DB::insert("INSERT INTO stats (content_id,view_count,updated_date) VALUES (?,?,NOW())", [$id, 1]);
     }
 }
 if (isset($_POST["question"])) {
@@ -306,6 +307,5 @@ if (isset($_POST["question"])) {
     exit;
 
 }
-
 
 ?>

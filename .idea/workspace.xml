@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Yetki ekleme tarafı 5 fonksiyondan tek fonksiyona düşürülüp dinamik bir hale getirilmiştir. Artık abac mantığı ile çalışmaktadır. Html responsları kaldırılmıştır.">
+    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="TOP 5 sıralaması tarihe göre yapıldı,&#10;Veritabanında index düzenlemleri yapıldı,tablo bağlantıları düzenlendi.&#10;Veritabanı veritipleri düzeltildi.">
+      <change afterPath="$PROJECT_DIR$/cms_tablo.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms (1).sql" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/authController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/authController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/contentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/permissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/permissionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get.php" beforeDir="false" afterPath="$PROJECT_DIR$/get.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/function.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/function.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,8 +72,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\wamp64\www\cms\views\langManagement" />
       <recent name="C:\wamp64\www\cms" />
+      <recent name="C:\wamp64\www\cms\views\langManagement" />
       <recent name="C:\wamp64\www\cms\views\stats" />
     </key>
   </component>
@@ -109,7 +109,9 @@
       <workItem from="1705485304466" duration="13616000" />
       <workItem from="1705565081734" duration="15945000" />
       <workItem from="1705651993960" duration="2810000" />
-      <workItem from="1705911054368" duration="15576000" />
+      <workItem from="1705911054368" duration="16706000" />
+      <workItem from="1705998364597" duration="9105000" />
+      <workItem from="1706083586789" duration="3550000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -239,7 +241,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705590401193</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Yetki kontrolleri düzenlendi. İçerik istenilen dilde ekleme izni yapıldı. Yetki ekleme sayfası çeviri işlemleri tamamlandı. Sidebar'daki ekleme kısmı eğer izni var ise görüntülenecek olarak düzeltildi.">
+      <option name="closed" value="true" />
+      <created>1705935543870</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1705935543871</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,7 +263,8 @@
     <MESSAGE value="Beğeni yapıldıktan sonra sayfa yenilenince card divi ortadan kaldırılması eklendi. Beğeni yapan user'ların idleri artık cookilerde tutuluyor. Veritabanındaki stats tablosunun yapısı değiştirildi. Content_likes tablosu kaldırıldı stats tablosuna eklenip düzeltildi. Veritabanındaki enum yapısı düzeltdi, tiny int kullanımına başlandı. Stats Tablosundaki sorgular değiştirldi." />
     <MESSAGE value="Yetki değiştirme kısmı abac yolunda ilerlendi ve dinamik bir yapıya getiriliyor. content table'daki bug düzeltildi." />
     <MESSAGE value="Yetki ekleme tarafı 5 fonksiyondan tek fonksiyona düşürülüp dinamik bir hale getirilmiştir. Artık abac mantığı ile çalışmaktadır. Html responsları kaldırılmıştır." />
-    <option name="LAST_COMMIT_MESSAGE" value="Yetki ekleme tarafı 5 fonksiyondan tek fonksiyona düşürülüp dinamik bir hale getirilmiştir. Artık abac mantığı ile çalışmaktadır. Html responsları kaldırılmıştır." />
+    <MESSAGE value="Yetki kontrolleri düzenlendi. İçerik istenilen dilde ekleme izni yapıldı. Yetki ekleme sayfası çeviri işlemleri tamamlandı. Sidebar'daki ekleme kısmı eğer izni var ise görüntülenecek olarak düzeltildi." />
+    <option name="LAST_COMMIT_MESSAGE" value="Yetki kontrolleri düzenlendi. İçerik istenilen dilde ekleme izni yapıldı. Yetki ekleme sayfası çeviri işlemleri tamamlandı. Sidebar'daki ekleme kısmı eğer izni var ise görüntülenecek olarak düzeltildi." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

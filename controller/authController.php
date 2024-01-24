@@ -34,8 +34,6 @@ if (isset($_POST["register"])) {
         echo "ok";
     }
 }
-
-
 if (isset($_POST["login"])) {
     $email = C($_POST["email"]);
     $password = C($_POST["password"]);
@@ -90,7 +88,6 @@ if (isset($_POST["sidebarAjax"])) {
             $controlView = controlView($id);
             $addID = DB::getVar("SELECT parent_id FROM pages WHERE property = 'add' ");
             $control = controlFunction($addID, $languageID, $role_id);
-var_dump($languageID);
             if ($controlView && ($gp->property != 'add' || ($gp->property == 'add' AND $control))) {
                 $response .= '
                     <li>
