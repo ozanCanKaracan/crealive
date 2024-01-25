@@ -83,10 +83,18 @@ if (isset($_POST["contentTable"])) {
     $lang = $_SESSION["lang"];
     $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
     if ($categoryId == null || $languageId == null) {
-        $data = DB::get("SELECT c.*, tc.title, tc.text 
-                FROM contents c LEFT JOIN translated_contents tc
-                ON c.id = tc.content_id AND tc.language_id = ? 
-                WHERE c.content_language = ?;", [$language, $language]);}
+
+        $firstQuery = DB::get("SELECT 'contents' as 'table', content_title, content_category, id FROM contents WHERE content_language = ?", [$language]);
+        $secondQuery = DB::get("SELECT 'translate' as 'table', title as content_title, (SELECT content_category FROM contents WHERE id = content_id) AS content_category, id FROM translated_contents WHERE language_id = ?", [$language]);
+
+        $data = array_merge($firstQuery, $secondQuery);
+//
+//        $data = DB::get("SELECT c.*, tc.title, tc.text
+//                FROM contents c LEFT JOIN translated_contents tc
+//                ON c.id = tc.content_id AND tc.language_id = ?
+//                WHERE c.content_language = ?;", [$language, $language]);}
+//    $data=DB::get("SELECT c.*, tc.* FROM contents AS c JOIN translated_contents AS tc ON c.content_language = tc.language_id WHERE c.content_language =");
+    }
     if ($categoryId and $languageId) {
         $data = DB::get("SELECT * FROM contents WHERE content_category=? AND content_language=?", [$categoryId, $languageId]);
     } else if ($categoryId) {
@@ -102,6 +110,12 @@ if (isset($_POST["contentTable"])) {
     $response = [];
 
     foreach ($data as $d) {
+
+        if (isset($d->table)) {
+            if ($d->table === 'translate') {
+
+            }
+        }
         /*$categoryName = DB::getVar("SELECT category.category_name
         FROM category
         INNER JOIN contents ON contents.content_category = category.id
@@ -307,5 +321,6 @@ if (isset($_POST["question"])) {
     exit;
 
 }
+
 
 ?>
