@@ -23,6 +23,7 @@ $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang])
                     <thead>
                     <tr class="fw-semibold fs-6 text-gray-800">
                         <th class="d-none"></th>
+                        <th class="d-none"></th>
                         <th><?php
                             $text='Başlık';
                             $translate=(language($text)) ? language($text) : $text;

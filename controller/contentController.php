@@ -29,32 +29,62 @@ if (isset($_POST["addContent"])) {
     $user_id = $_SESSION["user"];
     $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
     $controlTitle = DB::getVar("SELECT content_title FROM contents WHERE content_title=?", [$title]);
-    if (!$language || !$category || !$title || !$editor) {
-        echo "bos";
+    if(!$category){
+        echo "categoryNull";
+    }elseif(!$title){
+        echo "titleNull";
+    }elseif(!$editor){
+        echo "editorNull";
     } else if ($controlTitle) {
         echo "title";
     } else {
-        if (@$special) {
+        if ($special) {
             $controlSpecial = DB::getVar("SELECT url FROM contents WHERE url=?", [$special]);
             if ($controlSpecial) {
                 echo "special";
             } else {
-                $add = DB::insert("INSERT INTO contents (content_title, content_category, content_language, content_text, url) VALUES (?,?,?,?,?)", [$title, $category, $language, $editor, $special]);
-                $lastID = DB::lastInsertID($add);
-                if ($translatedText) {
-                    $translateLangID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$translateLanguage]);
-                    $add = DB::insert("INSERT INTO translated_contents (user_id,content_id,language_id,title,text) VALUES (?,?,?,?,?)", [$user_id, $lastID, $translateLangID, $translatedTitle, $translatedText]);
 
+                $add = DB::insert("INSERT INTO contents (content_title, content_category, content_language, content_text, url) VALUES (?,?,?,?,?)", [$title, $category, $language, $editor, $special]);
+                if (!$add) {
+                    echo "Database Error" . DB::getLastError($add);
+                    echo "hata";
+                } else {
+                    $lastID = DB::lastInsertID($add);
+                    if ($translatedText) {
+                        $translateLangID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$translateLanguage]);
+                        $add = DB::insert("INSERT INTO translated_contents (user_id,content_id,language_id,title,text) VALUES (?,?,?,?,?)", [$user_id, $lastID, $translateLangID, $translatedTitle, $translatedText]);
+                    }
+                    echo "ok";
+                    exit();
                 }
-                echo "ok";
-                exit;
             }
-        } else if (@$autoUrl) {
+        } else if ($autoUrl) {
             $controlAuto = DB::getVar("SELECT url FROM contents WHERE url=?", [$autoUrl]);
             if ($controlAuto) {
                 echo "auto";
             } else {
                 $add = DB::insert("INSERT INTO contents (content_title, content_category, content_language, content_text, url) VALUES (?,?,?,?,?)", [$title, $category, $language, $editor, $autoUrl]);
+                if (!$add) {
+                    echo "Database Error" . DB::getLastError($add);
+                    echo "hata";
+                } else {
+                    $lastID = DB::lastInsertID($add);
+
+                    DB::getLastError($add);
+                    if ($translatedText) {
+                        $translateLangID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$translateLanguage]);
+                        $add = DB::insert("INSERT INTO translated_contents (user_id,content_id,language_id,title,text) VALUES (?,?,?,?,?)", [$user_id, $lastID, $translateLangID, $translatedTitle, $translatedText]);
+                    }
+                    echo "ok";
+                    exit();
+                }
+            }
+        } else {
+            $add = $content->addContent($language, $category, $title, $editorContent, $url);
+            if (!$add) {
+                echo "Database Error" . DB::getLastError($add);
+                echo "hata";
+            } else {
                 $lastID = DB::lastInsertID($add);
                 if ($translatedText) {
                     $translateLangID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$translateLanguage]);
@@ -63,15 +93,6 @@ if (isset($_POST["addContent"])) {
                 echo "ok";
                 exit();
             }
-        } else {
-            $add = $content->addContent($language, $category, $title, $editorContent, $url);
-            $lastID = DB::lastInsertID($add);
-            if ($translatedText) {
-                $translateLangID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$translateLanguage]);
-                $add = DB::insert("INSERT INTO translated_contents (user_id,content_id,language_id,title,text) VALUES (?,?,?,?,?)", [$user_id, $lastID, $translateLangID, $translatedTitle, $translatedText]);
-            }
-            echo "ok";
-            exit();
         }
     }
 }
@@ -81,19 +102,13 @@ if (isset($_POST["contentTable"])) {
     $user_id = $_SESSION["user"];
     $page_id = $_POST["id"];
     $lang = $_SESSION["lang"];
+
     $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
     if ($categoryId == null || $languageId == null) {
 
         $firstQuery = DB::get("SELECT 'contents' as 'table', content_title, content_category, id FROM contents WHERE content_language = ?", [$language]);
-        $secondQuery = DB::get("SELECT 'translate' as 'table', title as content_title, (SELECT content_category FROM contents WHERE id = content_id) AS content_category, id FROM translated_contents WHERE language_id = ?", [$language]);
-
+        $secondQuery = DB::get("SELECT 'translate' as 'table', content_id , title as content_title, (SELECT content_category FROM contents WHERE id = content_id) AS content_category, id FROM translated_contents WHERE language_id = ?", [$language]);
         $data = array_merge($firstQuery, $secondQuery);
-//
-//        $data = DB::get("SELECT c.*, tc.title, tc.text
-//                FROM contents c LEFT JOIN translated_contents tc
-//                ON c.id = tc.content_id AND tc.language_id = ?
-//                WHERE c.content_language = ?;", [$language, $language]);}
-//    $data=DB::get("SELECT c.*, tc.* FROM contents AS c JOIN translated_contents AS tc ON c.content_language = tc.language_id WHERE c.content_language =");
     }
     if ($categoryId and $languageId) {
         $data = DB::get("SELECT * FROM contents WHERE content_category=? AND content_language=?", [$categoryId, $languageId]);
@@ -111,36 +126,40 @@ if (isset($_POST["contentTable"])) {
 
     foreach ($data as $d) {
 
-        if (isset($d->table)) {
-            if ($d->table === 'translate') {
-
+        if(isset($d->table)){
+            if ($d->table === 'translate'){
+                $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
+                $url = DB::getVar("SELECT url FROM contents WHERE id=?",[$d->content_id]);
+                $response[] = [
+                    "id" => $d->content_id,
+                    "url" => $url,
+                    "title" => $d->content_title,
+                    "category" => $categoryName,
+                    "process" => [
+                        "edit" => $controlEdit,
+                        "delete" => $controlDelete,
+                        "list" => $controlList,
+                        "translate"=>true,
+                    ],
+                ];
             }
-        }
-        /*$categoryName = DB::getVar("SELECT category.category_name
-        FROM category
-        INNER JOIN contents ON contents.content_category = category.id
-        WHERE contents.id=?", [$d->id]);*/
+        }if (isset($d->table)){
+            if ($d->table === 'contents'){
+                $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
+                $url = DB::getVar("SELECT url FROM contents WHERE id=?",[$d->id]);
 
-        $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
-        $access = DB::getVar("SELECT status FROM language_permission WHERE user_id=? AND language_id=?", [$user_id, $d->content_language]);
-        $text_1 = 'Düzenle';
-        $text_2 = 'Kaldır';
-        $text_3 = 'Görüntüle';
-        $translate_1 = (language($text_1)) ? language($text_1) : $text_1;
-        $translate_2 = (language($text_2)) ? language($text_2) : $text_2;
-        $translate_3 = (language($text_3)) ? language($text_3) : $text_3;
-
-        if ($access == 1) {
-            $response[] = [
-                "id" => $d->id,
-                "title" => $d->content_title,
-                "category" => $categoryName,
-                "process" => '<div class="d-flex justify-content-center">'
-                    . ($controlEdit ? '<a href="editContent/' . $d->url . '"><button type="button" class="btn btn-relief-info btn-sm ">' . $translate_1 . '</button></a><span style="margin:3px;"></span>' : '')
-                    . ($controlDelete ? '<button type="button" class="btn btn-relief-danger btn-sm " onclick="deleteContent(' . $d->id . ')"> ' . $translate_2 . ' </button><span style="margin:3px;"></span>' : '')
-                    . ($controlList ? '<a href="content/' . $d->url . '"><button type="button" class="btn btn-relief-warning btn-sm " onclick="pageVisit(' . $d->id . ')">' . $translate_3 . '</button></a>' : '')
-                    . '</div>',
-            ];
+                $response[] = [
+                    "id" => $d->id,
+                    "url" => $url,
+                    "title" => $d->content_title,
+                    "category" => $categoryName,
+                    "process" => [
+                        "edit" => $controlEdit,
+                        "delete" => $controlDelete,
+                        "list" => $controlList,
+                    ],
+                ];
+            }
         }
     }
     echo json_encode(["recordsTotal" => count($response), "recordsFiltered" => count($response), "data" => $response]);
@@ -149,6 +168,12 @@ if (isset($_POST["contentTable"])) {
 if (isset($_POST["deleteContent"])) {
     $id = C($_POST["id"]);
     $delete = $content->deleteContent($id);
+    echo "ok";
+    exit();
+}
+if (isset($_POST["deleteTranslatedContent"])) {
+    $id = C($_POST["id"]);
+    $delete = DB::exec("DELETE FROM translated_contents WHERE content_id=? ",[$id]);
     echo "ok";
     exit();
 }
@@ -285,7 +310,6 @@ if (isset($_POST["pageVisit"])) {
 }
 if (isset($_POST["question"])) {
     $question_2 = isset($_POST["number"]) && is_numeric($_POST["number"]) ? (int)$_POST["number"] : null;
-    var_dump($question_2);
     $id = $_POST["id"];
     $user_id = $_SESSION["user"];
 
@@ -321,6 +345,5 @@ if (isset($_POST["question"])) {
     exit;
 
 }
-
 
 ?>

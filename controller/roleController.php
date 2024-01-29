@@ -10,8 +10,11 @@ $user = new User();
 if (isset($_POST["addRole"])) {
     $roleName = C($_POST["roleName"]);
     $controlRole = $role->controlRole($roleName);
+    $regexControl = (preg_match("/[0-9]/", $roleName));
     if (!$roleName) {
         echo "bos";
+    }elseif($regexControl){
+        echo "regex";
     } else if ($controlRole) {
         echo "hata";
     } else {
@@ -34,10 +37,15 @@ if (isset($_POST["getRoleTable"])) {
 
             $response[] = [
                 "id" => $d->id,
+                "d_noneListName" => $language_1,
+                "d_nonePageName" => $language_2,
                 "role_name" => $d->role_name,
-                "users" => '<a href="userlistRole/' . $d->id . '"><button type="button" class="btn btn-relief-warning btn-sm">' . $language_1 . '</button></a>',
-                "pages" => '<a href="permission/' . $d->id . '"><button type="button" class="btn btn-relief-info btn-sm">' . $language_2 . '</button></a>',
-
+                "users" => [
+                    "button" =>true,
+                ],
+                "pages" => [
+                    "button" => true,
+                ],
             ];
         }
     }
@@ -74,50 +82,20 @@ if (isset($_POST["getUserTable"])) {
     echo json_encode(["recordsTotal" => count($data), "recordsFiltered" => count($data), "data" => $response]);
     exit();
 }
-if (isset($_POST["getSelectBox"])) {
-    $text_1 = "Rol Seçiniz";
-    $language_1 = (language($text_1)) ? language($text_1) : $text_1;
-    $text_2 = "Kaldır";
-    $language_2 = (language($text_2)) ? language($text_2) : $text_2;
-    $text_2 = "Rolleri Listele";
-    $language_3 = (language($text_2)) ? language($text_2) : $text_2;
-    $lang = $_SESSION["lang"];
-    $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
-
-    $response = '
-        <form id="deleteRoleForm">
-            <label class="form-label-lg mb-1">'.$language_3.'</label>
-            <select class="select2 form-control form-control select2-hidden-accessible" data-select2-id="1" aria-hidden="true" id="roleSelect" name="roleSelect">
-                <option value="" data-select2-id="3" selected> ' . $language_1 . ' </option>
-    ';
-
-    $data = $role->getRoles();
-
-    foreach ($data as $d) {
-        $id = $d->id;
-        $disabled = ($id == '1') ? 'disabled' : "";
-        $response .= '<option value="' . $id . '" data-select2-id="3" ' . $disabled . '>' . $d->role_name . '</option>';
-    }
-
-    $response .= '</select>
-                <div class="d-flex justify-content-end mt-1">
-                    <button type="submit" class="btn btn-relief-success" onclick="deleteRole(' . $language . ')">
-                        <font style="vertical-align: inherit;">' . $language_2 . '</font>
-                    </button>     
-                </div>
-            </form>
-    ';
-
-    echo $response;
-}
 if (isset($_POST["deleteRole"])) {
     $id = C($_POST["id"]);
     if (!$id) {
         echo "bos";
     } else {
-        $delete = $role->deleteRoles($id);
-        echo "ok";
-        exit();
+        $control=DB::getVar("SELECT 1 FROM users WHERE role_id=?",[$id]);
+        if($control){
+            echo "error";
+        }
+       else{
+           $delete = $role->deleteRoles($id);
+           echo "ok";
+            exit();
+        }
     }
 }
 if (isset($_POST["langCheckBox"])) {

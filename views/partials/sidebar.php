@@ -47,8 +47,57 @@
         </ul>
     </div>
     <div class="shadow-bottom" ></div>
-    <div class="main-menu-content" id="sidebar">
+    <div class="main-menu-content">
+        <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+            <li class="navigation-header">
+                <span data-i18n="Apps &amp; Pages">Sayfalar</span><i data-feather="more-horizontal"></i>
+            </li>
 
+            <?php
+            $getTitle = DB::get("SELECT * FROM pages WHERE parent_id = 0");
+            foreach ($getTitle as $gt) {
+                $getPages = DB::get("SELECT * FROM pages WHERE parent_id = ? AND `property` != '0' ", [$gt->id]);
+
+                $pageName = $gt->page_name;
+                $translate = (language($pageName)) ? language($pageName) : $pageName;
+                ?>
+
+                <li class="nav-item nav-group-children">
+                    <a class="d-flex align-items-center">
+                        <i class="<?= $gt->page_icon ?> mb-1"></i>
+                        <span class="menu-title text-truncate" data-i18n="Invoice"><?= $translate ?></span>
+                    </a>
+                    <ul class="menu-content">
+                        <?php
+                        foreach ($getPages as $gp) {
+                            $pageName = $gp->page_name;
+                            $translate = (language($pageName)) ? language($pageName) : $pageName;
+                            $id = $gp->id;
+                            $controlView = controlView($id);
+                            $role_id = $_SESSION["role_id"];
+                            $language = $_SESSION["lang"];
+                            $languageID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$language]);
+                            $addID = DB::getVar("SELECT parent_id FROM pages WHERE property = 'add' ");
+                            $control = controlFunction($addID, $languageID, $role_id);
+
+                            if ($controlView && ($gp->property != 'add' || ($gp->property == 'add' AND $control))) {
+                                ?>
+                                <li>
+                                    <a class="router-link-active router-link-exact-active" href="<?= $gp->href ?>">
+                                        <i data-feather="circle"></i>
+                                        <span class="menu-item text-truncate" data-i18n="List"><?= $translate ?></span>
+                                    </a>
+                                </li>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </ul>
+                </li>
+                <?php
+            }
+            ?>
+        </ul>
     </div>
 </div>
 <!-- END: Main Menu-->

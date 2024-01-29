@@ -24,11 +24,27 @@ $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
                         </div>
                         <div class="row">
                             <div class="col-md-3 mt-5" id="filterByCategory">
-
+                                <?php
+                                $data = DB::get("SELECT id,category_name FROM category");
+                                $text = 'Kategoriye Göre Filtrele ';
+                                $translate = (language($text)) ? language($text) : $text;
+                                $text_2 = 'Kategori Seçiniz';
+                                $translate_2 = (language($text_2)) ? language($text_2) : $text_2;
+                                ?>
+                                <label class="form-label-lg "><b><?=$translate?></b></label>
+                                <select class="select2 form-control form-control select2-hidden-accessible" data-select2-id="1" aria-hidden="true" id="categoryFilter" name="categoryFilter">
+                                    <option value="" data-select2-id="3" selected=""> <?=$translate_2?>  </option>
+                                    <?php
+                                    foreach ($data as $d) {?>
+                                        <option value="<?=$d->id?> " data-select2-id="3" > <?=$d->category_name ?> </option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
                             </div>
-<!--                            <div class="col-md-3 mt-5" id="filterByLanguage">-->
-<!---->
-<!--                            </div>-->
+                            <!--                            <div class="col-md-3 mt-5" id="filterByLanguage">-->
+                            <!---->
+                            <!--                            </div>-->
                         </div>
                         <?php
                         $controlList = controlList($target);
@@ -38,6 +54,7 @@ $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
                                    id="contentTable">
                                 <thead>
                                 <tr class="fw-semibold fs-6 text-gray-800">
+                                    <th scope="col" class="d-none"></th>
                                     <th scope="col" class="d-none"></th>
                                     <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
                                         style="width: 100px;"><b> <?php
@@ -59,9 +76,7 @@ $page_id = DB::getVar("SELECT id FROM pages WHERE href=?", [$page_name]);
                                 <tbody>
                                 </tbody>
                             </table>
-                        <?php } else {
-
-                        } ?>
+                        <?php } else {} ?>
                     </div>
                 </div>
             </div>

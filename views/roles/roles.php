@@ -27,6 +27,8 @@
                                 <thead>
                                 <tr class="fw-semibold fs-6 text-gray-800">
                                     <th scope="col" class="d-none"></th>
+                                    <th scope="col" class="d-none"></th>
+                                    <th scope="col" class="d-none"></th>
                                     <th tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1"
                                         style="width: 300px;"><?php $text = 'Rol Adı';
                                         $translate = (language($text)) ? language($text) : $text;

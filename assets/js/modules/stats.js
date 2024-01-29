@@ -75,12 +75,47 @@ function statsFilter() {
             'statsFilter': 1,
         },
         url: "controller/statsController.php",
-        success: function (e) {
+        dataType: 'json',
+        success: function (data) {
+            var translate_1 = data.translate_1;
+            var translate_2 = data.translate_2;
+            var translate_3 = data.translate_3;
+            var translate_4 = data.translate_4;
 
+            // Label ve select elementlerini oluştur
+            var labelElement = document.createElement('label');
+            labelElement.setAttribute('for', 'tag');
+            labelElement.classList.add('form-label-lg');
+            labelElement.innerHTML = '<b>' + translate_1 + ' :</b>';
+
+            var selectElement = document.createElement('select');
+            selectElement.classList.add('form-select');
+            selectElement.setAttribute('id', 'filterSelect');
+
+            var option1 = document.createElement('option');
+            option1.value = '';
+            option1.innerHTML = translate_2;
+
+            var option2 = document.createElement('option');
+            option2.value = '1';
+            option2.innerHTML = translate_3;
+
+            var option3 = document.createElement('option');
+            option3.value = '2';
+            option3.innerHTML = translate_4;
+
+            // Optionları select elementine ekleyin
+            selectElement.appendChild(option1);
+            selectElement.appendChild(option2);
+            selectElement.appendChild(option3);
+
+            // #statsFilter içerisini temizle ve yeni oluşturulan elementleri ekleyin
             $('#statsFilter').empty();
-            $('#statsFilter').append(e);
+            $('#statsFilter').append(labelElement);
+            $('#statsFilter').append(selectElement);
         }
     });
 }
+
 
 statsFilter()

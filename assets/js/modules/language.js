@@ -2,9 +2,10 @@ let table;
 
 function languageTable() {
     if (table) {
-        table.destroy()
-        table = false
+        table.destroy();
+        table = false;
     }
+
     table = $('#langPackageTable').DataTable({
         sDom: '<"d-flex justify-content-between align-items-center"lf>rt<"d-flex justify-content-between align-items-center"ip>',
         ajax: {
@@ -12,19 +13,32 @@ function languageTable() {
             type: 'POST',
             data: {
                 "languageTable": 1,
-            }
+            },
+            dataSrc: function (json) {
+                var data = json.data.map(function (item) {
+                    return {
+                        id: item.id,
+                        lang_dnone:item.lang_dnone,
+                        lang_short_dnone: item.lang_short_dnone,
+                        lang_short: item.lang_short,
+                        lang_name: (item.lang_name.flag ? item.lang_dnone + '<i class="flag-icon flag-icon-' + item.lang_short_dnone + '"></i> ' : ''),
+                        process: (item.process.button ? '<button type="button" class="btn btn-danger btn-sm" onclick="removeLanguage(' + item.id + ')">Kaldır</button>' : ''),
+                    };
+                });
+                return data;
+            },
         },
         columns: [
-            {data: 'id', visible: false},
-            {data: 'lang_name'},
-            {data: 'lang_short'},
-            {data: 'process'},
+            { data: 'id', visible: false },
+            { data: 'lang_dnone', visible: false },
+            { data: 'lang_short_dnone', visible: false },
+            { data: 'lang_name' },
+            { data: 'lang_short' },
+            { data: 'process' },
         ],
-        "language": {"url": "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json"}
+        language: { url: "https://cdn.datatables.net/plug-ins/1.13.4/i18n/tr.json" }
     });
-
 }
-
 languageTable()
 
 function addLangPackage() {

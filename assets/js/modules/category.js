@@ -1,18 +1,3 @@
-function getCategorySelectBox() {
-    $.ajax({
-        type: 'POST',
-        data: {
-            'getCategorySelectBox': 1
-        },
-        url: "controller/categoryController.php",
-        success: function (e) {
-            $('#selectBoxCategory').empty();
-            $('#selectBoxCategory').append(e);
-        }
-
-    })
-}
-
 function addCategory(id) {
     if (id == 2) {
         $("#addCategoryForm").validate({
@@ -202,168 +187,86 @@ function addCategory(id) {
     }
 }
 
-function deleteCategory(id) {
-    if (id == 2) {
-        $("#deleteCategoryForm").validate({
-            rules: {
-                categorySelect: {
-                    required: true,
-                },
-            },
-            messages: {
-                categorySelect: {
-                    required: "Please select a Role!",
-                },
-            },
-            errorPlacement: function (error, element) {
-                error.addClass("invalid-feedback");
-                error.insertAfter(element);
-                element.addClass("is-invalid");
-            },
-            success: function (label, element) {
-                label.remove();
-                $(element).removeClass("is-invalid");
-                $(element).addClass("is-valid");
-            },
-            submitHandler: function (form, event) {
-                event.preventDefault();
-                Swal.fire({
-                    title: 'Delete Category ?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#00FF00',
-                    confirmButtonText: 'Delete',
-                    cancelButtonText: 'Cancel',
-                    showClass: {
-                        popup: 'swal2-show',
-                        backdrop: 'swal2-backdrop-show',
-                        icon: 'swal2-icon-show'
-                    },
-                    hideClass: {
-                        popup: 'swal2-hide',
-                        backdrop: 'swal2-backdrop-hide',
-                        icon: 'swal2-icon-hide'
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: "POST",
-                            url: "controller/categoryController.php",
-                            data: {
-                                "deleteCategory": 1,
-                                "id": $("#categorySelect").val(),
-                            },
-                            success: function (e) {
-                                if (e.trim() === "ok") {
-                                    Swal.fire({
-                                        title: 'Success!',
-                                        text: 'Category Deleted!',
-                                        icon: 'success',
-                                        timer: 1500,
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#3085d6'
-                                    }).then((result) => {
-                                        $("#roleSelect").val(" ");
-                                        getCategorySelectBox();
-                                    });
-                                } else if (e.trim() === "hata") {
-                                    Swal.fire({
-                                        title: 'Error!',
-                                        text: 'There are contents belonging to this category!',
-                                        icon: 'error',
-                                        timer: 1500,
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#3085d6'
-                                    })
-                                }
-                            },
+function deleteCategory() {
 
-                        });
-                    }
-                });
-            }
-        });
-    } else {
-        $("#deleteCategoryForm").validate({
-            rules: {
-                categorySelect: {
-                    required: true,
+    $("#deleteCategoryForm").validate({
+        rules: {
+            categorySelect: {
+                required: true,
+            },
+        },
+        messages: {
+            categorySelect: {
+                required: "Lütfen Rol Seçiniz!",
+            },
+        },
+        errorPlacement: function (error, element) {
+            error.addClass("invalid-feedback");
+            error.insertAfter(element);
+            element.addClass("is-invalid");
+        },
+        success: function (label, element) {
+            label.remove();
+            $(element).removeClass("is-invalid");
+            $(element).addClass("is-valid");
+        },
+        submitHandler: function (form, event) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Kategori silinsin mi ?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#00FF00',
+                confirmButtonText: 'Sil',
+                cancelButtonText: 'İptal',
+                showClass: {
+                    popup: 'swal2-show',
+                    backdrop: 'swal2-backdrop-show',
+                    icon: 'swal2-icon-show'
                 },
-            },
-            messages: {
-                categorySelect: {
-                    required: "Lütfen Rol Seçiniz!",
-                },
-            },
-            errorPlacement: function (error, element) {
-                error.addClass("invalid-feedback");
-                error.insertAfter(element);
-                element.addClass("is-invalid");
-            },
-            success: function (label, element) {
-                label.remove();
-                $(element).removeClass("is-invalid");
-                $(element).addClass("is-valid");
-            },
-            submitHandler: function (form, event) {
-                event.preventDefault();
-                Swal.fire({
-                    title: 'Kategori silinsin mi ?',
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#00FF00',
-                    confirmButtonText: 'Sil',
-                    cancelButtonText: 'İptal',
-                    showClass: {
-                        popup: 'swal2-show',
-                        backdrop: 'swal2-backdrop-show',
-                        icon: 'swal2-icon-show'
-                    },
-                    hideClass: {
-                        popup: 'swal2-hide',
-                        backdrop: 'swal2-backdrop-hide',
-                        icon: 'swal2-icon-hide'
-                    }
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $.ajax({
-                            type: "POST",
-                            url: "controller/categoryController.php",
-                            data: {
-                                "deleteCategory": 1,
-                                "id": $("#categorySelect").val(),
-                            },
-                            success: function (e) {
-                                if (e.trim() === "ok") {
-                                    Swal.fire({
-                                        title: 'Başarılı!',
-                                        text: 'Kategori Silindi!',
-                                        icon: 'success',
-                                        timer: 1500,
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#3085d6'
-                                    }).then((result) => {
-                                        $("#roleSelect").val(" ");
-                                        getCategorySelectBox();
-                                    });
-                                } else if (e.trim() === "hata") {
-                                    Swal.fire({
-                                        title: 'Hata!',
-                                        text: 'Bu kategoriye ait içerikler bulunuyor!',
-                                        icon: 'error',
-                                        timer: 1500,
-                                        showConfirmButton: true,
-                                        confirmButtonColor: '#3085d6'
-                                    })
-                                }
-                            },
+                hideClass: {
+                    popup: 'swal2-hide',
+                    backdrop: 'swal2-backdrop-hide',
+                    icon: 'swal2-icon-hide'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: "POST",
+                        url: "controller/categoryController.php",
+                        data: {
+                            "deleteCategory": 1,
+                            "id": $("#categorySelect").val(),
+                        },
+                        success: function (e) {
+                            if (e.trim() === "ok") {
+                                Swal.fire({
+                                    title: 'Başarılı!',
+                                    text: 'Kategori Silindi!',
+                                    icon: 'success',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                }).then((result) => {
+                                    window.location.reload();
+                                    $("#roleSelect").val(" ");
+                                });
+                            } else if (e.trim() === "hata") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Bu kategoriye ait içerikler bulunuyor!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            }
+                        },
 
-                        });
-                    }
-                });
-            }
-        });
-    }
+                    });
+                }
+            });
+        }
+    });
 }

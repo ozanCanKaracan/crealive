@@ -19,12 +19,16 @@ if (isset($_POST["top_5"])) {
 
     foreach ($data as $d) {
         $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
-
+        $url=DB::getVar("SELECT url FROM contents WHERE id=?",[$d->id]);
         $response[] = [
             "id" => $d->id,
+            "url"=>$url,
             "title" => $d->content_title,
             "category" => $categoryName,
-            "process" => '<a href="content/' . $d->url . '"><button type="button" class="btn btn-relief-warning btn-sm " onclick="pageVisit(' . $d->id . ')">' . $translate_3 . '</button></a>',
+            "process" => [
+                "text" =>$translate_3,
+                "button"=>true,
+            ],
         ];
     }
 
@@ -119,16 +123,13 @@ if (isset($_POST["statsFilter"])) {
     $translate_3 = (language($text_3)) ? language($text_3) : $text_3;
     $translate_4 = (language($text_4)) ? language($text_4) : $text_4;
 
-    $response = '
-      <label for="tag" class="form-label-lg"><b>'.$translate_1.' :</b></label>
-        <select class="form-select" id="filterSelect">
-            <option value="">' . $translate_2 . '</option>
-            <option value="1">'.$translate_3.'</option>
-            <option value="2">'.$translate_4.'</option>
-        </select>';
+    $data = array(
+        'translate_1' => $translate_1,
+        'translate_2' => $translate_2,
+        'translate_3' => $translate_3,
+        'translate_4' => $translate_4
+    );
 
-
-    echo $response;
+    echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;
-
 }

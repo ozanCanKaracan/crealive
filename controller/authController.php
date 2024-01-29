@@ -56,7 +56,7 @@ if (isset($_POST["logout"])) {
     echo "ok";
     exit();
 }
-if (isset($_POST["sidebarAjax"])) {
+/*if (isset($_POST["sidebarAjax"])) {
     $role_id = $_SESSION["role_id"];
     $language = $_SESSION["lang"];
     $languageID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$language]);
@@ -106,4 +106,4 @@ if (isset($_POST["sidebarAjax"])) {
         </ul>';
     echo $response;
     exit;
-}
+}*/

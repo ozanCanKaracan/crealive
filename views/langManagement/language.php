@@ -46,6 +46,8 @@
                         <thead>
                         <tr class="fw-semibold fs-6 text-gray-800">
                             <th scope="col" class="d-none"></th>
+                            <th scope="col" class="d-none"></th>
+                            <th scope="col" class="d-none"></th>
                             <th scope="col"><b><?php $text = 'Dil Adı';
                                     $translate = (language($text)) ? language($text) : $text;
                                     ?><?= $translate ?></b></th>

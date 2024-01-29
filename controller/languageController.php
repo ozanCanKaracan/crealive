@@ -11,20 +11,27 @@ if (isset($_POST["languageTable"])) {
             $languageShort = $d->lang_name_short;
             $languageShort = ($languageShort == 'en') ? 'us' : $languageShort;
             $shortName = ($shortName == 'en') ? 'us' : $shortName;
-            $text= $d->lang_name;
-            $translate=(language($text)) ? language($text) : $text;
+            $text = $d->lang_name;
+            $translate = (language($text)) ? language($text) : $text;
+            $d_noneShortTag= ($languageShort == 'en') ? 'us' : $languageShort;
             $response[] = [
                 "id" => $d->id,
-                "lang_name" => $translate . '       <i class="flag-icon flag-icon-' . $languageShort . '"></i>',
+                "lang_dnone" =>$translate,
+                "lang_short_dnone" => $d_noneShortTag,
+                "lang_name" => [
+                    "flag"=>true,
+                ],
                 "lang_short" => $shortName,
-                "process" => '<button type="button" class="btn btn-danger btn-sm" onclick="removeLanguage(' . $d->id . ')">Kaldır</button>',
+                "process" => [
+                    "button" => true,
+                ],
             ];
         }
     }
-
-    echo json_encode(["recordsTotal" => count($data), "recordsFiltered" => count($data), "data" => $response]);
+    echo json_encode(["recordsTotal" => count($response), "recordsFiltered" => count($response), "data" => $response]);
     exit();
 }
+
 if (isset($_POST["addLangPackage"])) {
     $id = $_POST["selectedLang"];
     $apiKey = "AIzaSyBdH8gjaAKplDXc_rxfTAHI9wCjxTO_U70";

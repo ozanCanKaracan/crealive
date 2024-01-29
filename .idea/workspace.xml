@@ -4,14 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="TOP 5 sıralaması tarihe göre yapıldı,&#10;Veritabanında index düzenlemleri yapıldı,tablo bağlantıları düzenlendi.&#10;Veritabanı veritipleri düzeltildi.">
-      <change afterPath="$PROJECT_DIR$/cms_tablo.sql" afterDir="false" />
+    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="HTML response düzenlenmeye başlandı,&#10;içerik listelerken çevirilmiş içeriklerde listeye eklendi.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms (1).sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/contents.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/contents.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/language.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/language.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/roles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/stats.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/stats.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/top_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/top_5.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/authController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/authController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/categoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/categoryController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/contentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/permissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/permissionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/languageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/languageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/roleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/roleController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/category/editCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/category/editCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/content/contents.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/contents.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/langManagement/language.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/langManagement/language.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/partials/sidebar.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/sidebar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/roles/editRole.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/roles/editRole.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/roles/roles.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/roles/roles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/stats/top_5.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/stats/top_5.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +125,9 @@
       <workItem from="1705911054368" duration="16706000" />
       <workItem from="1705998364597" duration="9105000" />
       <workItem from="1706083586789" duration="3550000" />
+      <workItem from="1706109466419" duration="66000" />
+      <workItem from="1706209210111" duration="3100000" />
+      <workItem from="1706515878461" duration="13353000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -249,7 +265,31 @@
       <option name="project" value="LOCAL" />
       <updated>1705935543871</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="TOP 5 sıralaması tarihe göre yapıldı,&#10;Veritabanında index düzenlemleri yapıldı,tablo bağlantıları düzenlendi.&#10;Veritabanı veritipleri düzeltildi.">
+      <option name="closed" value="true" />
+      <created>1706109484473</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1706109484473</updated>
+    </task>
+    <task id="LOCAL-00019" summary="TOP 5 sıralaması tarihe göre yapıldı,&#10;Veritabanında index düzenlemleri yapıldı,tablo bağlantıları düzenlendi.&#10;Veritabanı veritipleri düzeltildi.">
+      <option name="closed" value="true" />
+      <created>1706109520011</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1706109520011</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Sorgu Birleştirme.">
+      <option name="closed" value="true" />
+      <created>1706212164278</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1706212164278</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -264,7 +304,10 @@
     <MESSAGE value="Yetki değiştirme kısmı abac yolunda ilerlendi ve dinamik bir yapıya getiriliyor. content table'daki bug düzeltildi." />
     <MESSAGE value="Yetki ekleme tarafı 5 fonksiyondan tek fonksiyona düşürülüp dinamik bir hale getirilmiştir. Artık abac mantığı ile çalışmaktadır. Html responsları kaldırılmıştır." />
     <MESSAGE value="Yetki kontrolleri düzenlendi. İçerik istenilen dilde ekleme izni yapıldı. Yetki ekleme sayfası çeviri işlemleri tamamlandı. Sidebar'daki ekleme kısmı eğer izni var ise görüntülenecek olarak düzeltildi." />
-    <option name="LAST_COMMIT_MESSAGE" value="Yetki kontrolleri düzenlendi. İçerik istenilen dilde ekleme izni yapıldı. Yetki ekleme sayfası çeviri işlemleri tamamlandı. Sidebar'daki ekleme kısmı eğer izni var ise görüntülenecek olarak düzeltildi." />
+    <MESSAGE value="TOP 5 sıralaması tarihe göre yapıldı,&#10;Veritabanında index düzenlemleri yapıldı,tablo bağlantıları düzenlendi.&#10;Veritabanı veritipleri düzeltildi." />
+    <MESSAGE value="Sorgu Birleştirme." />
+    <MESSAGE value="HTML response düzenlenmeye başlandı,&#10;içerik listelerken çevirilmiş içeriklerde listeye eklendi." />
+    <option name="LAST_COMMIT_MESSAGE" value="HTML response düzenlenmeye başlandı,&#10;içerik listelerken çevirilmiş içeriklerde listeye eklendi." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
