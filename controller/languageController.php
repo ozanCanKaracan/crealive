@@ -31,7 +31,6 @@ if (isset($_POST["languageTable"])) {
     echo json_encode(["recordsTotal" => count($response), "recordsFiltered" => count($response), "data" => $response]);
     exit();
 }
-
 if (isset($_POST["addLangPackage"])) {
     $id = $_POST["selectedLang"];
     $apiKey = "AIzaSyBdH8gjaAKplDXc_rxfTAHI9wCjxTO_U70";

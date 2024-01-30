@@ -82,7 +82,6 @@ function statsFilter() {
             var translate_3 = data.translate_3;
             var translate_4 = data.translate_4;
 
-            // Label ve select elementlerini oluştur
             var labelElement = document.createElement('label');
             labelElement.setAttribute('for', 'tag');
             labelElement.classList.add('form-label-lg');
@@ -104,12 +103,10 @@ function statsFilter() {
             option3.value = '2';
             option3.innerHTML = translate_4;
 
-            // Optionları select elementine ekleyin
             selectElement.appendChild(option1);
             selectElement.appendChild(option2);
             selectElement.appendChild(option3);
 
-            // #statsFilter içerisini temizle ve yeni oluşturulan elementleri ekleyin
             $('#statsFilter').empty();
             $('#statsFilter').append(labelElement);
             $('#statsFilter').append(selectElement);

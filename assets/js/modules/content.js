@@ -8,10 +8,15 @@ function question(number) {
                 "id": id,
             },
             url: "controller/contentController.php",
-            success: function (e) {
-
+            dataType: 'json',
+            success: function (response) {
                 $('#question').empty();
-                $('#question').append(e);
+                if (response.button1) {
+                    $('#question').append('<button type="button" class="btn m-1" onclick="question(1)">Evet</button>');
+                }
+                if (response.button2) {
+                    $('#question').append('<button type="button" class="btn m-1" onclick="question(2)">Hayır</button>');
+                }
             }
         });
     } else {
@@ -20,17 +25,27 @@ function question(number) {
             type: 'POST',
             data: {
                 'question': 1,
-                "id" : id
+                "id": id
             },
             url: "controller/contentController.php",
-            success: function (e) {
+            dataType: 'json',
+            success: function (response) {
                 takeID(id)
                 $('#question').empty();
-                $('#question').append(e);
+                if (response.button1) {
+                    $('#question').append('<button type="button" class="btn m-1" onclick="question(1)">Evet</button>');
+                }
+                if (response.button2) {
+                    $('#question').append('<button type="button" class="btn m-1" onclick="question(2)">Hayır</button>');
+                }
+                if(response.message){
+                    $('#question').append('<h3>Teşekkürler</h3>');
+                }
             }
         });
     }
 }
+
 
 function takeID(id) {
     $.ajax({

@@ -29,11 +29,11 @@ if (isset($_POST["addContent"])) {
     $user_id = $_SESSION["user"];
     $language = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$lang]);
     $controlTitle = DB::getVar("SELECT content_title FROM contents WHERE content_title=?", [$title]);
-    if(!$category){
+    if (!$category) {
         echo "categoryNull";
-    }elseif(!$title){
+    } elseif (!$title) {
         echo "titleNull";
-    }elseif(!$editor){
+    } elseif (!$editor) {
         echo "editorNull";
     } else if ($controlTitle) {
         echo "title";
@@ -111,57 +111,66 @@ if (isset($_POST["contentTable"])) {
         $data = array_merge($firstQuery, $secondQuery);
     }
     if ($categoryId and $languageId) {
-        $data = DB::get("SELECT * FROM contents WHERE content_category=? AND content_language=?", [$categoryId, $languageId]);
+        $data = DB::get("SELECT 'contents' as 'table', content_title, content_category, id FROM contents WHERE content_language = ? AND content_category=?", [$language, $categoryId]);
     } else if ($categoryId) {
-        $data = DB::get("SELECT * FROM contents WHERE content_category=?", [$categoryId]);
+        $firstQuery = DB::get("SELECT 'contents' as 'table', content_title, content_category, id FROM contents WHERE content_language = ? AND content_category=?", [$language, $categoryId]);
+        $secondQuery = DB::get("SELECT 'translate' as 'table', content_id,content_category, title as content_title, id FROM translated_contents WHERE language_id = ? AND content_category=? ", [$language,$categoryId]);
+        $data = array_merge($firstQuery, $secondQuery);
+
     } else if ($languageId) {
-        $data = DB::get("SELECT * FROM contents WHERE content_language=?", [$languageId]);
+        $firstQuery = DB::get("SELECT 'contents' as 'table', content_title, content_category, id FROM contents WHERE content_language = ?", [$languageId]);
+        $secondQuery = DB::get("SELECT 'translate' as 'table', content_id,content_category, title as content_title, id FROM translated_contents WHERE language_id = ?", [$languageId]);
+        $data = array_merge($firstQuery, $secondQuery);
+
+
     }
-    $controlEdit = controlEdit($page_id,$language);
-    $controlDelete = controlDeleteBack($page_id,$language);
-    $controlList = controlPageList($page_id,$language);
+
+    $controlEdit = controlEdit($page_id, $language);
+    $controlDelete = controlDeleteBack($page_id, $language);
+    $controlList = controlPageList($page_id, $language);
 
 
     $response = [];
 
     foreach ($data as $d) {
-
-        if(isset($d->table)){
-            if ($d->table === 'translate'){
-                $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
-                $url = DB::getVar("SELECT url FROM contents WHERE id=?",[$d->content_id]);
-                $response[] = [
-                    "id" => $d->content_id,
-                    "url" => $url,
-                    "title" => $d->content_title,
-                    "category" => $categoryName,
-                    "process" => [
-                        "edit" => $controlEdit,
-                        "delete" => $controlDelete,
-                        "list" => $controlList,
-                        "translate"=>true,
-                    ],
-                ];
+            if (isset($d->table)) {
+                if ($d->table === 'translate') {
+                    $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
+                    $url = DB::getVar("SELECT url FROM contents WHERE id=?", [$d->content_id]);
+                    $response[] = [
+                        "id" => $d->content_id,
+                        "url" => $url,
+                        "title" => $d->content_title,
+                        "category" => $categoryName,
+                        "process" => [
+                            "edit" => $controlEdit,
+                            "delete" => $controlDelete,
+                            "list" => $controlList,
+                            "translate" => true,
+                        ],
+                    ];
+                }
             }
-        }if (isset($d->table)){
-            if ($d->table === 'contents'){
-                $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
-                $url = DB::getVar("SELECT url FROM contents WHERE id=?",[$d->id]);
+            if (isset($d->table)) {
+                if ($d->table === 'contents') {
+                    $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
+                    $url = DB::getVar("SELECT url FROM contents WHERE id=?", [$d->id]);
 
-                $response[] = [
-                    "id" => $d->id,
-                    "url" => $url,
-                    "title" => $d->content_title,
-                    "category" => $categoryName,
-                    "process" => [
-                        "edit" => $controlEdit,
-                        "delete" => $controlDelete,
-                        "list" => $controlList,
-                    ],
-                ];
+                    $response[] = [
+                        "id" => $d->id,
+                        "url" => $url,
+                        "title" => $d->content_title,
+                        "category" => $categoryName,
+                        "process" => [
+                            "edit" => $controlEdit,
+                            "delete" => $controlDelete,
+                            "list" => $controlList,
+                        ],
+                    ];
+                }
             }
         }
-    }
+
     echo json_encode(["recordsTotal" => count($response), "recordsFiltered" => count($response), "data" => $response]);
     exit();
 }
@@ -173,29 +182,30 @@ if (isset($_POST["deleteContent"])) {
 }
 if (isset($_POST["deleteTranslatedContent"])) {
     $id = C($_POST["id"]);
-    $delete = DB::exec("DELETE FROM translated_contents WHERE content_id=? ",[$id]);
+    $delete = DB::exec("DELETE FROM translated_contents WHERE content_id=? ", [$id]);
     echo "ok";
     exit();
 }
 if (isset($_POST["categoryFilter"])) {
     $data = $category->getCategory();
     $text = 'Kategoriye Göre Filtrele ';
-    $translate = (language($text)) ? language($text) : $text;
     $text_2 = 'Kategori Seçiniz';
+    $translate = (language($text)) ? language($text) : $text;
     $translate_2 = (language($text_2)) ? language($text_2) : $text_2;
-    $response = "";
-    $response .= '
-     <label class="form-label-lg "><b> ' . $translate . ' :</b></label>
-     <select class="select2 form-control form-control select2-hidden-accessible" data-select2-id="1" aria-hidden="true" id="categoryFilter" name="categoryFilter">
-         <option value="" data-select2-id="3" selected="">  ' . $translate_2 . ' </option> ';
-    foreach ($data as $d) {
-        $response .= '   <option value="' . $d->id . '" data-select2-id="3" >' . $d->category_name . '</option>';
-    }
-    $response .= '</select>';
-    echo $response;
-    exit();
 
+    // Verileri içeren bir dizi oluştur
+    $categoryData = array();
+    foreach ($data as $d) {
+        $categoryData[] = array(
+            'id' => $d->id,
+            'category_name' => $d->category_name
+        );
+    }
+
+    echo json_encode($categoryData, JSON_UNESCAPED_UNICODE);
+    exit();
 }
+
 /*if (isset($_POST["languageFilter"])) {
     $data = DB::getVar("SELECT id,lang_name FROM languages");
     $text = 'Dile Göre Filtrele ';
@@ -264,33 +274,28 @@ if (isset($_POST["editContent"])) {
 }
 if (isset($_POST["tagSelect"])) {
     $categoryId = isset($_POST["categoryId"]) && is_numeric($_POST["categoryId"]) ? (int)$_POST["categoryId"] : null;
-    $text = "Etiket Seç";
-    $translate = (language($text)) ? language($text) : $text;
+
+    $response = [];
     if ($categoryId) {
         $data = DB::get("SELECT tag_id FROM tag_category WHERE category_id=?", [$categoryId]);
-        $response = '
-      <label for="tag" class="form-label-lg"><b>' . $translate . '</b></label>
-        <select class="form-select" id="tag" multiple="multiple">';
         foreach ($data as $d) {
             $tagName = DB::getVar("SELECT tag_name FROM tag WHERE id=?", [$d->tag_id]);
-            $response .= '<option value="' . $d->tag_id . '">' . $tagName . '</option>';
+            $response[] = [
+                'tag_id' => $d->tag_id,
+                'tag_name' => $tagName
+            ];
         }
-        $response .= '</select >';
-    } else {
-        $response = "";
-        $response .= '
-            <label for="tag" class="form-label-lg"><b>' . $translate . '</b></label>
-            <select class="form-select" id="tag" multiple="multiple">
-            </select>';
     }
-    echo $response;
-    exit;
+
+    echo json_encode($response);
+    exit();
 }
 if (isset($_POST["pageVisit"])) {
     $id = C($_POST["id"]);
     $user_id = $_SESSION["user"];
     $cookieName = "visited_pages_user" . $user_id;
-
+    $dates=date_default_timezone_set('Europe/Istanbul');
+    $date = date("Y-m-d H:i:s");
     // Eğer daha önce bir cookie varsa, değerini al, yoksa boş bir dizi oluştur
     $visitedPages = isset($_COOKIE[$cookieName]) ? json_decode($_COOKIE[$cookieName], true) : array();
 
@@ -302,10 +307,9 @@ if (isset($_POST["pageVisit"])) {
     }   // Stats tablosunu güncelle
     $control = DB::getVar("SELECT 1 FROM stats WHERE content_id=?", [$id]);
     if ($control == true) {
-        var_dump($id);
-        $process = DB::exec("UPDATE stats SET view_count = view_count + 1, updated_date = NOW() WHERE content_id=?", [$id]);
+        $process = DB::exec("UPDATE stats SET view_count = view_count + 1 WHERE content_id=?", [$id]);
     } else {
-        $process = DB::insert("INSERT INTO stats (content_id,view_count,updated_date) VALUES (?,?,NOW())", [$id, 1]);
+        $process = DB::insert("INSERT INTO stats (content_id,view_count,updated_date) VALUES (?,?,?)", [$id, 1,$date]);
     }
 }
 if (isset($_POST["question"])) {
@@ -320,30 +324,28 @@ if (isset($_POST["question"])) {
     // İlgili cookie'yi kontrol et ve gerekirse oluştur
     $likedContentsLike = isset($_COOKIE[$likeCookieName]) ? json_decode($_COOKIE[$likeCookieName], true) : array();
     $likedContentsDislike = isset($_COOKIE[$dislikeCookieName]) ? json_decode($_COOKIE[$dislikeCookieName], true) : array();
-    $response ='';
+    $response = array();
+
     if (!in_array($id, $likedContentsLike) && !in_array($id, $likedContentsDislike)) {
         if ($question_2 == 1) {
             $likedContentsLike[] = $id;
             setcookie($likeCookieName, json_encode($likedContentsLike), time() + (86400 * 30), "/");
-            $response = '<h3>Teşekkürler</h3>';
-            $update = DB::exec("UPDATE stats SET content_likes = content_likes + 1 WHERE content_id=?",[$id]);
+            $response["message"] = true;
+            $update = DB::exec("UPDATE stats SET content_likes = content_likes + 1 WHERE content_id=?", [$id]);
         } else if ($question_2 == 2) {
             $likedContentsDislike[] = $id;
             setcookie($dislikeCookieName, json_encode($likedContentsDislike), time() + (86400 * 30), "/");
-            $response = '<h3>Teşekkürler</h3>';
-            $update = DB::exec("UPDATE stats SET content_dislikes = content_dislikes + 1 WHERE content_id=?",[$id]);
+            $response["message"] = true;
+            $update = DB::exec("UPDATE stats SET content_dislikes = content_dislikes + 1 WHERE content_id=?", [$id]);
         } else if ($question_2 === null) {
-            $response = '
-        <button type="button" class="btn m-1" onclick="question(1)">Evet</button>
-        <button type="button" class="btn m-1" onclick="question(2)">Hayır</button>
-        ';
-
+            $response["button1"] = true;
+            $response["button2"] = true;
         }
-
     }
-    echo $response;
-    exit;
 
+    echo json_encode($response);
+    exit;
 }
+
 
 ?>

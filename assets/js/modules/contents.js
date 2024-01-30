@@ -53,8 +53,6 @@ function contentTable(id, lang, categoryId, languageId) {
     });
 }
 
-
-
 function categoryFilter() {
     $.ajax({
         type: 'POST',
@@ -63,11 +61,39 @@ function categoryFilter() {
         },
         url: "controller/contentController.php",
         success: function (e) {
-            $('#filterByCategory').empty();
-            $('#filterByCategory').append(e);
+            var categoryData = JSON.parse(e);
+
+            var selectElement = document.createElement('select');
+            selectElement.classList.add('select2', 'form-control', 'form-control', 'select2-hidden-accessible');
+            selectElement.setAttribute('data-select2-id', '1');
+            selectElement.setAttribute('aria-hidden', 'true');
+            selectElement.setAttribute('id', 'categoryFilter');
+            selectElement.setAttribute('name', 'categoryFilter');
+
+            var defaultOption = document.createElement('option');
+            defaultOption.value = '';
+            defaultOption.setAttribute('data-select2-id', '3');
+            defaultOption.selected = true;
+            defaultOption.innerHTML = 'Kategori Seçiniz';
+            selectElement.appendChild(defaultOption);
+
+            categoryData.forEach(function (category) {
+                var optionElement = document.createElement('option');
+                optionElement.value = category.id;
+                optionElement.setAttribute('data-select2-id', '3');
+                optionElement.innerHTML = category.category_name;
+                selectElement.appendChild(optionElement);
+            });
+
+            var containerElement = document.getElementById('filterByCategory');
+            containerElement.innerHTML = '';
+            containerElement.appendChild(selectElement);
+
+
         }
     });
 }
+
 
 function languageFilter() {
     $.ajax({

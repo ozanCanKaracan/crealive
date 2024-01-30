@@ -503,13 +503,26 @@ function tagSelect(categoryId) {
         },
         url: "controller/contentController.php",
         success: function (e) {
-            $('#tagContainer').empty();
-            $('#tagContainer').append(e);
+            // Gelen veriyi JSON olarak parse et
+            var tagData = JSON.parse(e);
+
+            var selectElement = document.createElement('select');
+            selectElement.classList.add('form-select');
+            selectElement.setAttribute('id', 'tag');
+            selectElement.setAttribute('multiple', 'multiple');
+
+            tagData.forEach(function (tag) {
+                var optionElement = document.createElement('option');
+                optionElement.value = tag.tag_id;
+                optionElement.text = tag.tag_name;
+                selectElement.appendChild(optionElement);
+            });
+
+            var containerElement = document.getElementById('tagContainer');
+            containerElement.innerHTML = '';
+            containerElement.appendChild(selectElement);
         }
     });
 }
 
-tagSelect()
-
-
-
+tagSelect();
