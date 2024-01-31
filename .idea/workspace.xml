@@ -4,15 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="HTML response düzenlenmeye başlandı,&#10;içerik listelerken çevirilmiş içeriklerde listeye eklendi.">
+    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="HTML responsları düzenleniyor ve content sorgusundaki bug fixlendi">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/addContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/addContent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/js/modules/content.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/contents.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/contents.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/stats.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/stats.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/contentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/include/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/include/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/permission.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/recommended.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/recommended.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/userlistRole.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/userlistRole.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/languageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/languageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/permissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/permissionController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/recommendedController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/recommendedController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/roleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/roleController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/partials/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +120,8 @@
       <workItem from="1706109466419" duration="66000" />
       <workItem from="1706209210111" duration="3100000" />
       <workItem from="1706515878461" duration="13568000" />
-      <workItem from="1706600690444" duration="15999000" />
+      <workItem from="1706600690444" duration="19432000" />
+      <workItem from="1706684860175" duration="16867000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -286,7 +291,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706540061721</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="HTML responsları düzenleniyor ve content sorgusundaki bug fixlendi">
+      <option name="closed" value="true" />
+      <created>1706627535890</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1706627535890</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,7 +317,8 @@
     <MESSAGE value="TOP 5 sıralaması tarihe göre yapıldı,&#10;Veritabanında index düzenlemleri yapıldı,tablo bağlantıları düzenlendi.&#10;Veritabanı veritipleri düzeltildi." />
     <MESSAGE value="Sorgu Birleştirme." />
     <MESSAGE value="HTML response düzenlenmeye başlandı,&#10;içerik listelerken çevirilmiş içeriklerde listeye eklendi." />
-    <option name="LAST_COMMIT_MESSAGE" value="HTML response düzenlenmeye başlandı,&#10;içerik listelerken çevirilmiş içeriklerde listeye eklendi." />
+    <MESSAGE value="HTML responsları düzenleniyor ve content sorgusundaki bug fixlendi" />
+    <option name="LAST_COMMIT_MESSAGE" value="HTML responsları düzenleniyor ve content sorgusundaki bug fixlendi" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

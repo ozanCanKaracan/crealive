@@ -60,7 +60,7 @@ if (isset($_POST["getUserTable"])) {
 
     if (count($data) > 0) {
         foreach ($data as $d) {
-            $languages = DB::get("SELECT * FROM languages");
+            $languages = DB::get("SELECT id,lang_name_short FROM languages");
 
             $userData = [
                 "id" => $d->id,
@@ -68,11 +68,15 @@ if (isset($_POST["getUserTable"])) {
             ];
 
             foreach ($languages as $lg) {
+                $checkedControl = DB::getVar("SELECT status FROM language_permission WHERE user_id=? AND language_id=?", [$d->id, $lg->id]);
+                $checked = ($checkedControl == 1) ? 'checked' : '';
 
-                $checkedControl=DB::getVar("SELECT status FROM language_permission WHERE user_id=? AND language_id=?",[$d->id , $lg->id]);
-                $checked= ($checkedControl == 1) ? 'checked' : '';
-                $userData[$lg->lang_name_short] = '<input type="checkbox" class="custom-control-input ' . $lg->lang_name_short . 'Check" 
-                id="' . $lg->lang_name_short . 'CheckBox" value="' . $d->id . '" onclick="langCheckBox(' . $lg->id . ', \'' . addslashes($lg->lang_name_short) . '\')" '.$checked.'>';
+                $userData['languages'][] = [
+                    "lang_name_short" => $lg->lang_name_short,
+                    "check" => true,
+                    "lgID" => $lg->id,
+                    "checked" => $checked,
+                ];
             }
 
             $response[] = $userData;
@@ -82,6 +86,8 @@ if (isset($_POST["getUserTable"])) {
     echo json_encode(["recordsTotal" => count($data), "recordsFiltered" => count($data), "data" => $response]);
     exit();
 }
+
+
 if (isset($_POST["deleteRole"])) {
     $id = C($_POST["id"]);
     if (!$id) {

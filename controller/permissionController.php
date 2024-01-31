@@ -11,7 +11,7 @@ if (isset($_POST["getPermissionTable"])) {
     $role_ID = $_SESSION["role_id"];
     if (count($data) > 0) {
         foreach ($data as $d) {
-            $control = DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=?", [$d->id, $id]);
+            $control = DB::get("SELECT permission_add,permission_delete,permission_edit,permission_list,permission_view FROM permission WHERE page_id=? AND role_id=?", [$d->id, $id]);
             if (isset($control[0])) {
                 $checkedAdd = ($control[0]->permission_add == 1) ? 'checked' : '';
                 $checkedDelete = ($control[0]->permission_delete == 1) ? 'checked' : '';
@@ -29,8 +29,7 @@ if (isset($_POST["getPermissionTable"])) {
 
             if ($d->page_name == "İçerik") {
                 foreach ($languages as $language) {
-                    $controlLanguage=DB::get("SELECT * FROM permission WHERE page_id=? AND role_id=? AND language_id=?",[$d->id,$id,$language->id]);
-
+                    $controlLanguage=DB::get("SELECT permission_add,permission_delete,permission_edit,permission_list,permission_view FROM permission WHERE page_id=? AND role_id=? AND language_id=?",[$d->id,$id,$language->id]);
 
                     if(isset($controlLanguage[0])){
                         $checkedAddLanguage = ($controlLanguage[0]->permission_add == 1) ? 'checked' : '';
@@ -55,11 +54,36 @@ if (isset($_POST["getPermissionTable"])) {
                     $response[] = [
                         "id" => $d->id,
                         "pages" => $translate_1 . " (" . $translate_2 . ")",
-                        "add" => '<input type="checkbox" class="custom-control-input addCheckLanguage" id="languageAddCheckBox" value="' . $language->id . '" onclick="languageCheckbox(' . $id . ', \'add\',\'' . $d->id . '\')" ' . $checkedAddLanguage . ' >',
-                        "delete" => '<input type="checkbox" class="custom-control-input deleteCheckLanguage" id="languageDeleteCheckBox" value="' . $language->id . '" onclick="languageCheckbox(' . $id . ', \'delete\',\'' . $d->id . '\')" ' . $checkedDeleteLanguage . ' >',
-                        "edit" => '<input type="checkbox" class="custom-control-input editCheckLanguage" id="languageEditCheckBox" value="' . $language->id . '" onclick="languageCheckbox(' . $id . ', \'edit\',\'' . $d->id . '\')" ' . $checkedEditLanguage . '>',
-                        "list" => '<input type="checkbox" class="custom-control-input listCheckLanguage" id="languageListCheckBox" value="' . $language->id . '" onclick="languageCheckbox(' . $id . ', \'list\',\'' . $d->id . '\')" ' . $checkedListLanguage . ' >',
-                        "view" => '<input type="checkbox" class="custom-control-input viewCheckLanguage" id="languageViewCheckBox" value="' . $language->id . '" onclick="languageCheckbox(' . $id . ', \'view\',\'' . $d->id . '\')" ' . $checkedViewLanguage . ' >',
+                        "add" => [
+                            "checkBoxContent"=>true,
+                            "language"=>$language->id,
+                            "roleIDContent"=>$id,
+                            "checkContent"=>$checkedAddLanguage,
+                        ],
+                        "delete" => [
+                            "checkBoxContent"=>true,
+                            "language"=>$language->id,
+                            "roleIDContent"=>$id,
+                            "checkContent"=>$checkedDeleteLanguage,
+                        ],
+                        "edit" => [
+                            "checkBoxContent"=>true,
+                            "language"=>$language->id,
+                            "roleIDContent"=>$id,
+                            "checkContent"=>$checkedEditLanguage,
+                        ],
+                        "list" => [
+                            "checkBoxContent"=>true,
+                            "language"=>$language->id,
+                            "roleIDContent"=>$id,
+                            "checkContent"=>$checkedListLanguage,
+                        ],
+                        "view" => [
+                            "checkBoxContent"=>true,
+                            "language"=>$language->id,
+                            "roleIDContent"=>$id,
+                            "checkContent"=>$checkedViewLanguage,
+                        ],
                     ];
                 }
             } else {
@@ -69,11 +93,32 @@ if (isset($_POST["getPermissionTable"])) {
                 $response[] = [
                     "id" => $d->id,
                     "pages" => $translate,
-                    "add" => '<input type="checkbox" class="custom-control-input addCheck" id="addCheckBox" value="' . $d->id . '" onclick="permissionCheckbox(' . $id . ', \'add\')" ' . $checkedAdd . '>',
-                    "delete" => '<input type="checkbox" class="custom-control-input deleteCheck" id="deleteCheckBox" value="' . $d->id . '" onclick="permissionCheckbox(' . $id . ', \'delete\')" ' . $checkedDelete . '>',
-                    "edit" => '<input type="checkbox" class="custom-control-input editCheck" id="editCheckBox" value="' . $d->id . '" onclick="permissionCheckbox(' . $id . ', \'edit\')" ' . $checkedEdit . '>',
-                    "list" => '<input type="checkbox" class="custom-control-input listCheck" id="listCheckBox" value="' . $d->id . '" onclick="permissionCheckbox(' . $id . ', \'list\')" ' . $checkedList . '>',
-                    "view" => '<input type="checkbox" class="custom-control-input viewCheck" id="listCheckBox" value="' . $d->id . '" onclick="permissionCheckbox(' . $id . ', \'view\')" ' . $checkedView . '>',
+                    "add" => [
+                        "pages"=>true,
+                        "roleID"=>$id,
+                        "check"=>$checkedAdd,
+                        "checkBox"=>true,
+                    ],
+                    "delete" =>  [
+                        "roleID"=>$id,
+                        "check"=>$checkedDelete,
+                        "checkBox"=>true,
+                    ],
+                    "edit" => [
+                        "roleID"=>$id,
+                        "check"=>$checkedEdit,
+                        "checkBox"=>true,
+                    ],
+                    "list" =>[
+                        "roleID"=>$id,
+                        "check"=>$checkedList,
+                        "checkBox"=>true,
+                    ] ,
+                    "view" =>[
+                        "roleID"=>$id,
+                        "check"=>$checkedView,
+                        "checkBox"=>true,
+                    ] ,
                 ];
             }
         }
@@ -115,6 +160,7 @@ if (isset($_POST["permissionCheckbox"])) {
     $roleID = $_POST["roleID"];
     $type = $_POST["type"];
     $permission = 'permission_' . $type;
+    var_dump($permission);
     if ($checkedID) {
         foreach ($checkedID as $check) {
             $control = DB::get("SELECT 1 FROM permission WHERE page_id=? AND role_id=?", [$check, $roleID]);
@@ -130,7 +176,7 @@ if (isset($_POST["permissionCheckbox"])) {
     if ($notCheckedID) {
         foreach ($notCheckedID as $not) {
             $update = DB::exec("UPDATE permission SET $permission = 0 WHERE page_id=? AND role_id=?", [$not, $roleID]);
-            echo "update not";
+            echo "   update not";
         }
     }
 }

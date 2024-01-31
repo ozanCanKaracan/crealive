@@ -363,11 +363,32 @@ function selectLanguage() {
         },
         url: "controller/languageController.php",
         success: function (e) {
-            $('#selectLanguage').empty();
-            $('#selectLanguage').append(e);
+            var languageData = JSON.parse(e);
+
+            var selectLanguageContainer = $('#selectLanguage');
+            selectLanguageContainer.empty();
+
+            languageData.forEach(function (language) {
+                var languageFlag = (language.lang_name_short == "en") ? "us" : language.lang_name_short;
+
+                var anchorElement = $('<a>', {
+                    'class': 'dropdown-item ' + language.isActive,
+                    'href': '?lang=' + language.lang_name_short,
+                });
+
+                var flagIconElement = $('<i>', {
+                    'class': 'flag-icon flag-icon-' + languageFlag,
+                });
+
+                anchorElement.append(flagIconElement);
+                anchorElement.append(' ' + language.translate);
+
+                selectLanguageContainer.append(anchorElement);
+            });
         }
     });
 }
+
 
 selectLanguage()
 

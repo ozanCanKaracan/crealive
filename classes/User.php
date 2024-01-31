@@ -21,6 +21,6 @@ class User{
         return DB::exec("INSERT INTO users (name,language_id,phone,mail,password) VALUES (?,?,?,?,?)",[$name,$language,$phone,$email,$encryptedPass]);
     }
     function getUser($id){
-        return DB::get("SELECT * FROM users WHERE role_id=?",[$id]);
+        return DB::get("SELECT id,name FROM users WHERE role_id=?",[$id]);
     }
 }

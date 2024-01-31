@@ -62,12 +62,12 @@ if (isset($_POST["selectLanguage"])) {
         $result = substr($browserLanguage, 0, 2);
         $selectedLanguage = DB::getVar("SELECT lang_name_short FROM languages WHERE lang_name_short=?", [$result]);
         $_SESSION['lang'] = $selectedLanguage;
-
     }
+
     $fullName = DB::getVar("SELECT lang_name FROM languages WHERE lang_name_short=?", [$selectedLanguage]);
     $translate = (language($fullName)) ? language($fullName) : $fullName;
     $allLanguages = DB::get("SELECT * FROM languages WHERE status = 1 ORDER BY id ASC");
-    $response = '';
+    $response = [];
 
     foreach ($allLanguages as $language) {
         $langName = $language->lang_name;
@@ -77,17 +77,21 @@ if (isset($_POST["selectLanguage"])) {
         $control = $languageClass->controlUserLanguage($language->id);
 
         if ($control === true) {
-            $languageFlag=($languageShort == "en") ? "us" :$languageShort;
-            $response .= '
-            <a class="dropdown-item  ' . $isActive . '" href="?lang=' . $languageShort . ' ">
-                <i class="flag-icon flag-icon-' . $languageFlag . ' " "></i> ' . $translate . '
-            </a>';
+            $languageFlag = ($languageShort == "en") ? "us" : $languageShort;
+
+            $response[] = [
+                'isActive' => $isActive,
+                'lang_name_short' => $languageShort,
+                'translate' => $translate,
+                'languageFlag' => $languageFlag,
+            ];
         }
     }
 
-    echo $response;
+    echo json_encode($response);
     exit;
 }
+
 if (isset($_POST["removeLanguage"])) {
     $id = C($_POST["id"]);
     $selectedLanguage = $_SESSION["lang"];

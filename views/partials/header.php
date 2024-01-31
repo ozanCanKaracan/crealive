@@ -37,6 +37,7 @@
 
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-flag" id="selectLanguage">
+
                 </div>
             </li>
             <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon"

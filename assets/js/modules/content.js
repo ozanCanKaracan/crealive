@@ -17,6 +17,9 @@ function question(number) {
                 if (response.button2) {
                     $('#question').append('<button type="button" class="btn m-1" onclick="question(2)">Hayır</button>');
                 }
+                if (response.message) {
+                    $('#question').append('<h3>Teşekkürler</h3>');
+                }
             }
         });
     } else {
@@ -38,7 +41,7 @@ function question(number) {
                 if (response.button2) {
                     $('#question').append('<button type="button" class="btn m-1" onclick="question(2)">Hayır</button>');
                 }
-                if(response.message){
+                if (response.message) {
                     $('#question').append('<h3>Teşekkürler</h3>');
                 }
             }
