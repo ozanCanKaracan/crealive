@@ -4,10 +4,9 @@ $content = new Content();
 $category = new Category();
 
 if (isset($_POST["addContent"])) {
-    $checkedTag = isset($_POST["urlTag"]) && is_numeric($_POST["urlTag"]) ? (int)$_POST["urlTag"] : null;
-    $checkedCategory = isset($_POST["urlCat"]) && is_numeric($_POST["urlCat"]) ? (int)$_POST["urlCat"] : null;
-    $tag = isset($_POST["tag"]) && is_numeric($_POST["tag"]) ? (int)$_POST["tag"] : null;
-
+    $checkedTag = isset($_POST["urlTag"]) && is_numeric($_POST["urlTag"]) ? intval($_POST["urlTag"]) : null;
+    $checkedCategory = isset($_POST["urlCat"]) && is_numeric($_POST["urlCat"]) ? intval($_POST["urlCat"]) : null;
+    $tag = isset($_POST["tag"]) && is_numeric($_POST["tag"]) ? intval($_POST["tag"]) : null;
     $specialURL = isset($_POST["specialURL"]) && is_string($_POST["specialURL"]) ? $_POST["specialURL"] : null;
     $translatedText = isset($_POST["translatedText"]) && is_string($_POST["translatedText"]) ? $_POST["translatedText"] : null;
     $translatedTitle = isset($_POST["translatedTitle"]) && is_string($_POST["translatedTitle"]) ? $_POST["translatedTitle"] : null;
@@ -69,7 +68,6 @@ if (isset($_POST["addContent"])) {
                     echo "hata";
                 } else {
                     $lastID = DB::lastInsertID($add);
-
                     DB::getLastError($add);
                     if ($translatedText) {
                         $translateLangID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$translateLanguage]);
@@ -193,7 +191,6 @@ if (isset($_POST["categoryFilter"])) {
     $translate = (language($text)) ? language($text) : $text;
     $translate_2 = (language($text_2)) ? language($text_2) : $text_2;
 
-    // Verileri içeren bir dizi oluştur
     $categoryData = array();
     foreach ($data as $d) {
         $categoryData[] = array(
@@ -273,7 +270,7 @@ if (isset($_POST["editContent"])) {
     }
 }
 if (isset($_POST["tagSelect"])) {
-    $categoryId = isset($_POST["categoryId"]) && is_numeric($_POST["categoryId"]) ? (int)$_POST["categoryId"] : null;
+    $categoryId = isset($_POST["categoryId"]) && is_numeric($_POST["categoryId"]) ? intval($_POST["categoryId"]) : null;
 
     $response = [];
     if ($categoryId) {
@@ -313,7 +310,7 @@ if (isset($_POST["pageVisit"])) {
     }
 }
 if (isset($_POST["question"])) {
-    $question_2 = isset($_POST["number"]) && is_numeric($_POST["number"]) ? (int)$_POST["number"] : null;
+    $question_2 = isset($_POST["number"]) && is_numeric($_POST["number"]) ? intval($_POST["number"]) : null;
     $id = $_POST["id"];
     $user_id = $_SESSION["user"];
 

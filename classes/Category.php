@@ -26,7 +26,7 @@ class Category
 
     function controlAddCategory($categoryName)
     {
-    return DB::get("SELECT * FROM category WHERE category_name=?",[$categoryName]);
+    return DB::get("SELECT 1 FROM category WHERE category_name=?",[$categoryName]);
     }
     function deleteCategory($categoryID){
         return DB::exec("DELETE FROM category WHERE id=? ",[$categoryID]);

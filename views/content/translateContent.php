@@ -1,9 +1,9 @@
 <?php
 $slug = $_GET["slug"];
-$data = DB::get("SELECT id,content_text,content_title FROM contents WHERE url=?", [$slug]);
-$id = $data[0]->id;
+$id=DB::getVar("SELECT id FROM contents WHERE url=?",[$slug]);
+$data = DB::get("SELECT text,title FROM translated_contents WHERE content_id=?", [$id]);
 $user_id = $_SESSION["user"];
-$text=$data[0]->content_text;
+$text=$data[0]->text;
 $text = htmlspecialchars_decode($text);
 
 ?>
@@ -15,7 +15,7 @@ $text = htmlspecialchars_decode($text);
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="card-header d-flex justify-content-center ">
-                    <h3 class=""><?php echo $data[0]->content_title ?></h3>
+                    <h3 class=""><?php echo $data[0]->title ?></h3>
                 </div>
                 <div class="card-body">
                     <?php echo $text ?>

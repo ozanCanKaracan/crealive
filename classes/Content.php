@@ -19,7 +19,7 @@ class Content
 
     function controlContent($categoryID)
     {
-        return DB::get("SELECT * FROM contents WHERE content_category=?", [$categoryID]);
+        return DB::get("SELECT 1 FROM contents WHERE content_category=?", [$categoryID]);
     }
 
     function deleteContent($id)

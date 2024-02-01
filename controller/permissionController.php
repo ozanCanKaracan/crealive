@@ -160,7 +160,6 @@ if (isset($_POST["permissionCheckbox"])) {
     $roleID = $_POST["roleID"];
     $type = $_POST["type"];
     $permission = 'permission_' . $type;
-    var_dump($permission);
     if ($checkedID) {
         foreach ($checkedID as $check) {
             $control = DB::get("SELECT 1 FROM permission WHERE page_id=? AND role_id=?", [$check, $roleID]);

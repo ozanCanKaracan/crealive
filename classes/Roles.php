@@ -16,7 +16,7 @@ class Roles
 
     function controlRole($roleName)
     {
-        return DB::get("SELECT * FROM roles WHERE role_name=?", [$roleName]);
+        return DB::get("SELECT 1 FROM roles WHERE role_name=?", [$roleName]);
     }
 
     function addRole($roleName)
@@ -26,7 +26,7 @@ class Roles
 
     function getRoles()
     {
-        return DB::get("SELECT * FROM roles");
+        return DB::get("SELECT id,role_name FROM roles");
     }
 
     function deleteRoles($id)

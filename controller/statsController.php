@@ -14,20 +14,18 @@ if (isset($_POST["top_5"])) {
                     ORDER BY s.updated_date DESC, s.view_count DESC
                     LIMIT 5", [$language]);
 
-
     $response = [];
-
     foreach ($data as $d) {
         $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
-        $url=DB::getVar("SELECT url FROM contents WHERE id=?",[$d->id]);
+        $url = DB::getVar("SELECT url FROM contents WHERE id=?", [$d->id]);
         $response[] = [
             "id" => $d->id,
-            "url"=>$url,
+            "url" => $url,
             "title" => $d->content_title,
             "category" => $categoryName,
             "process" => [
-                "text" =>$translate_3,
-                "button"=>true,
+                "text" => $translate_3,
+                "button" => true,
             ],
         ];
     }
@@ -36,10 +34,10 @@ if (isset($_POST["top_5"])) {
     exit();
 }
 if (isset($_POST["statsTable"])) {
-    $filter = isset($_POST["filter"]) ? $_POST["filter"] : null;
-    $language=$_SESSION["lang"];
-    $langID=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$language]);
-    $data = DB::get("SELECT * FROM contents WHERE content_language=?",[$langID]);
+    $filter = isset($_POST["filter"]) && is_numeric($_POST["filter"]) ? intval($_POST["filter"]) : null;
+    $language = $_SESSION["lang"];
+    $langID = DB::getVar("SELECT id FROM languages WHERE lang_name_short=?", [$language]);
+    $data = DB::get("SELECT id,content_title,content_category FROM contents WHERE content_language=?", [$langID]);
     $response = [];
     $maxConversionRate = 0;
     $maxStat = 0;
@@ -49,7 +47,7 @@ if (isset($_POST["statsTable"])) {
     foreach ($data as $d) {
         $categoryName = DB::getVar("SELECT category_name FROM category WHERE id=?", [$d->content_category]);
 
-        $totalLikesAndDislikes=DB::getRow("SELECT content_likes, content_dislikes FROM stats WHERE content_id = ?",[$d->id]);
+        $totalLikesAndDislikes = DB::getRow("SELECT content_likes, content_dislikes FROM stats WHERE content_id = ?", [$d->id]);
 
         if ($totalLikesAndDislikes !== false && is_object($totalLikesAndDislikes)) {
             $likeCount = $totalLikesAndDislikes->content_likes;
@@ -75,7 +73,7 @@ if (isset($_POST["statsTable"])) {
                     "like" => $likeCount,
                     "dislike" => $dislikeCount,
                     "conversion_rate" => '%' . $conversionRate,
-                    "view"=> $stat
+                    "view" => $stat
                 ];
             }
         } else if ($filter == 2) {
@@ -88,7 +86,7 @@ if (isset($_POST["statsTable"])) {
                     "like" => $likeCount,
                     "dislike" => $dislikeCount,
                     "conversion_rate" => '%' . $conversionRate,
-                    "view"=> $stat
+                    "view" => $stat
                 ];
             }
         } else {
@@ -99,7 +97,7 @@ if (isset($_POST["statsTable"])) {
                 "like" => $likeCount,
                 "dislike" => $dislikeCount,
                 "conversion_rate" => '%' . $conversionRate,
-                "view"=> $stat
+                "view" => $stat
             ];
         }
     }

@@ -34,7 +34,7 @@ function contentTable(id, lang, categoryId, languageId) {
                         process: '<div class="d-flex justify-content-center">'
                             + (item.process.edit ? '<a href="editContent/' + item.id + '"><button type="button" class="btn btn-relief-info btn-sm"><i class="bi bi-pencil-square"></i></button></a><span style="margin:3px;"></span>' : '')
                             + (item.process.delete ? '<button type="button" class="btn btn-relief-danger btn-sm" onclick="' + (item.process.translate ? 'deleteTranslateContent' : 'deleteContent') + '(' + item.id + ')"><i class="bi bi-trash-fill"></i></button><span style="margin:3px;"></span>' : '')
-                            + (item.process.list ? '<a href="content/' + item.url + '"><button type="button" class="btn btn-relief-warning btn-sm" onclick="pageVisit(' + item.id + ')"><i class="bi bi-eye-fill"></i></button></a>' : '')
+                            + (item.process.list ? (item.process.translate ? '<a href="translateContent/' + item.url + '">' : '<a href="content/' + item.url + '">') + '<button type="button" class="btn btn-relief-warning btn-sm" onclick="pageVisit(' + item.id + ')"><i class="bi bi-eye-fill"></i></button></a>' : '')
                             + '</div>'
                     };
                 });

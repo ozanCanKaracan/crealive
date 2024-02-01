@@ -102,6 +102,21 @@ if (!$_GET) {
                 include('views/404/404.php');
                 break;
             }
+        case 'translateContent' :
+            $access = access($_GET["target"]);
+            $languageAccess = languageAcces();
+            if($languageAccess){
+                if ($access) {
+                    include('views/content/translateContent.php');
+                    break;
+                } else {
+                    include('views/404/404.php');
+                    break;
+                }
+            }else{
+                include('views/404/404.php');
+                break;
+            }
 
         case 'recommended' :
             $access = access($_GET["target"]);

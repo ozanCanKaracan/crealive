@@ -4,19 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="HTML responsları düzenleniyor ve content sorgusundaki bug fixlendi">
+    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Sistemdeki bütün html responselar düzeltitldi select * ' lı sorgular yapılandırıldı.'">
+      <change afterPath="$PROJECT_DIR$/views/content/translateContent.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/content.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/permission.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/permission.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/recommended.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/recommended.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/userlistRole.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/userlistRole.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/contents.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/contents.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/roles.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/roles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/Category.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/Content.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Content.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/Roles.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/Roles.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/categoryController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/categoryController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/contentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/contentController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/languageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/languageController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/permissionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/permissionController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/recommendedController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/recommendedController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/roleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/roleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/header.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/header.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller/statsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/statsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get.php" beforeDir="false" afterPath="$PROJECT_DIR$/get.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/content/content.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/content/content.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +127,8 @@
       <workItem from="1706515878461" duration="13568000" />
       <workItem from="1706600690444" duration="19432000" />
       <workItem from="1706684860175" duration="16867000" />
+      <workItem from="1706714438199" duration="632000" />
+      <workItem from="1706775480234" duration="9289000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -299,7 +306,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706627535890</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Sistemdeki bütün html responselar düzeltitldi select * ' lı sorgular yapılandırıldı.'">
+      <option name="closed" value="true" />
+      <created>1706714507978</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1706714507978</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -318,7 +333,8 @@
     <MESSAGE value="Sorgu Birleştirme." />
     <MESSAGE value="HTML response düzenlenmeye başlandı,&#10;içerik listelerken çevirilmiş içeriklerde listeye eklendi." />
     <MESSAGE value="HTML responsları düzenleniyor ve content sorgusundaki bug fixlendi" />
-    <option name="LAST_COMMIT_MESSAGE" value="HTML responsları düzenleniyor ve content sorgusundaki bug fixlendi" />
+    <MESSAGE value="Sistemdeki bütün html responselar düzeltitldi select * ' lı sorgular yapılandırıldı.'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sistemdeki bütün html responselar düzeltitldi select * ' lı sorgular yapılandırıldı.'" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

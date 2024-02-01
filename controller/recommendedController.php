@@ -13,7 +13,7 @@ if (isset($_POST["recommended"])) {
 
     foreach ($content_IDs as $cID) {
         $categories = DB::getVar("SELECT content_category FROM contents WHERE id=? ", [$cID]);
-        $contents = DB::get("SELECT * FROM contents WHERE content_category=?", [$categories,]);
+        $contents = DB::get("SELECT id,content_title FROM contents WHERE content_category=?", [$categories]);
 
         $contentData = [];
 

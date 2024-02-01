@@ -40,7 +40,7 @@ function getRoleTable(langID) {
     });
 }
 
-function addRole(id) {
+function addRole() {
     $("#addRoleForm").validate({
         rules: {
             role: {
@@ -98,10 +98,28 @@ function addRole(id) {
                         },
                         url: "controller/roleController.php",
                         success: function (e) {
-                            if (e.trim() === "bos") {
+                            if (e.trim() === "empty") {
                                 Swal.fire({
                                     title: 'Hata!',
                                     text: 'Rol Ekleme Kısmını Boş Bırakmayınız!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            } else if (e.trim() === "tooMany") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'En fazla 35 karakter olabilir!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            } else if (e.trim() === "least3") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'En az 3 karakter olabilir!',
                                     icon: 'error',
                                     timer: 1500,
                                     showConfirmButton: true,
@@ -229,7 +247,6 @@ function deleteRole(id) {
 }
 
 $("#role").on("input", function () {
-    var sanitizedValue = $(this).val().replace(/[^a-zA-Z\s]/g, "");
+    var sanitizedValue = $(this).val().replace(/[^a-zA-ZğüşıöçĞÜŞİÖÇ\s]/g, "");
     $(this).val(sanitizedValue);
 });
-

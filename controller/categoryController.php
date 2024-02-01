@@ -7,15 +7,21 @@ $content = new Content();
 if (isset($_POST["categoryAdd"])) {
     $categoryName = C($_POST["categoryName"]);
 
-    $categoryControl = $category->controlAddCategory($categoryName);
     if (empty($categoryName)) {
         echo "bos";
-    } else if ($categoryControl) {
-        echo "hata";
+    } else if (strlen($categoryName) > 35) {
+        echo "tooMany";
+    }else if (strlen($categoryName) < 3) {
+        echo "least3";
     } else {
-        $add = $category->addCategory($categoryName);
-        echo "ok";
-        exit();
+        $categoryControl = $category->controlAddCategory($categoryName);
+        if ($categoryControl) {
+            echo "hata";
+        } else {
+            $add = $category->addCategory($categoryName);
+            echo "ok";
+            exit();
+        }
     }
 }
 if (isset($_POST["deleteCategory"])) {

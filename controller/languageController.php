@@ -66,7 +66,7 @@ if (isset($_POST["selectLanguage"])) {
 
     $fullName = DB::getVar("SELECT lang_name FROM languages WHERE lang_name_short=?", [$selectedLanguage]);
     $translate = (language($fullName)) ? language($fullName) : $fullName;
-    $allLanguages = DB::get("SELECT * FROM languages WHERE status = 1 ORDER BY id ASC");
+    $allLanguages = DB::get("SELECT id,lang_name,lang_name_short FROM languages WHERE status = 1 ORDER BY id ASC");
     $response = [];
 
     foreach ($allLanguages as $language) {
