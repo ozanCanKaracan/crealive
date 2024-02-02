@@ -114,7 +114,6 @@ function addCategory() {
 }
 
 function deleteCategory() {
-
     $("#deleteCategoryForm").validate({
         rules: {
             categorySelect: {

@@ -132,4 +132,55 @@ if (isset($_POST["langCheckBox"])) {
         }
     }
 }
+if (isset($_POST["assignmentTable"])) {
+    $data = $user->getUsers();
+    $response = [];
+    if (count($data) > 0) {
+        foreach ($data as $d) {
+            $role = DB::getVar("SELECT role_name FROM roles WHERE id=?", [$d->role_id]);
+            $response[] = [
+                "id" => $d->id,
+                "name" => $d->name,
+                "role" => $role,
+                "process" => [
+                    "roleID" => $d->role_id,
+                    "button" => true,
+                ],
+            ];
+        }
+    }
 
+    echo json_encode(["recordsTotal" => count($data), "recordsFiltered" => count($data), "data" => $response]);
+    exit();
+}
+
+if (isset($_POST["editModal"])) {
+    $id = intval($_POST["id"]);
+    $roleID = intval($_POST["roleID"]);
+    $roles =$role->getRoles();
+    $options = array();
+
+    foreach ($roles as $r) {
+        $options[] = array('id' => $r->id, 'role_name' => $r->role_name);
+    }
+
+    echo json_encode(array('options' => $options, 'selectedID' => $roleID, 'id'=>$id));
+    exit();
+}
+if(isset($_POST["editRole"])){
+    $id=intval($_POST["id"]);
+    $roleID=intval($_POST["roleID"]);
+
+    if(!$roleID){
+        echo "empty";
+    }else{
+        $control=DB::get("SELECT 1 FROM users WHERE id=? AND role_id=?",[$id,$roleID]);
+        if($control){
+            echo "error";
+        }else{
+            $update=DB::exec("UPDATE users SET role_id=? WHERE id=?",[$roleID,$id]);
+            echo "ok";
+            exit();
+        }
+    }
+}

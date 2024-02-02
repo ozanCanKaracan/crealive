@@ -14,7 +14,6 @@ if (!$_GET) {
             break;
         case 'roles' :
             $access = access($_GET["target"]);
-
             if ($access) {
                 include('views/roles/roles.php');
                 break;
@@ -77,7 +76,6 @@ if (!$_GET) {
                 include('views/404/404.php');
                 break;
             }
-
         case 'contents' :
             $access = access($_GET["target"]);
             if ($access) {
@@ -122,6 +120,15 @@ if (!$_GET) {
             $access = access($_GET["target"]);
             if ($access) {
                 include('views/content/recommended.php');
+                break;
+            } else {
+                include('views/404/404.php');
+                break;
+            }
+        case 'roleAssignment' :
+            $access = access($_GET["target"]);
+            if ($access) {
+                include('views/roles/roleAssignment.php');
                 break;
             } else {
                 include('views/404/404.php');

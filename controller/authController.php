@@ -14,26 +14,38 @@ if (isset($_POST["register"])) {
     $encryptedPass = md5(sha1(md5($pass)));
     $controlEmail = $auth->controlEmail($email);
     $controlPhone = $auth->controlPhone($phone);
+
     if ($controlEmail) {
         echo "email";
     } elseif ($controlPhone) {
         echo "phone";
-    }
-    elseif (empty($name) || empty($phone) || empty($email) || empty($emailConfirmation) || empty($lang) || empty($pass) || empty($passConfirmation)) {
-        echo "bos";
-    }  elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } elseif (empty($name) || empty($phone) || empty($email) || empty($emailConfirmation) || empty($lang) || empty($pass) || empty($passConfirmation)) {
+        echo "empty";
+    } elseif (strlen($name) < 3) {
+        echo "name3";
+    } elseif (preg_match("/[0-9]/", $name)) {
+        echo "name_number";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "mail";
     } elseif ($email !== $emailConfirmation) {
         echo "mail2";
-    }elseif (strlen($pass) < 3) {
-        echo "pass";
+    } elseif (strlen($phone) < 10) {
+        echo "phone1";
+    } elseif (strlen($phone) > 10) {
+        echo "phone2";
+    } elseif (preg_match("/\D/", $phone)) {
+        echo "phone3";
+    } elseif (strlen($pass) < 3) {
+        echo "pass1";
     } elseif ($pass !== $passConfirmation) {
-        echo "pass";
+        echo "pass2";
     } else {
         $add = $auth->addUser($name, $lang, $phone, $email, $encryptedPass);
         echo "ok";
     }
 }
+
+
 if (isset($_POST["login"])) {
     $email = C($_POST["email"]);
     $password = C($_POST["password"]);
@@ -41,14 +53,16 @@ if (isset($_POST["login"])) {
 
     $login = $auth->login($email, $encryptedPass);
     if (!$email || !$password) {
-        echo "bos";
+        echo "empty";
+    }else if(strlen($password) < 3 ){
+        echo "least3";
     } else if ($login) {
         $_SESSION["user"] = $login->id;
         $_SESSION["role_id"] = $login->role_id;
         echo "ok";
         exit();
     } else {
-        echo "hata";
+        echo "error";
     }
 }
 if (isset($_POST["logout"])) {

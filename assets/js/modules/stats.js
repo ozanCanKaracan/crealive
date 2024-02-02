@@ -30,8 +30,6 @@ function statsTable(language, filter) {
                 {data: 'dislike'},
                 {data: 'conversion_rate'},
                 {data: 'view'},
-
-
             ],
 
         });
@@ -66,7 +64,6 @@ function statsTable(language, filter) {
         });
     }
 }
-
 
 function statsFilter() {
     $.ajax({
@@ -113,6 +110,5 @@ function statsFilter() {
         }
     });
 }
-
 
 statsFilter()

@@ -12,7 +12,7 @@ function register() {
             },
             phone: {
                 required: true,
-                minlength: 10,
+                minlength: 9,
                 maxlength: 10,
                 customPattern: /^[0-9]+$/
             },
@@ -113,7 +113,7 @@ function register() {
                             "pass2": $("#password2").val(),
                         },
                         success: function (e) {
-                            if (e.trim() === "bos") {
+                            if (e.trim() === "empty") {
                                 Swal.fire({
                                     title: 'Hata!',
                                     text: 'Boş alan Bırakmayınız!',
@@ -131,7 +131,34 @@ function register() {
                                     showConfirmButton: true,
                                     confirmButtonColor: '#3085d6'
                                 })
-                            } else if (e.trim() === "mail") {
+                            } else if (e.trim() === "phone1") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Telefon numarası en az 10 rakamdan oluşmalıdır!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            } else if (e.trim() === "phone2") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Telefon numarası en fazla 10 rakamdan oluşmalıdır!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            } else if (e.trim() === "phone3") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Telefon numarasında harf kullanılmamalıdır!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            } else if (e.trim() === "email") {
                                 Swal.fire({
                                     title: 'Hata!',
                                     text: 'Bu mail adresi kullanılıyor!',
@@ -149,10 +176,46 @@ function register() {
                                     showConfirmButton: true,
                                     confirmButtonColor: '#3085d6'
                                 })
-                            } else if (e.trim() === "pass") {
+                            } else if (e.trim() === "mail") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Doğru formatta mail adresi giriniz!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            } else if (e.trim() === "pass2") {
                                 Swal.fire({
                                     title: 'Hata!',
                                     text: 'Şifreler uyuşmuyor!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            } else if (e.trim() === "pass1") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'Şifre en az 3 karakter olmalıdır!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            } else if (e.trim() === "name3") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'İsim alanı en az 3 karakter olmalıdır!',
+                                    icon: 'error',
+                                    timer: 1500,
+                                    showConfirmButton: true,
+                                    confirmButtonColor: '#3085d6'
+                                })
+                            } else if (e.trim() === "name_number") {
+                                Swal.fire({
+                                    title: 'Hata!',
+                                    text: 'İsim alanında sayı girişi yapılamaz!',
                                     icon: 'error',
                                     timer: 1500,
                                     showConfirmButton: true,
@@ -223,10 +286,19 @@ function login() {
                     "password": $("#password").val(),
                 },
                 success: function (e) {
-                    if (e.trim() === "bos") {
+                    if (e.trim() === "empty") {
                         Swal.fire({
                             title: 'Hata!',
                             text: 'Boş alan bırakmayınız!',
+                            icon: 'error',
+                            timer: 1500,
+                            showConfirmButton: true,
+                            confirmButtonColor: '#3085d6'
+                        });
+                    } else if (e.trim() === "error") {
+                        Swal.fire({
+                            title: 'Hata!',
+                            text: 'Email veya şifre hatalı!',
                             icon: 'error',
                             timer: 1500,
                             showConfirmButton: true,
@@ -243,15 +315,6 @@ function login() {
                         }).then((result) => {
                             window.location.href = "";
                         });
-                    } else if (e.trim() === "hata") {
-                        Swal.fire({
-                            title: 'Hata!',
-                            text: 'Email veya şifre hatalı!',
-                            icon: 'error',
-                            timer: 1500,
-                            showConfirmButton: true,
-                            confirmButtonColor: '#3085d6'
-                        });
                     }
                 }
             });
@@ -260,100 +323,56 @@ function login() {
 }
 
 function logout(lang) {
-    if (lang == 2) {
-        Swal.fire({
-            title: 'Are you sure you want to log out?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#00FF00',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes',
-            cancelButtonText: 'Cancel',
-            showClass: {
-                popup: 'swal2-show',
-                backdrop: 'swal2-backdrop-show',
-                icon: 'swal2-icon-show'
-            },
-            hideClass: {
-                popup: 'swal2-hide',
-                backdrop: 'swal2-backdrop-hide',
-                icon: 'swal2-icon-hide'
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "POST",
-                    url: "controller/authController.php",
-                    data: {
-                        "logout": 1,
-                    },
-                    success: function (e) {
-                        if (e.trim() === "ok") {
-                            Swal.fire({
-                                title: 'Success!',
-                                text: 'Signing out!',
-                                icon: 'success',
-                                timer: 1500,
-                                showConfirmButton: true,
-                                confirmButtonColor: '#3085d6'
-                            }).then((result) => {
-                                window.location.href = "";
-                            });
-                        }
+
+    Swal.fire({
+        title: 'Çıkış yapmak istediğinize emin misiniz?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#00FF00',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Evet',
+        cancelButtonText: 'İptal',
+        showClass: {
+            popup: 'swal2-show',
+            backdrop: 'swal2-backdrop-show',
+            icon: 'swal2-icon-show'
+        },
+        hideClass: {
+            popup: 'swal2-hide',
+            backdrop: 'swal2-backdrop-hide',
+            icon: 'swal2-icon-hide'
+        }
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                type: "POST",
+                url: "controller/authController.php",
+                data: {
+                    "logout": 1,
+                },
+                success: function (e) {
+                    if (e.trim() === "ok") {
+                        Swal.fire({
+                            title: 'Başarılı!',
+                            text: 'Çıkış yapılıyor!',
+                            icon: 'success',
+                            timer: 1500,
+                            showConfirmButton: true,
+                            confirmButtonColor: '#3085d6'
+                        }).then((result) => {
+                            window.location.href = "";
+                        });
                     }
-                })
-            }
-        })
-    } else {
-        Swal.fire({
-            title: 'Çıkış yapmak istediğinize emin misiniz?',
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#00FF00',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Evet',
-            cancelButtonText: 'İptal',
-            showClass: {
-                popup: 'swal2-show',
-                backdrop: 'swal2-backdrop-show',
-                icon: 'swal2-icon-show'
-            },
-            hideClass: {
-                popup: 'swal2-hide',
-                backdrop: 'swal2-backdrop-hide',
-                icon: 'swal2-icon-hide'
-            }
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    type: "POST",
-                    url: "controller/authController.php",
-                    data: {
-                        "logout": 1,
-                    },
-                    success: function (e) {
-                        if (e.trim() === "ok") {
-                            Swal.fire({
-                                title: 'Başarılı!',
-                                text: 'Çıkış yapılıyor!',
-                                icon: 'success',
-                                timer: 1500,
-                                showConfirmButton: true,
-                                confirmButtonColor: '#3085d6'
-                            }).then((result) => {
-                                window.location.href = "";
-                            });
-                        }
-                    }
-                })
-            }
-        })
-    }
+                }
+            })
+        }
+    })
 }
-    $("#phone").on("input", function () {
-        var sanitizedValue = $(this).val().replace(/[^0-9]/g, "");
-        $(this).val(sanitizedValue);
-    });
+
+$("#phone").on("input", function () {
+    var sanitizedValue = $(this).val().replace(/[^0-9]/g, "");
+    $(this).val(sanitizedValue);
+});
 
 function selectLanguage() {
     $.ajax({
@@ -389,23 +408,21 @@ function selectLanguage() {
     });
 }
 
-
 selectLanguage()
 
-function sidebarAjax() {
-    $.ajax({
-        type: 'POST',
-        data: {
-            'sidebarAjax': 1,
-        },
-        url: "controller/authController.php",
-        success: function (e) {
-
-            $('#sidebar').empty();
-            $('#sidebar').append(e);
-        }
-    });
-}
-
-sidebarAjax()
-
+// function sidebarAjax() {
+//     $.ajax({
+//         type: 'POST',
+//         data: {
+//             'sidebarAjax': 1,
+//         },
+//         url: "controller/authController.php",
+//         success: function (e) {
+//
+//             $('#sidebar').empty();
+//             $('#sidebar').append(e);
+//         }
+//     });
+// }
+// sidebarAjax()
+//

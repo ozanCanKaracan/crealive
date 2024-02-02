@@ -23,4 +23,7 @@ class User{
     function getUser($id){
         return DB::get("SELECT id,name FROM users WHERE role_id=?",[$id]);
     }
+    function getUsers(){
+        return DB::get("SELECT id,name,role_id FROM users");
+    }
 }
