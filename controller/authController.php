@@ -45,7 +45,6 @@ if (isset($_POST["register"])) {
     }
 }
 
-
 if (isset($_POST["login"])) {
     $email = C($_POST["email"]);
     $password = C($_POST["password"]);
