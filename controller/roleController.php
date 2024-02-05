@@ -157,30 +157,78 @@ if (isset($_POST["assignmentTable"])) {
 if (isset($_POST["editModal"])) {
     $id = intval($_POST["id"]);
     $roleID = intval($_POST["roleID"]);
-    $roles =$role->getRoles();
+    $roles = $role->getRoles();
     $options = array();
 
     foreach ($roles as $r) {
         $options[] = array('id' => $r->id, 'role_name' => $r->role_name);
     }
 
-    echo json_encode(array('options' => $options, 'selectedID' => $roleID, 'id'=>$id));
+    echo json_encode(array('options' => $options, 'selectedID' => $roleID, 'id' => $id));
     exit();
 }
-if(isset($_POST["editRole"])){
-    $id=intval($_POST["id"]);
-    $roleID=intval($_POST["roleID"]);
+if (isset($_POST["editRole"])) {
+    $id = intval($_POST["id"]);
+    $roleID = intval($_POST["roleID"]);
 
-    if(!$roleID){
+    if (!$roleID) {
         echo "empty";
-    }else{
-        $control=DB::get("SELECT 1 FROM users WHERE id=? AND role_id=?",[$id,$roleID]);
-        if($control){
+    } else {
+        $control = DB::get("SELECT 1 FROM users WHERE id=? AND role_id=?", [$id, $roleID]);
+        if ($control) {
             echo "error";
-        }else{
-            $update=DB::exec("UPDATE users SET role_id=? WHERE id=?",[$roleID,$id]);
+        } else {
+            $update = DB::exec("UPDATE users SET role_id=? WHERE id=?", [$roleID, $id]);
             echo "ok";
             exit();
         }
+    }
+}
+if (isset($_POST["addWorker"])) {
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $emailConfirmation = $_POST["emailagain"];
+    $phone = $_POST["phone"];
+    $password = $_POST["password"];
+    $passwordConfirmation = $_POST["passwordagain"];
+    $role=intval($_POST["role"]);
+    $lang=$_SESSION["lang"];
+    $language=DB::getVar("SELECT id FROM languages WHERE lang_name_short=?",[$lang]);
+    $encryptedPass = md5(sha1(md5($password)));
+
+
+    if(!$name){
+        echo "name";
+    }elseif(!$email){
+        echo "email";
+    }elseif (!$emailConfirmation){
+        echo "emailagain";
+    }elseif(!$phone){
+        echo "phone";
+    }elseif(!$password){
+        echo "password";
+    }elseif (!$passwordConfirmation){
+        echo "passwordagain";
+    }elseif (!$role){
+        echo "role";
+    } elseif (preg_match("/[0-9]/", $name)) {
+        echo "name_number";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo "mail";
+    }elseif ($email !== $emailConfirmation) {
+        echo "mail2";
+    } elseif (strlen($phone) < 10) {
+        echo "phone1";
+    } elseif (strlen($phone) > 10) {
+        echo "phone2";
+    } elseif (preg_match("/\D/", $phone)) {
+        echo "phone3";
+    } elseif (strlen($passwordConfirmation) < 3) {
+        echo "pass1";
+    } elseif ($password !== $passwordConfirmation) {
+        echo "pass2";
+    }else{
+        $add=DB::insert("INSERT INTO users (name,language_id,phone,mail,password,role_id,status) VALUES (?,?,?,?,?,?,?)",[$name,$language,$phone,$email,$encryptedPass,$role,1]);
+        echo "ok";
     }
 }

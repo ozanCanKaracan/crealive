@@ -4,18 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Select *'lı sorgular düzenlendi, çevrilmiş içerikleri görme sayfası yapıldı.">
-      <change afterPath="$PROJECT_DIR$/assets/js/modules/roleAssignment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/views/roles/roleAssignment.php" afterDir="false" />
+    <list default="true" id="aa49a6c8-4aad-443d-86f7-e825c924d911" name="Changes" comment="Kayıt olma tarafındaki form validasyomları php tarafında da aynı şekilde yapıldı,Giriş yapma php fonksiyonundaki validasyon düzenlendi&#10;Adminin, kullanıcıya rol verme, rollerini değiştirme sayfası ve fonksiyonları yapıldı.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/category.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/js/modules/stats.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/stats.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/classes/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/authController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/authController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/js/modules/roleAssignment.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/js/modules/roleAssignment.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller/roleController.php" beforeDir="false" afterPath="$PROJECT_DIR$/controller/roleController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/get.php" beforeDir="false" afterPath="$PROJECT_DIR$/get.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/partials/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/partials/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/langManagement/language.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/langManagement/language.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/roles/roleAssignment.php" beforeDir="false" afterPath="$PROJECT_DIR$/views/roles/roleAssignment.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +117,8 @@
       <workItem from="1706684860175" duration="16867000" />
       <workItem from="1706714438199" duration="632000" />
       <workItem from="1706775480234" duration="9485000" />
-      <workItem from="1706861553678" duration="16096000" />
+      <workItem from="1706861553678" duration="17588000" />
+      <workItem from="1707115994662" duration="17564000" />
     </task>
     <task id="LOCAL-00001" summary="commit">
       <option name="closed" value="true" />
@@ -317,7 +312,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706800117496</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Kayıt olma tarafındaki form validasyomları php tarafında da aynı şekilde yapıldı,Giriş yapma php fonksiyonundaki validasyon düzenlendi&#10;Adminin, kullanıcıya rol verme, rollerini değiştirme sayfası ve fonksiyonları yapıldı.">
+      <option name="closed" value="true" />
+      <created>1706886051735</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1706886051735</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +341,8 @@
     <MESSAGE value="HTML responsları düzenleniyor ve content sorgusundaki bug fixlendi" />
     <MESSAGE value="Sistemdeki bütün html responselar düzeltitldi select * ' lı sorgular yapılandırıldı.'" />
     <MESSAGE value="Select *'lı sorgular düzenlendi, çevrilmiş içerikleri görme sayfası yapıldı." />
-    <option name="LAST_COMMIT_MESSAGE" value="Select *'lı sorgular düzenlendi, çevrilmiş içerikleri görme sayfası yapıldı." />
+    <MESSAGE value="Kayıt olma tarafındaki form validasyomları php tarafında da aynı şekilde yapıldı,Giriş yapma php fonksiyonundaki validasyon düzenlendi&#10;Adminin, kullanıcıya rol verme, rollerini değiştirme sayfası ve fonksiyonları yapıldı." />
+    <option name="LAST_COMMIT_MESSAGE" value="Kayıt olma tarafındaki form validasyomları php tarafında da aynı şekilde yapıldı,Giriş yapma php fonksiyonundaki validasyon düzenlendi&#10;Adminin, kullanıcıya rol verme, rollerini değiştirme sayfası ve fonksiyonları yapıldı." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

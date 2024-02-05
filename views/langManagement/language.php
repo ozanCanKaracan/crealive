@@ -21,7 +21,7 @@
                                 $translate = (language($text)) ? language($text) : $text;
                                 ?><?= $translate ?></option>
                             <?php
-                            $getLanguage = DB::get("SELECT * FROM languages WHERE status = 0");
+                            $getLanguage = DB::get("SELECT id,lang_name FROM languages WHERE status = 0");
                             foreach ($getLanguage as $language) {
                                 ?>
                                 <option value="<?= $language->id ?>"><?= $language->lang_name ?></option>
@@ -60,7 +60,6 @@
                         </tr>
                         </thead>
                         <tbody>
-
                         </tbody>
                     </table>
                 </div>
